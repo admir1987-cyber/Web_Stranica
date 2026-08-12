@@ -35,6 +35,9 @@ body {
   justify-content: space-between;
   gap: 24px;
   padding: 20px 32px;
+  background-color: var(--color-bg);
+  position: relative;
+  z-index: 10;
 }
 
 /* ==================================================== */
@@ -162,7 +165,7 @@ body {
 
 /* HERO VSEBINA */
 .hero-content {
-  padding: 40px 32px 0;
+  padding: 130px 32px 0;
 }
 
 /* HERO NASLOV */
@@ -189,6 +192,7 @@ body {
 .hero-buttons {
   display: flex;
   gap: 14px;
+  padding-top: 24px;
   margin-bottom: 28px;
 }
 .btn-secondary {
@@ -376,9 +380,6 @@ body {
   padding-left: calc(48px + 37px);
 }
 
-
-
-/* HERO OZADJE — fotografija  photo-web*/
 .hero {
   position: relative;
   overflow: hidden;
@@ -408,7 +409,6 @@ body {
   background-image: linear-gradient(to right, rgba(247, 245, 239, 0.95) 0%, rgba(247, 245, 239, 0) 80%), url('assets/images/photo-scripts.png');
   animation-delay: 12s;
 }
-
 @keyframes heroRotate {
   0% { opacity: 1; }
   27.8% { opacity: 1; }
@@ -921,4 +921,34 @@ body {
     text-align: center;
     margin-top: 8px;
   }
+}
+
+/* Značke zaupanja v hero sekciji (Reliable, Fast, Secure) */
+.trust-badges {
+  display: flex;
+  gap: 28px;
+  padding-top: 28px;
+  margin-bottom: 28px;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trust-badge svg {
+  flex-shrink: 0;
+}
+
+.trust-badge h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 2px;
+}
+
+.trust-badge p {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 0;
 }

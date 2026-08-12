@@ -29,7 +29,7 @@ navDropdownItems.forEach((item) => {
 /* PREKLOPNIK JEZIKA — EN / SLO */
 function setLanguage(lang) {
   document.querySelectorAll('[data-en]').forEach((el) => {
-    el.textContent = el.dataset[lang];
+    el.innerHTML = el.dataset[lang];
   });
 
   document.querySelectorAll('.lang-btn').forEach((btn) => {

@@ -35,9 +35,6 @@ body {
   justify-content: space-between;
   gap: 24px;
   padding: 20px 32px;
-  background-color: var(--color-bg);
-  position: relative;
-  z-index: 10;
 }
 
 /* ==================================================== */
@@ -113,6 +110,10 @@ body {
 /* ==================================================== */
 /* GUMBI (SPLOŠNO) */
 /* ==================================================== */
+.btn-primary {
+  box-shadow: 0 4px 12px rgba(107, 133, 71, 0.25);
+}
+
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -122,6 +123,12 @@ body {
   padding: 10px 22px;
   border-radius: 6px;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(26, 35, 50, 0.2);
 }
 
 .btn-primary {
@@ -165,7 +172,7 @@ body {
 
 /* HERO VSEBINA */
 .hero-content {
-  padding: 130px 32px 0;
+  padding: 40px 32px 0;
 }
 
 /* HERO NASLOV */
@@ -192,7 +199,6 @@ body {
 .hero-buttons {
   display: flex;
   gap: 14px;
-  padding-top: 24px;
   margin-bottom: 28px;
 }
 .btn-secondary {
@@ -246,7 +252,7 @@ body {
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-accent);
   margin: 0 0 12px;
 }
 
@@ -290,6 +296,13 @@ body {
   background-color: #ffffff;
   border-radius: 16px;
   padding: 32px 28px;
+  box-shadow: 0 4px 16px rgba(26, 35, 50, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(26, 35, 50, 0.12);
 }
 
 .service-icon {
@@ -380,6 +393,9 @@ body {
   padding-left: calc(48px + 37px);
 }
 
+
+
+/* HERO OZADJE — fotografija  photo-web*/
 .hero {
   position: relative;
   overflow: hidden;
@@ -409,6 +425,7 @@ body {
   background-image: linear-gradient(to right, rgba(247, 245, 239, 0.95) 0%, rgba(247, 245, 239, 0) 80%), url('assets/images/photo-scripts.png');
   animation-delay: 12s;
 }
+
 @keyframes heroRotate {
   0% { opacity: 1; }
   27.8% { opacity: 1; }
@@ -434,7 +451,6 @@ body {
 }
 
 .project-image {
-  background-color: transparent;
   border-radius: 16px;
   overflow: hidden;
   height: 380px;
@@ -589,6 +605,7 @@ body {
 .about-photo {
   border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(26, 35, 50, 0.10);
 }
 
 .about-photo img {
@@ -607,45 +624,50 @@ body {
 .process {
   padding: 25px 32px;
   text-align: center;
-  background-color: #EEEBDD;
+  position: relative;
+  overflow: hidden;
+}
+
+.process-watermark {
+  position: absolute;
+  top: -40px;
+  left: 169px;
+  font-family: var(--font-mono);
+  font-size: 364px;
+  font-weight: 500;
+  color: var(--color-accent);
+  opacity: 0.06;
+  line-height: 1;
+  z-index: -1;
+  pointer-events: none;
+  transform: scaleY(1.35);
+}
+
+.wm-bracket {
+  letter-spacing: 0;
+}
+
+.wm-slash {
+  margin: 0 -60px;
 }
 
 .process-steps {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 60px;
+  gap: 100px;
+  width: fit-content;
+  margin: 60px auto 0;
 }
 
-.step-connector {
-  width: 5cm;
-  height: 12px;
-  margin-top: 33.5px;
-  margin-left: -46.5px;
-  margin-right: -46.5px;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.step-connector::before {
-  content: "";
+.process-wave {
   position: absolute;
-  top: 6px;
+  top: 0;
   left: 0;
-  right: 0;
-  border-top: 2px dashed var(--color-border);
-}
-
-.step-connector::after {
-  content: "";
-  position: absolute;
-  top: 1px;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-left: 8px solid var(--color-border);
+  width: 100%;
+  height: 67px;
+  z-index: 0;
 }
 
 .process-step {
@@ -655,6 +677,8 @@ body {
   text-align: center;
   flex-shrink: 0;
   width: 160px;
+  position: relative;
+  z-index: 1;
 }
 
 .step-number {
@@ -831,6 +855,18 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px 8px;
     margin-top: 32px;
+    width: 100%;
+  }
+
+  .process-wave {
+    display: none;
+  }
+
+  .process-watermark {
+    font-size: 280px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(1.35);
   }
 
   .step-connector {
@@ -927,7 +963,6 @@ body {
 .trust-badges {
   display: flex;
   gap: 28px;
-  padding-top: 28px;
   margin-bottom: 28px;
 }
 
@@ -951,4 +986,258 @@ body {
   font-size: 12px;
   color: var(--color-text-muted);
   margin: 0;
+}
+
+/* Krug sa sjenom oko ikonica u Why Work With Me, isti stil kao Proces */
+.why-work-icon {
+  width: 67px;
+  height: 67px;
+  border-radius: 50%;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 6px 16px rgba(26, 35, 50, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+/* Podnaslov ispod naslova sekcije, npr. "A clear and proven process..." */
+.section-subtitle {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  max-width: 480px;
+  margin: 16px auto 0;
+  line-height: 1.5;
+}
+
+/* Sekcija Why Work With Me — fiksna visina i pomicanje slike u lijevo */
+.why-work {
+  padding: 48px 0px;
+  width: 100%;
+}
+
+.why-work-card {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden; /* Skriva dijelove slike koji izađu van okvira */
+  border-radius: 24px;
+}
+
+.why-work-card {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden; 
+  /* Ovdje definiramo zaobljenje za svaki kut posebno: gore-lijevo, gore-desno, dolje-desno, dolje-lijevo */
+  border-radius: 24px 24px 24px 24px; 
+  margin-left: -30px; 
+}
+
+.why-work-image {
+  width: 100%;          
+  height: 409px;         
+  object-fit: fill;      
+  margin-left: 120px;    
+  border-radius: 24px; /* Osigurava da i sama slika prati zaobljenje kuteva */
+  display: block;
+}
+
+/* Tekst preko tamne Why Work With Me slike */
+.why-work-card {
+  position: relative;
+}
+
+.why-work-text {
+  position: absolute;
+  top: 48px;
+  left: 110px;
+  max-width: 320px;
+  z-index: 1;
+}
+
+.why-work-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+  margin: 0 0 12px;
+}
+
+.why-work-title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+
+.why-work-title span {
+  display: block;
+}
+
+.why-work-title .accent {
+  color: var(--color-accent-light);
+}
+
+.why-work-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.why-work-divider .divider-line {
+  width: 40px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.why-work-divider .divider-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-accent-light);
+}
+
+.why-work-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+/* Gumb u Why Work With Me sekciji */
+.why-work-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 48px;
+}
+/* Četiri kartice u praznom prostoru Why Work With Me sekcije */
+.why-work-cards {
+  position: absolute;
+  top: 48px;
+  left: 460px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 420px;
+  max-width: none;
+  z-index: 1;
+}
+
+.why-card {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 18px 16px;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  background-color: rgba(255, 255, 255, 0.07);
+  border-color: rgba(201, 226, 101, 0.3);
+}
+
+.why-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 12px 0 6px;
+}
+
+.why-card p {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Why Work With Me na mobitelu */
+@media (max-width: 768px) {
+
+  .why-work {
+    padding: 24px 0;
+  }
+
+  .why-work-card {
+    margin-left: 0;
+    border-radius: 0;
+  }
+
+  .why-work-image {
+    margin-left: 0;
+    border-radius: 0;
+    height: 371px;
+  }
+
+  .why-work-text {
+    left: 20px;
+    right: 20px;
+    max-width: 100%;
+    top: 24px;
+  }
+
+  .why-work-cards {
+    position: static;
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .why-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .why-card svg {
+    grid-row: span 2;
+    width: 20px;
+    height: 20px;
+  }
+
+  .why-card h4 {
+    font-size: 11px;
+    margin: 0 0 2px;
+  }
+
+  .why-card p {
+    font-size: 9.5px;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .why-work-btn {
+    margin-top: 16px;
+    font-size: 13px;
+    padding: 10px 18px;
+  }
+
+  .why-work-eyebrow {
+    font-size: 9px;
+    margin-bottom: 2px;
+  }
+
+  .why-work-title {
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .why-work-divider {
+    margin-bottom: 5px;
+  }
+
+  .why-work-desc {
+    font-size: 10.5px;
+    line-height: 1.35;
+  }
 }

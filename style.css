@@ -29,6 +29,12 @@ body {
 /* ==================================================== */
 /* NAVIGACIJA */
 /* ==================================================== */
+.hero-wrapper {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
 .navbar {
   display: flex;
   align-items: center;
@@ -172,6 +178,8 @@ body {
 
 /* HERO VSEBINA */
 .hero-content {
+  position: relative;
+  z-index: 1;
   padding: 40px 32px 0;
 }
 
@@ -397,16 +405,15 @@ body {
 
 /* HERO OZADJE — fotografija  photo-web*/
 .hero {
-  position: relative;
-  overflow: hidden;
   padding-bottom: 140px;
+  position: relative;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   z-index: -1;
   opacity: 0;
   animation: heroRotate 18s infinite;
@@ -736,6 +743,16 @@ body {
   width: 100%;
   height: 2px;
   background-color: var(--color-text);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 32px;
+  position: relative;
+  z-index: 10;
 }
 
 /* Mobilni meni panel, skriven dok se ne otvori */

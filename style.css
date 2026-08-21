@@ -10,6 +10,11 @@
   --color-border: #D8D4C8;
   --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+  /* Največja širina vsebine in tekoči rob od roba zaslona. */
+  --container-max: clamp(1400px, 92vw, 1900px);
+  --gutter: clamp(20px, 4vw, 60px);
+  --step-size: clamp(56px, 4.65vw, 90px);
 }
 
 /* ==================================================== */
@@ -26,6 +31,16 @@ body {
   color: var(--color-text);
 }
 
+/* Nevidna škatla, ki drži vsebino na sredini in ji ne pusti čez 1400px. */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
 /* ==================================================== */
 /* NAVIGACIJA */
 /* ==================================================== */
@@ -40,7 +55,8 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 20px 32px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* ==================================================== */
@@ -180,12 +196,12 @@ body {
 .hero-content {
   position: relative;
   z-index: 1;
-  padding: 40px 32px 0;
+  padding-top: 40px;
 }
 
 /* HERO NASLOV */
 .hero-title {
-  font-size: 56px;
+  font-size: clamp(28px, 5vw, 76px);
   line-height: 1.2;
   font-weight: 600;
   margin: 48px 0 16px;
@@ -199,7 +215,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--color-text-muted);
-  max-width: 460px;
+  max-width: clamp(460px, 32vw, 620px);
   margin: 0 0 28px;
 }
 
@@ -217,8 +233,8 @@ body {
 
 /* VEČJI GUMBI SAMO V HERO SEKCIJI */
 .hero-buttons .btn {
-  font-size: 18px;
-  padding: 13px 28px;
+  font-size: clamp(18px, 1.25vw, 24px);
+  padding: clamp(13px, 0.9vw, 18px) clamp(28px, 1.95vw, 38px);
   border-radius: 8px;
 }
 
@@ -251,7 +267,7 @@ body {
 
 /* SEKCIJA USLUGE */
 .services {
-  padding: 24px 32px 100px;
+  padding: 24px 0 100px;
   text-align: center;
 }
 
@@ -265,7 +281,7 @@ body {
 }
 
 .section-title {
-  font-size: 36px;
+  font-size: clamp(24px, 3.5vw, 49px);
   font-weight: 600;
   margin: 0;
 }
@@ -303,7 +319,7 @@ body {
 .service-card {
   background-color: #ffffff;
   border-radius: 16px;
-  padding: 32px 28px;
+  padding: clamp(32px, 2.2vw, 44px) clamp(28px, 1.95vw, 38px);
   box-shadow: 0 4px 16px rgba(26, 35, 50, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -380,8 +396,8 @@ body {
 }
 
 .service-icon {
-  width: 70px;
-  height: 70px;
+  width: clamp(70px, 4.9vw, 95px);
+  height: clamp(70px, 4.9vw, 95px);
   background-color: var(--color-accent);
   border-radius: 10px;
   display: flex;
@@ -443,7 +459,7 @@ body {
 
 /* SEKCIJA PROJEKTI */
 .projects {
-  padding: 5px 32px 100px;
+  padding: 5px 0 100px;
   text-align: center;
 }
 
@@ -460,7 +476,7 @@ body {
 .project-image {
   border-radius: 16px;
   overflow: hidden;
-  height: 380px;
+  height: clamp(380px, 26.4vw, 513px);
 }
 
 .project-image img {
@@ -471,7 +487,7 @@ body {
 }
 
 .project-info h3 {
-  font-size: 28px;
+  font-size: clamp(20px, 2.5vw, 38px);
   font-weight: 600;
   margin: 0 0 6px;
 }
@@ -576,7 +592,7 @@ body {
 
 /* SEKCIJA ABOUT */
 .about {
-  padding: 100px 32px;
+  padding: 100px 0;
   text-align: center;
 }
 
@@ -605,7 +621,7 @@ body {
 
 .about-photo {
   aspect-ratio: 4 / 5;
-  max-width: 280px;
+  max-width: clamp(280px, 19.4vw, 378px);
   justify-self: end;
 }
 
@@ -629,7 +645,7 @@ body {
 
 /* SEKCIJA PROCES */
 .process {
-  padding: 25px 32px;
+  padding: 25px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -637,17 +653,18 @@ body {
 
 .process-watermark {
   position: absolute;
-  top: -40px;
-  left: 169px;
+  top: 50%;
+  left: 50%;
   font-family: var(--font-mono);
-  font-size: 364px;
+  font-size: clamp(180px, 26vw, 500px);
   font-weight: 500;
   color: var(--color-accent);
   opacity: 0.06;
   line-height: 1;
   z-index: -1;
   pointer-events: none;
-  transform: scaleY(1.35);
+  white-space: nowrap;
+  transform: translate(-50%, -50%) scaleY(1.35);
 }
 
 .wm-bracket {
@@ -655,26 +672,17 @@ body {
 }
 
 .wm-slash {
-  margin: 0 -60px;
+  margin: 0 -0.165em;
 }
 
 .process-steps {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 100px;
-  width: fit-content;
-  margin: 60px auto 0;
-}
-
-.process-wave {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: start;
+  gap: 0;
   width: 100%;
-  height: 67px;
-  z-index: 0;
+  margin: clamp(32px, 5vw, 60px) auto 0;
 }
 
 .process-step {
@@ -682,15 +690,25 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  flex-shrink: 0;
-  width: 160px;
+  padding: 0 clamp(4px, 1vw, 16px);
   position: relative;
   z-index: 1;
 }
 
+
+/* Valovita linija u Proces sekciji */
+.process-wave {
+  position: absolute;
+  top: calc(var(--step-size) * -0.149);
+  left: 0;
+  width: 100%;
+  height: calc(var(--step-size) * 1.597);
+  z-index: 0;
+}
+
 .step-number {
-  width: 67px;
-  height: 67px;
+  width: var(--step-size);
+  height: var(--step-size);
   border-radius: 50%;
   background-color: var(--color-bg);
   border: 1px solid var(--color-border);
@@ -750,7 +768,8 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 20px 32px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   position: relative;
   z-index: 10;
 }
@@ -760,11 +779,72 @@ body {
   display: none;
 }
 
+/* Vmesni zasloni: tri kartice storitev postanejo dve. */
+@media (max-width: 992px) {
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Pet korakov se prelomi v tri stolpce, valovita črta izgine. */
+  .process-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 8px;
+  }
+
+  .process-wave {
+    display: none;
+  }
+}
+
+/* ==================================================== */
+/* TEKOCE VELIKOSTI PISAVE — rastejo z zaslonom do stropa */
+/* ==================================================== */
+.btn,
+.nav-links a,
+.service-stack,
+.service-desc,
+.service-checklist li,
+.project-tag,
+.project-features li {
+  font-size: clamp(14px, 0.97vw, 19px);
+}
+
+.section-eyebrow,
+.badge span:last-child,
+.process-step p {
+  font-size: clamp(13px, 0.9vw, 17px);
+}
+
+.step-num {
+  font-size: clamp(12px, 0.83vw, 16px);
+}
+
+.logo-mark,
+.logo-text,
+.project-desc {
+  font-size: clamp(15px, 1.04vw, 20px);
+}
+
+.hero-subtitle,
+.about-story p {
+  font-size: clamp(16px, 1.11vw, 22px);
+}
+
+.process-step h3 {
+  font-size: clamp(17px, 1.18vw, 23px);
+}
+
+.service-card h3 {
+  font-size: clamp(18px, 1.25vw, 24px);
+}
+
 /* Mobilni prikaz ispod 768px širine ekrana */
 @media (max-width: 768px) {
 
-  .navbar {
-    padding: 14px 20px;
+    .navbar {
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
 
   .logo-mark,
@@ -809,8 +889,8 @@ body {
     font-size: 26px;
   }
 
-  .about {
-    padding: 30px 20px;
+    .about {
+    padding: 30px 0;
   }
 
   .about-grid {
@@ -835,7 +915,7 @@ body {
   }
 
   .services {
-    padding: 20px 20px;
+    padding: 20px 0;
   }
 
   .services-grid {
@@ -850,7 +930,7 @@ body {
   }
 
   .projects {
-    padding: 20px 20px;
+    padding: 20px 0;
   }
 
   .project-showcase {
@@ -864,7 +944,7 @@ body {
   }
 
   .process {
-    padding: 20px 20px;
+    padding: 20px 0;
   }
 
   .process-steps {
@@ -937,7 +1017,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding: 16px 32px 24px;
+    padding: 16px var(--gutter) 24px;
     background-color: var(--color-bg);
     border-top: 1px solid var(--color-border);
     position: absolute;
@@ -994,13 +1074,13 @@ body {
 }
 
 .trust-badge h4 {
-  font-size: 13px;
+  font-size: clamp(13px, 0.9vw, 17px);
   font-weight: 700;
   margin: 0 0 2px;
 }
 
 .trust-badge p {
-  font-size: 12px;
+  font-size: clamp(12px, 0.83vw, 16px);
   color: var(--color-text-muted);
   margin: 0;
 }
@@ -1020,74 +1100,64 @@ body {
 }
 /* Podnaslov ispod naslova sekcije, npr. "A clear and proven process..." */
 .section-subtitle {
-  font-size: 15px;
+  font-size: clamp(15px, 1.04vw, 20px);
   color: var(--color-text-muted);
-  max-width: 480px;
+  max-width: clamp(480px, 33vw, 650px);
   margin: 16px auto 0;
   line-height: 1.5;
 }
 
-/* Sekcija Why Work With Me — fiksna visina i pomicanje slike u lijevo */
+/* Sekcija Why Work With Me — kartica se ustavi na isti sirini kot ostale sekcije. */
 .why-work {
-  padding: 48px 0px;
-  width: 100%;
+  padding: 48px var(--gutter);
 }
 
+/* Razmerje je zaklenjeno, zato vse znotraj ostane na svojem mestu na vsaki sirini. */
 .why-work-card {
-  display: flex;
-  justify-content: center;
+  position: relative;
+  container-type: inline-size;
   width: 100%;
-  overflow: hidden; /* Skriva dijelove slike koji izađu van okvira */
+  max-width: calc(var(--container-max) - 2 * var(--gutter));
+  margin: 0 auto;
+  aspect-ratio: 1400 / 409;
+  overflow: hidden;
   border-radius: 24px;
-}
-
-.why-work-card {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  overflow: hidden; 
-  /* Ovdje definiramo zaobljenje za svaki kut posebno: gore-lijevo, gore-desno, dolje-desno, dolje-lijevo */
-  border-radius: 24px 24px 24px 24px; 
-  margin-left: -30px; 
+  background: linear-gradient(180deg, #242329 0%, #2D2C31 100%);
 }
 
 .why-work-image {
-  width: 100%;          
-  height: 409px;         
-  object-fit: fill;      
-  margin-left: 120px;    
-  border-radius: 24px; /* Osigurava da i sama slika prati zaobljenje kuteva */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
   display: block;
 }
 
-/* Tekst preko tamne Why Work With Me slike */
-.why-work-card {
-  position: relative;
-}
-
+/* Enota cqw pomeni odstotek sirine kartice, zato se vse krci in raste skupaj z njo. */
 .why-work-text {
   position: absolute;
-  top: 48px;
-  left: 110px;
-  max-width: 320px;
+  top: 3.43cqw;
+  left: 7.857cqw;
+  max-width: 22.86cqw;
   z-index: 1;
 }
 
 .why-work-eyebrow {
-  font-size: 13px;
+  font-size: 0.929cqw;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.07cqw;
   text-transform: uppercase;
   color: var(--color-accent-light);
-  margin: 0 0 12px;
+  margin: 0 0 0.857cqw;
 }
 
 .why-work-title {
-  font-size: 32px;
+  font-size: 2.286cqw;
   font-weight: 700;
   line-height: 1.25;
   color: #ffffff;
-  margin: 0 0 16px;
+  margin: 0 0 1.143cqw;
 }
 
 .why-work-title span {
@@ -1100,7 +1170,32 @@ body {
 
 .why-work-divider {
   display: flex;
+  al.why-work-divider {
+  display: flex;
   align-items: center;
+  gap: 0.714cqw;
+  margin-bottom: 1.43cqw;
+}
+
+.why-work-divider .divider-line {
+  width: 2.857cqw;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.why-work-divider .divider-dot {
+  width: 0.357cqw;
+  height: 0.357cqw;
+  border-radius: 50%;
+  background-color: var(--color-accent-light);
+}
+
+.why-work-desc {
+  font-size: 1cqw;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}ign-items: center;
   gap: 10px;
   margin-bottom: 20px;
 }
@@ -1129,18 +1224,26 @@ body {
 .why-work-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 48px;
+  gap: 0.714cqw;
+  margin-top: 3.43cqw;
+  font-size: 1cqw;
+  padding: 0.714cqw 1.571cqw;
+  border-radius: 0.43cqw;
+}
+
+.why-work-btn svg {
+  width: 1.143cqw;
+  height: 1.143cqw;
 }
 /* Četiri kartice u praznom prostoru Why Work With Me sekcije */
 .why-work-cards {
   position: absolute;
-  top: 48px;
-  left: 460px;
+  top: 0;
+  left: 26.143cqw;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  width: 420px;
+  gap: 1.143cqw;
+  width: 28cqw;
   max-width: none;
   z-index: 1;
 }
@@ -1148,9 +1251,14 @@ body {
 .why-card {
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 18px 16px;
+  border-radius: 0.857cqw;
+  padding: 1.286cqw 1.143cqw;
   transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.why-card svg {
+  width: 1.714cqw;
+  height: 1.714cqw;
 }
 
 .why-card:hover {
@@ -1160,17 +1268,64 @@ body {
 }
 
 .why-card h4 {
-  font-size: 13px;
+  font-size: 0.929cqw;
   font-weight: 700;
   color: #ffffff;
-  margin: 12px 0 6px;
+  margin: 0.857cqw 0 0.43cqw;
 }
 
 .why-card p {
-  font-size: 11.5px;
+  font-size: 0.821cqw;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
+}
+
+/* Pod 1200px kartica ni vec zaklenjena, vsebina se zlozi eno pod drugo. */
+@media (max-width: 1200px) {
+
+  .why-work-card {
+    aspect-ratio: auto;
+    padding: clamp(24px, 3vw, 40px);
+  }
+
+  .why-work-image {
+    display: none;
+  }
+
+  .why-work-text {
+    position: static;
+    max-width: 100%;
+  }
+
+  .why-work-eyebrow { font-size: 13px; letter-spacing: 1px; margin: 0 0 12px; }
+  .why-work-title { font-size: clamp(22px, 2.6vw, 30px); margin: 0 0 16px; }
+  .why-work-divider { gap: 10px; margin-bottom: 20px; }
+  .why-work-divider .divider-line { width: 40px; }
+  .why-work-divider .divider-dot { width: 5px; height: 5px; }
+  .why-work-desc { font-size: 14px; max-width: 620px; }
+
+  .why-work-cards {
+    position: static;
+    width: 100%;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .why-card { border-radius: 12px; padding: 16px 14px; }
+  .why-card svg { width: 22px; height: 22px; }
+  .why-card h4 { font-size: 13px; margin: 10px 0 6px; }
+  .why-card p { font-size: 11.5px; }
+
+  .why-work-btn {
+    gap: 10px;
+    margin-top: 28px;
+    font-size: 14px;
+    padding: 10px 22px;
+    border-radius: 6px;
+  }
+
+  .why-work-btn svg { width: 16px; height: 16px; }
 }
 
 /* Why Work With Me na mobitelu */

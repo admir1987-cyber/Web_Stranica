@@ -12,9 +12,18 @@
   --font-mono: 'JetBrains Mono', Consolas, monospace;
 
   /* Največja širina vsebine in tekoči rob od roba zaslona. */
-  --container-max: clamp(1400px, 92vw, 1900px);
-  --gutter: clamp(20px, 4vw, 60px);
-  --step-size: clamp(56px, 4.65vw, 90px);
+  --container-max: clamp(1400px, 97.3vw, 2492px);
+  --gutter: clamp(20px, 4vw, 102px);
+  --step-size: clamp(56px, 4.65vw, 119px);
+  --icon-size: clamp(70px, 4.9vw, 125px);
+  --icon-gap: clamp(16px, 1.1vw, 29px);
+
+  /* Razmiki rastejo skupaj z zaslonom, da ostane razmerje enako. */
+  --space-xs: clamp(10px, 0.85vw, 22px);
+  --space-sm: clamp(16px, 1.4vw, 36px);
+  --space-md: clamp(24px, 2.1vw, 54px);
+  --space-lg: clamp(40px, 4.2vw, 108px);
+  --space-xl: clamp(60px, 7vw, 179px);
 }
 
 /* ==================================================== */
@@ -68,6 +77,13 @@ body {
   gap: 6px;
   text-decoration: none;
   color: var(--color-text);
+}
+
+/* Logotip raste z zaslonom, sirina se prilagodi sama. */
+.logo img {
+  height: clamp(24px, 1.95vw, 50px);
+  width: auto;
+  display: block;
 }
 
 .logo-mark {
@@ -196,15 +212,15 @@ body {
 .hero-content {
   position: relative;
   z-index: 1;
-  padding-top: 40px;
+  padding-top: var(--space-md);
 }
 
 /* HERO NASLOV */
 .hero-title {
-  font-size: clamp(28px, 5vw, 76px);
+  font-size: clamp(28px, 5vw, 128px);
   line-height: 1.2;
   font-weight: 600;
-  margin: 48px 0 16px;
+  margin: var(--space-lg) 0 var(--space-sm);
 }
 .accent {
   color: var(--color-accent-light);
@@ -215,15 +231,15 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--color-text-muted);
-  max-width: clamp(460px, 32vw, 620px);
-  margin: 0 0 28px;
+  max-width: clamp(460px, 38vw, 973px);
+  margin: 0 0 var(--space-md);
 }
 
 /* HERO GUMBI */
 .hero-buttons {
   display: flex;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: clamp(14px, 1.15vw, 29px);
+  margin-bottom: var(--space-md);
 }
 .btn-secondary {
   background-color: transparent;
@@ -233,8 +249,8 @@ body {
 
 /* VEČJI GUMBI SAMO V HERO SEKCIJI */
 .hero-buttons .btn {
-  font-size: clamp(18px, 1.25vw, 24px);
-  padding: clamp(13px, 0.9vw, 18px) clamp(28px, 1.95vw, 38px);
+  font-size: clamp(18px, 1.25vw, 32px);
+  padding: clamp(13px, 0.9vw, 23px) clamp(28px, 1.95vw, 50px);
   border-radius: 8px;
 }
 
@@ -267,7 +283,7 @@ body {
 
 /* SEKCIJA USLUGE */
 .services {
-  padding: 24px 0 100px;
+  padding: var(--space-md) 0 var(--space-xl);
   text-align: center;
 }
 
@@ -281,7 +297,7 @@ body {
 }
 
 .section-title {
-  font-size: clamp(24px, 3.5vw, 49px);
+  font-size: clamp(24px, 3.5vw, 90px);
   font-weight: 600;
   margin: 0;
 }
@@ -291,7 +307,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: var(--space-sm);
 }
 
 .divider-line {
@@ -311,15 +327,15 @@ body {
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 60px;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
   text-align: left;
 }
 
 .service-card {
   background-color: #ffffff;
   border-radius: 16px;
-  padding: clamp(32px, 2.2vw, 44px) clamp(28px, 1.95vw, 38px);
+  padding: clamp(32px, 2.2vw, 56px) clamp(28px, 1.95vw, 50px);
   box-shadow: 0 4px 16px rgba(26, 35, 50, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -343,21 +359,21 @@ body {
 .service-card h3 {
   font-size: 18px;
   font-weight: 600;
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-xs);
 }
 
 .service-stack {
   font-size: 14px;
   font-weight: 600;
   color: var(--color-accent);
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-sm);
 }
 
 .service-desc {
   font-size: 14px;
   line-height: 1.6;
   color: var(--color-text-muted);
-  margin: 0 0 20px;
+  margin: 0 0 var(--space-sm);
 }
 
 .service-checklist {
@@ -369,8 +385,8 @@ body {
 .service-checklist li {
   font-size: 14px;
   color: var(--color-accent);
-  margin-bottom: 10px;
-  padding-left: 22px;
+  margin-bottom: var(--space-xs);
+  padding-left: 1.6em;
   position: relative;
 }
 
@@ -391,19 +407,25 @@ body {
 .service-card-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--icon-gap);
+  margin-bottom: var(--space-sm);
 }
 
 .service-icon {
-  width: clamp(70px, 4.9vw, 95px);
-  height: clamp(70px, 4.9vw, 95px);
+  width: var(--icon-size);
+  height: var(--icon-size);
   background-color: var(--color-accent);
-  border-radius: 10px;
+  border-radius: clamp(10px, 0.7vw, 18px);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+/* Ikona vedno zavzame enak delez zelene skatle. */
+.service-icon svg {
+  width: 46%;
+  height: 46%;
 }
 
 .service-heading {
@@ -411,17 +433,17 @@ body {
   flex-direction: column;
 }
 
-/* Ovi stilovi osiguravaju da opis i lista budu u istoj ravnici kao i naslov, prateći širinu ikone i razmak */
+/* Uvlaka je vezana na ikono in razmik, zato ostane poravnana z naslovom. */
 .service-desc,
 .service-checklist {
-  padding-left: calc(48px + 37px);
+  padding-left: calc(var(--icon-size) + var(--icon-gap));
 }
 
 
 
 /* HERO OZADJE — fotografija  photo-web*/
 .hero {
-  padding-bottom: 140px;
+  padding-bottom: var(--space-xl);
   position: relative;
 }
 
@@ -459,7 +481,7 @@ body {
 
 /* SEKCIJA PROJEKTI */
 .projects {
-  padding: 5px 0 100px;
+  padding: 5px 0 var(--space-xl);
   text-align: center;
 }
 
@@ -467,8 +489,8 @@ body {
  .project-showcase {
   display: grid;
   grid-template-columns: 0.8fr 1.4fr;
-  gap: 48px;
-  margin-top: 87px;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
   text-align: left;
   align-items: start;
 }
@@ -476,7 +498,7 @@ body {
 .project-image {
   border-radius: 16px;
   overflow: hidden;
-  height: clamp(380px, 26.4vw, 513px);
+  height: clamp(380px, 30vw, 768px);
 }
 
 .project-image img {
@@ -487,7 +509,7 @@ body {
 }
 
 .project-info h3 {
-  font-size: clamp(20px, 2.5vw, 38px);
+  font-size: clamp(20px, 2.5vw, 64px);
   font-weight: 600;
   margin: 0 0 6px;
 }
@@ -500,8 +522,8 @@ body {
 }
 
 .project-desc {
-  font-size: 15px;
   line-height: 1.7;
+  max-width: 68ch;
   color: var(--color-text-muted);
   margin: 0 0 24px;
 }
@@ -592,7 +614,7 @@ body {
 
 /* SEKCIJA ABOUT */
 .about {
-  padding: 100px 0;
+  padding: var(--space-xl) 0;
   text-align: center;
 }
 
@@ -613,15 +635,15 @@ body {
 .about-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.6fr;
-  gap: 48px;
-  margin-top: 60px;
+  gap: var(--space-lg);
+  margin: var(--space-lg) auto 0;
   align-items: start;
-  margin-left: -160px;
+  max-width: min(100%, clamp(900px, 72vw, 1843px));
 }
 
 .about-photo {
   aspect-ratio: 4 / 5;
-  max-width: clamp(280px, 19.4vw, 378px);
+  max-width: clamp(280px, 21vw, 538px);
   justify-self: end;
 }
 
@@ -645,7 +667,7 @@ body {
 
 /* SEKCIJA PROCES */
 .process {
-  padding: 25px 0;
+  padding: var(--space-md) 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -656,7 +678,7 @@ body {
   top: 50%;
   left: 50%;
   font-family: var(--font-mono);
-  font-size: clamp(180px, 26vw, 500px);
+  font-size: clamp(180px, 26vw, 666px);
   font-weight: 500;
   color: var(--color-accent);
   opacity: 0.06;
@@ -704,6 +726,12 @@ body {
   width: 100%;
   height: calc(var(--step-size) * 1.597);
   z-index: 0;
+}
+
+/* Ikona vedno zavzame enak delez kroga. */
+.step-number svg {
+  width: 78%;
+  height: 78%;
 }
 
 .step-number {
@@ -807,35 +835,35 @@ body {
 .service-checklist li,
 .project-tag,
 .project-features li {
-  font-size: clamp(14px, 0.97vw, 19px);
+  font-size: clamp(14px, 0.97vw, 25px);
 }
 
 .section-eyebrow,
 .badge span:last-child,
 .process-step p {
-  font-size: clamp(13px, 0.9vw, 17px);
+  font-size: clamp(13px, 0.9vw, 23px);
 }
 
 .step-num {
-  font-size: clamp(12px, 0.83vw, 16px);
+  font-size: clamp(12px, 0.83vw, 21px);
 }
 
 .logo-mark,
 .logo-text,
 .project-desc {
-  font-size: clamp(15px, 1.04vw, 20px);
+  font-size: clamp(15px, 1.04vw, 27px);
 }
 
 .hero-subtitle,
 .about-story p {
-  font-size: clamp(16px, 1.11vw, 22px);
+  font-size: clamp(16px, 1.11vw, 28px);
 }
 
 .process-step h3 {
-  font-size: clamp(17px, 1.18vw, 23px);
+  font-size: clamp(18px, 1.25vw, 32px);
 }
 
-.service-card h3 {
+/* Mobilni {
   font-size: clamp(18px, 1.25vw, 24px);
 }
 
@@ -1059,8 +1087,14 @@ body {
 /* Značke zaupanja v hero sekciji (Reliable, Fast, Secure) */
 .trust-badges {
   display: flex;
-  gap: 28px;
-  margin-bottom: 28px;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+/* Ikone znacke rastejo z zaslonom. */
+.trust-badge svg {
+  width: clamp(38px, 3vw, 77px);
+  height: auto;
 }
 
 .trust-badge {
@@ -1074,13 +1108,13 @@ body {
 }
 
 .trust-badge h4 {
-  font-size: clamp(13px, 0.9vw, 17px);
+  font-size: clamp(13px, 0.9vw, 23px);
   font-weight: 700;
   margin: 0 0 2px;
 }
 
 .trust-badge p {
-  font-size: clamp(12px, 0.83vw, 16px);
+  font-size: clamp(12px, 0.83vw, 21px);
   color: var(--color-text-muted);
   margin: 0;
 }
@@ -1100,9 +1134,9 @@ body {
 }
 /* Podnaslov ispod naslova sekcije, npr. "A clear and proven process..." */
 .section-subtitle {
-  font-size: clamp(15px, 1.04vw, 20px);
+  font-size: clamp(15px, 1.04vw, 27px);
   color: var(--color-text-muted);
-  max-width: clamp(480px, 33vw, 650px);
+  max-width: clamp(480px, 33vw, 845px);
   margin: 16px auto 0;
   line-height: 1.5;
 }

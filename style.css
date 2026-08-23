@@ -74,14 +74,15 @@ body {
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   text-decoration: none;
   color: var(--color-text);
+  margin-top: 4px;
 }
 
-/* Logotip raste z zaslonom, sirina se prilagodi sama. */
+.logo-img-wrapper img,
 .logo img {
-  height: clamp(24px, 1.95vw, 50px);
+  height: clamp(28px, 2.2vw, 44px);
   width: auto;
   display: block;
 }
@@ -1446,4 +1447,38 @@ body {
     font-size: 10.5px;
     line-height: 1.35;
   }
+}
+
+/* ==================================================== */
+/* PRILAGODBA ZA ULTRA-WIDE I VELIKE ZASLONE (1400px+) */
+/* ==================================================== */
+@media (min-width: 1400px) {
+  .hero-content {
+    padding-top: 60px;
+  }
+
+  .services-grid {
+    gap: 32px;
+  }
+
+  .service-card {
+    border-radius: 20px;
+  }
+
+  .why-work-card {
+    border-radius: 32px;
+  }
+
+  /* Slika logotipa raste proporcionalno širini ekrana (vw) */
+  .logo-img-wrapper img,
+  .logo img {
+    height: clamp(44px, 2.5vw, 90px);
+  }
+
+  /* Tekstualni dio logotipa prati rast na velikim ekranima */
+  .logo-mark,
+  .logo-text {
+    font-size: clamp(20px, 1.25vw, 36px);
+  }
+
 }

@@ -677,6 +677,75 @@ body {
   margin: 0;
 }
 
+/* SKILLS & TOOLS — kartice orodij v treh skupinah. */
+.skills {
+  margin-top: var(--space-xl);
+  text-align: left;
+}
+
+.skill-group {
+  margin-top: var(--space-lg);
+}
+
+.skill-label {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 0.76vw, 19px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 11vw, 260px), 1fr));
+  gap: var(--space-sm);
+}
+
+.skill-card {
+  aspect-ratio: 1 / 1;
+}
+
+.skill-inner {
+  width: 100%;
+  height: 100%;
+}
+
+/* Zadnja stran pride v naslednjem koraku. */
+.skill-back {
+  display: none;
+}
+
+.skill-front {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: clamp(12px, 1vw, 22px);
+  box-shadow: 0 4px 16px rgba(26, 35, 50, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
+.skill-front img {
+  width: 38%;
+  height: 38%;
+  object-fit: contain;
+}
+
+.skill-front span {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 0.8vw, 20px);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
 /* SEKCIJA PROCES */
 .process {
   padding: var(--space-md) 0;
@@ -1288,6 +1357,77 @@ a.contact-value:hover {
 
 .legal-back {
   margin-top: var(--space-xl);
+}
+
+/* POJAVNO OKNO — lezi cez celo stran. */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(26, 27, 32, 0.6);
+}
+
+.modal-box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: clamp(320px, 55vw, 900px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: clamp(16px, 1.2vw, 28px);
+  padding: clamp(28px, 3vw, 64px);
+  box-shadow: 0 24px 60px rgba(26, 35, 50, 0.25);
+}
+
+.modal-close {
+  position: absolute;
+  top: clamp(14px, 1.2vw, 26px);
+  right: clamp(14px, 1.2vw, 26px);
+  width: clamp(34px, 2.6vw, 56px);
+  height: clamp(34px, 2.6vw, 56px);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.modal-close svg {
+  width: 45%;
+  height: 45%;
+}
+
+.modal-close:hover {
+  background-color: #E8EDDD;
+  color: var(--color-accent);
+}
+
+/* Ko je okno odprto, stran za njim ne drsi. */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Kartice storitev je zdaj mogoce klikniti. */
+.service-card {
+  cursor: pointer;
 }
 
 /* NOGA STRANI — dve vrstici, zgoraj povezave, spodaj podatki. */

@@ -29,6 +29,38 @@ navDropdownItems.forEach((item) => {
   });
 });
 
+/* POJAVNO OKNO ZA STORITVE */
+const modal = document.getElementById('serviceModal');
+const modalBody = document.getElementById('modalBody');
+
+function openModal(kljuc) {
+  if (!modal) return;
+  modal.hidden = false;
+  document.body.classList.add('modal-open');
+}
+
+function closeModal() {
+  if (!modal) return;
+  modal.hidden = true;
+  document.body.classList.remove('modal-open');
+}
+
+if (modal) {
+  modal.querySelector('.modal-close').addEventListener('click', closeModal);
+  modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+}
+
+/* Odpre se iz spustnega menija in iz kartic v razdelku Storitve. */
+document.querySelectorAll('[data-service]').forEach((el) => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal(el.dataset.service);
+  });
+});
+
 /* PREKLOPNIK JEZIKA — EN / SLO */
 function setLanguage(lang) {
   document.querySelectorAll('[data-en]').forEach((el) => {

@@ -255,15 +255,21 @@ body {
   border-radius: 8px;
 }
 
-/* SOCIALNE POVEZAVE */
+/* SOCIALNE POVEZAVE — zdaj v sekciji Kontakt. */
 .social-links {
   display: flex;
   align-items: center;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
 }
 
 .social-links span {
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 0.76vw, 19px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--color-text-muted);
 }
 
@@ -271,15 +277,20 @@ body {
   display: flex;
   align-items: center;
   opacity: 0.7;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
-.social-icon img[alt="Fiverr"] {
-  width: 32px;
-  height: auto;
+/* Vse ikone imajo enako velikost in rastejo z zaslonom. */
+.social-icon svg,
+.social-icon img {
+  width: clamp(22px, 1.6vw, 40px);
+  height: clamp(22px, 1.6vw, 40px);
+  object-fit: contain;
 }
 
 .social-icon:hover {
   opacity: 1;
+  transform: translateY(-2px);
 }
 
 /* SEKCIJA USLUGE */
@@ -861,11 +872,11 @@ body {
 }
 
 .process-step h3 {
-  font-size: clamp(18px, 1.25vw, 32px);
+   font-size: clamp(17px, 1.18vw, 30px);
 }
 
-/* Mobilni {
-  font-size: clamp(18px, 1.25vw, 24px);
+.service-card h3 {
+  font-size: clamp(18px, 1.25vw, 32px);
 }
 
 /* Mobilni prikaz ispod 768px širine ekrana */
@@ -1085,6 +1096,286 @@ body {
   }
 }
 
+/* SEKCIJA KONTAKT */
+.contact {
+  padding: var(--space-xl) 0;
+  text-align: center;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+  text-align: left;
+  align-items: start;
+}
+
+/* Vrstica: oznaka levo, podatek desno, tanka crta spodaj. */
+.contact-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 0.76vw, 19px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.contact-value {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 0.9vw, 23px);
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  text-align: right;
+  transition: color 0.15s ease;
+}
+
+a.contact-value:hover {
+  color: var(--color-accent);
+}
+
+/* OBRAZEC */
+.contact-form {
+  text-align: left;
+}
+
+.field {
+  margin-bottom: var(--space-md);
+}
+
+.field .contact-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 0.97vw, 25px);
+  color: var(--color-text);
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--space-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 8em;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(107, 133, 71, 0.15);
+}
+
+.contact-form ::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.form-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  border: none;
+}
+
+.form-btn svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* Privolitev za obdelavo podatkov. */
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+  font-size: clamp(12px, 0.83vw, 21px);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.consent input {
+  margin-top: 0.25em;
+  accent-color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* Polje za robote — clovek ga ne vidi. */
+.hp {
+  position: absolute;
+  left: -9999px;
+}
+
+.form-status {
+  margin-top: var(--space-sm);
+  font-size: clamp(13px, 0.9vw, 23px);
+  min-height: 1.5em;
+}
+
+.form-status.ok { color: var(--color-accent); }
+.form-status.err { color: #B04A3A; }
+
+/* Pod 992px gre vse eno pod drugo. */
+@media (max-width: 992px) {
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* PRAVNA STRAN — zasebnost. */
+.legal {
+  padding: var(--space-xl) 0;
+}
+
+.legal-inner {
+  max-width: min(100%, 70ch);
+}
+
+.legal h1 {
+  font-size: clamp(28px, 3.5vw, 90px);
+  font-weight: 600;
+  margin: 0 0 var(--space-xs);
+}
+
+.legal-date {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 0.76vw, 19px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-lg);
+}
+
+.legal h2 {
+  font-size: clamp(17px, 1.18vw, 30px);
+  font-weight: 600;
+  margin: var(--space-lg) 0 var(--space-sm);
+}
+
+.legal p {
+  font-size: clamp(16px, 1.11vw, 28px);
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-sm);
+}
+
+.legal a {
+  color: var(--color-accent);
+}
+
+.legal-back {
+  margin-top: var(--space-xl);
+}
+
+/* NOGA STRANI — dve vrstici, zgoraj povezave, spodaj podatki. */
+.footer {
+  background-color: #1A1B20;
+  padding: var(--space-lg) 0 var(--space-md);
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-top a {
+  font-size: clamp(14px, 0.97vw, 25px);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-top a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
+  padding-top: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 0.7vw, 18px);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Logotip je tu le znak ob imenu, zato je nizek. */
+.footer-brand img {
+  height: clamp(14px, 1vw, 26px);
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-link:hover {
+  color: var(--color-accent-light);
+}
+
+/* Avtorske pravice se odrinejo na desno. */
+.footer-copy {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+
+  .footer-top {
+    gap: var(--space-sm);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .footer-copy {
+    margin-left: 0;
+  }
+}
+
 /* Značke zaupanja v hero sekciji (Reliable, Fast, Secure) */
 .trust-badges {
   display: flex;
@@ -1205,8 +1496,6 @@ body {
 
 .why-work-divider {
   display: flex;
-  al.why-work-divider {
-  display: flex;
   align-items: center;
   gap: 0.714cqw;
   margin-bottom: 1.43cqw;
@@ -1227,29 +1516,6 @@ body {
 
 .why-work-desc {
   font-size: 1cqw;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.65);
-  margin: 0;
-}ign-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.why-work-divider .divider-line {
-  width: 40px;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.25);
-}
-
-.why-work-divider .divider-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: var(--color-accent-light);
-}
-
-.why-work-desc {
-  font-size: 14px;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.65);
   margin: 0;

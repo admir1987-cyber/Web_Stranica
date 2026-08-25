@@ -758,6 +758,33 @@ body {
   font-size: clamp(14px, 0.97vw, 25px);
   line-height: 1.55;
   color: var(--color-text-muted);
+  transition: color 0.2s ease;
+  /* Prostor za tri vrstice, da logotipi ne poskakujejo. */
+  min-height: 4.65em;
+}
+
+/* Ko kazemo na orodje, je njegova razlaga temnejsa od osnovnega opisa. */
+.skill-panel-desc.is-orodje {
+  color: var(--color-text);
+}
+
+.skill-panel-accent .skill-panel-desc.is-orodje {
+  color: #ffffff;
+}
+
+/* Logotip se ob prehodu dvigne in dobi zeleno obrobo. */
+.skill-logo {
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.skill-logo:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.skill-panel-accent .skill-logo:hover {
+  border-color: #ffffff;
 }
 
 /* Na zeleni plosci mora biti besedilo svetlo. */
@@ -802,6 +829,12 @@ body {
   width: 34%;
   height: 34%;
   object-fit: contain;
+}
+
+/* Vrtenje velja samo ob prihodu miske, ne tudi ob odhodu. */
+.skill-logo:hover img {
+  transform: rotateY(360deg);
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .skill-logo span {

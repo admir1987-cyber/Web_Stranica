@@ -232,3 +232,47 @@ document.querySelectorAll('.mobile-nav-links a').forEach((link) => {
     mobileMenu.classList.remove('open');
   });
 });
+
+/* RAZLAGE ORODIJ — besedilo se pokaze, ko gres z misko cez logotip. */
+const orodja = {
+  Flutter: ['One build — the app runs on both Android and iPhone.', 'Ena izdelava — aplikacija deluje na Androidu in iPhonu.'],
+  Dart: ['The language behind Flutter. Fast, and fewer bugs.', 'Jezik za Flutterjem. Hiter, z manj napakami.'],
+  Supabase: ['Cloud database. Logins, data and backups included.', 'Baza v oblaku. Prijava, podatki in varnostne kopije.'],
+  HTML5: ['The skeleton of the page. Clean structure Google understands.', 'Ogrodje strani. Čista struktura, ki jo Google razume.'],
+  CSS: ['The look. Fits every screen, from phone to 4K.', 'Videz. Prilagodi se vsakemu zaslonu, od telefona do 4K.'],
+  JavaScript: ['Brings the page alive. Forms, motion, interaction.', 'Oživi stran. Obrazci, gibanje, interakcija.'],
+  Git: ['Every change is saved. Going back is always possible.', 'Vsaka sprememba je shranjena. Vrnitev nazaj je vedno možna.'],
+  Linux: ['Servers run on Linux. The terminal is home ground.', 'Strežniki tečejo na Linuxu. Terminal je moj teren.'],
+  Python: ['Data processing and automation of repetitive work.', 'Obdelava podatkov in avtomatizacija ponavljajočega se dela.'],
+  Bash: ['Scripts that do the job for you — same time, every day.', 'Skripte, ki delo opravijo namesto vas — vsak dan ob isti uri.'],
+  PostgreSQL: ['Data kept in order and fast to reach, even when there is a lot.', 'Podatki urejeni in hitro dosegljivi, tudi ko jih je veliko.']
+};
+
+document.querySelectorAll('.skill-panel').forEach((plosca) => {
+  const opis = plosca.querySelector('.skill-panel-desc');
+  if (!opis) return;
+
+  plosca.querySelectorAll('.skill-logo').forEach((logo) => {
+    const ime = logo.querySelector('span').textContent.trim();
+    const razlaga = orodja[ime];
+    if (!razlaga) return;
+
+    /* Pokaze razlago orodja namesto osnovnega opisa. */
+    function pokazi() {
+      const slo = document.documentElement.lang === 'sl';
+      opis.textContent = slo ? razlaga[1] : razlaga[0];
+      opis.classList.add('is-orodje');
+    }
+
+    /* Vrne osnovni opis, ki je zapisan v atributih same plosce. */
+    function vrni() {
+      const slo = document.documentElement.lang === 'sl';
+      opis.textContent = slo ? opis.dataset.slo : opis.dataset.en;
+      opis.classList.remove('is-orodje');
+    }
+
+    logo.addEventListener('mouseenter', pokazi);
+    logo.addEventListener('mouseleave', vrni);
+    logo.addEventListener('click', pokazi);
+  });
+});

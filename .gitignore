@@ -5,4 +5,5 @@ skills-lock.json
 
 # Zacasne kopije in smeti sistema.
 *.backup
+assets/mockup/
 Thumbs.db

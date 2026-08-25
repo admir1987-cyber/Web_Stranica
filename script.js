@@ -33,8 +33,92 @@ navDropdownItems.forEach((item) => {
 const modal = document.getElementById('serviceModal');
 const modalBody = document.getElementById('modalBody');
 
+/* Vsebina vsake storitve v obeh jezikih, na enem mestu za lazje urejanje. */
+const storitve = {
+  mobile: {
+    stack: 'Flutter · Dart',
+    ikona: '<rect x="6.5" y="2" width="11" height="20" rx="3" style="stroke:#ffffff; stroke-width:2.5; fill:none;"/><rect x="10.3" y="3.4" width="3.4" height="1.1" rx="0.55" style="fill:#ffffff; stroke:none;"/><line x1="10.3" y1="19.3" x2="13.7" y2="19.3" style="stroke:#ffffff; stroke-width:2.5;"/>',
+    naslovEn: 'Mobile App Development',
+    naslovSlo: 'Razvoj mobilnih aplikacij',
+    opisEn: 'I build mobile apps for Android and iOS from a single codebase, so you get both platforms without paying twice. Every app is made for smooth performance and a clean, modern interface.',
+    opisSlo: 'Izdelam mobilne aplikacije za Android in iOS iz ene same kode, tako da dobite obe platformi brez dvojnih stroškov. Vsaka aplikacija je narejena za tekoče delovanje in čist, sodoben vmesnik.',
+    tocke: [
+      ['Custom apps built to your needs', 'Aplikacije, izdelane po vaših potrebah'],
+      ['One codebase for Android and iOS', 'Ena koda za Android in iOS'],
+      ['Clean and responsive interface', 'Čist in odziven vmesnik'],
+      ['Publishing to Google Play and App Store', 'Objava v Google Play in App Store'],
+      ['Maintenance and later updates', 'Vzdrževanje in kasnejše dopolnitve']
+    ]
+  },
+  web: {
+    stack: 'HTML · CSS · JavaScript',
+    ikona: '<circle cx="12" cy="12" r="10" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/><line x1="2" y1="12" x2="22" y2="12" style="stroke:#ffffff; stroke-width:2.2;"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>',
+    naslovEn: 'Web Development',
+    naslovSlo: 'Spletni razvoj',
+    opisEn: 'Modern websites that load fast, look good on every screen and are easy to maintain. Written by hand, without heavy tools, so nothing slows the page down.',
+    opisSlo: 'Sodobne spletne strani, ki se hitro naložijo, dobro izgledajo na vsakem zaslonu in jih je enostavno vzdrževati. Napisane ročno, brez težkih orodij, zato strani nič ne upočasnjuje.',
+    tocke: [
+      ['Presentation sites and portfolios', 'Predstavitvene strani in portfelji'],
+      ['Responsive design for phone, tablet and desktop', 'Odziven dizajn za telefon, tablico in računalnik'],
+      ['Speed and SEO optimization', 'Optimizacija hitrosti in SEO'],
+      ['Contact forms connected to your email', 'Kontaktni obrazci, povezani z vašo e-pošto'],
+      ['Maintenance and later updates', 'Vzdrževanje in kasnejše dopolnitve']
+    ]
+  },
+  scripts: {
+    stack: 'Linux · Python · Bash',
+    ikona: '<polyline points="4 17 10 11 4 5" style="stroke:#ffffff; stroke-width:2.5; fill:none;"/><line x1="12" y1="19" x2="20" y2="19" style="stroke:#ffffff; stroke-width:2.5;"/>',
+    naslovEn: 'Scripts & Automation',
+    naslovSlo: 'Skripte in avtomatizacija',
+    opisEn: 'Repetitive work done by a program instead of by hand. I write scripts and small tools that process data, run tasks on schedule and save you hours every week.',
+    opisSlo: 'Ponavljajoče se delo namesto ročno opravi program. Pišem skripte in majhna orodja, ki obdelujejo podatke, izvajajo naloge ob določenem času in vam prihranijo ure vsak teden.',
+    tocke: [
+      ['Task automation and scheduling', 'Avtomatizacija in načrtovanje nalog'],
+      ['Data processing and reports', 'Obdelava podatkov in poročila'],
+      ['Linux server administration', 'Administracija strežnikov Linux'],
+      ['Custom tools for your workflow', 'Orodja po meri za vaš potek dela'],
+      ['Backup and monitoring', 'Varnostne kopije in nadzor']
+    ]
+  }
+};
+
 function openModal(kljuc) {
   if (!modal) return;
+  const s = storitve[kljuc];
+  if (!s) return;
+
+  /* Vsako tocko zapisemo v obeh jezikih, da preklopnik deluje tudi tukaj. */
+  const seznam = s.tocke
+    .map((t) => `<li data-en="${t[0]}" data-slo="${t[1]}">${t[0]}</li>`)
+    .join('');
+
+  modalBody.innerHTML = `
+    <div class="modal-head">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">${s.ikona}</svg>
+      </div>
+      <div>
+        <h3 class="modal-title" data-en="${s.naslovEn}" data-slo="${s.naslovSlo}">${s.naslovEn}</h3>
+        <p class="service-stack">${s.stack}</p>
+      </div>
+    </div>
+    <p class="modal-desc" data-en="${s.opisEn}" data-slo="${s.opisSlo}">${s.opisEn}</p>
+    <p class="modal-label" data-en="What it includes" data-slo="Kaj vključuje">What it includes</p>
+    <ul class="service-checklist">${seznam}</ul>
+    <div class="modal-actions">
+      <a href="#contact" class="btn btn-primary" data-en="Send an inquiry" data-slo="Pošljite povpraševanje">Send an inquiry</a>
+      <a href="#projects" class="btn btn-secondary" data-en="View my work" data-slo="Poglejte moje delo">View my work</a>
+    </div>
+  `;
+
+  /* Ko kliknemo gumb v oknu, se okno zapre in stran skoci na razdelek. */
+  modalBody.querySelectorAll('.modal-actions a').forEach((a) => {
+    a.addEventListener('click', closeModal);
+  });
+
+  /* Novo vsebino takoj prevedemo v jezik, ki je izbran na strani. */
+  setLanguage(document.documentElement.lang === 'sl' ? 'slo' : 'en');
+
   modal.hidden = false;
   document.body.classList.add('modal-open');
 }

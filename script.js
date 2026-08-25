@@ -279,3 +279,91 @@ document.querySelectorAll('.skill-panel').forEach((plosca) => {
     logo.addEventListener('click', pokazi);
   });
 });
+
+/* ENERGIJA PO POTI PROCESA */
+const pot = document.getElementById('wavePath');
+const krogla = document.getElementById('waveOrb');
+const kroglaSij = document.getElementById('waveOrbGlow');
+const iskre = document.getElementById('waveSparks');
+
+/* Kdor v sistemu izklopi animacije, dobi mirno crto brez energije. */
+const manjGibanja = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Na pravni strani tega razdelka ni, zato najprej preverimo. */
+if (pot && krogla && !manjGibanja) {
+  const NS = 'http://www.w3.org/2000/svg';
+  const dolzina = pot.getTotalLength();
+  const trajanje = 5600;
+
+  krogla.setAttribute('opacity', '1');
+  kroglaSij.setAttribute('opacity', '1');
+
+  let delci = [];
+  let zacetek = null;
+  let vidno = false;
+
+  /* Ustvari eno iskro ob trenutni legi energije. */
+  function iskra(x, y) {
+    if (delci.length > 14) return;
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('r', (Math.random() * 1.6 + 0.8).toFixed(2));
+    c.setAttribute('fill', Math.random() < 0.5 ? '#FFF3C4' : '#ffffff');
+    c.setAttribute('cx', x);
+    c.setAttribute('cy', y);
+    iskre.appendChild(c);
+    delci.push({
+      el: c, x: x, y: y,
+      vx: (Math.random() - 0.2) * 2.4,
+      vy: (Math.random() - 0.5) * 3.4,
+      zivljenje: 1
+    });
+  }
+
+  function korak(cas) {
+    if (!vidno) return;
+    if (zacetek === null) zacetek = cas;
+
+    const preteceno = ((cas - zacetek) % trajanje) / trajanje;
+    const d = preteceno * dolzina;
+    const tocka = pot.getPointAtLength(d);
+
+    krogla.setAttribute('transform', 'translate(' + tocka.x + ',' + tocka.y + ')');
+    kroglaSij.setAttribute('transform', 'translate(' + tocka.x + ',' + tocka.y + ')');
+
+    if (Math.random() < 0.85) iskra(tocka.x, tocka.y);
+
+    /* Iskre se razletijo, padajo in ugasnejo. */
+    for (let i = delci.length - 1; i >= 0; i--) {
+      const q = delci[i];
+      q.zivljenje -= 0.05;
+      q.x += q.vx;
+      q.y += q.vy;
+      q.vy += 0.09;
+      if (q.zivljenje <= 0) {
+        iskre.removeChild(q.el);
+        delci.splice(i, 1);
+        continue;
+      }
+      q.el.setAttribute('cx', q.x);
+      q.el.setAttribute('cy', q.y);
+      q.el.setAttribute('opacity', q.zivljenje.toFixed(2));
+    }
+
+    requestAnimationFrame(korak);
+  }
+
+  /* Ko razdelek ni na zaslonu, animacija miruje in ne jemlje baterije. */
+  const opazovalec = new IntersectionObserver((vnosi) => {
+    vnosi.forEach((v) => {
+      if (v.isIntersecting && !vidno) {
+        vidno = true;
+        zacetek = null;
+        requestAnimationFrame(korak);
+      } else if (!v.isIntersecting) {
+        vidno = false;
+      }
+    });
+  }, { threshold: 0.1 });
+
+  opazovalec.observe(pot.closest('.process-steps'));
+}

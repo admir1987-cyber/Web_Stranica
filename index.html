@@ -314,6 +314,10 @@
 
   <!-- Mobilni razvoj -->
   <div class="service-card" data-service="mobile">
+    <span class="service-bar"></span>
+    <span class="service-mark mark-1">{ }</span>
+    <span class="service-mark mark-2">=&gt;</span>
+    <span class="service-mark mark-3">;</span>
   <div class="service-card-header">
       <div class="service-icon">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -333,9 +337,17 @@
       <li data-en="Beautiful &amp; Responsive UI" data-slo="Lep in odziven vmesnik">Beautiful &amp; Responsive UI</li>
       <li data-en="Fast, Scalable &amp; Reliable" data-slo="Hitro, razširljivo in zanesljivo">Fast, Scalable &amp; Reliable</li>
     </ul>
+    <div class="service-more">
+      <span data-en="Read more about this service" data-slo="Preberi več o storitvi">Read more about this service</span>
+      <span class="service-arrow" aria-hidden="true">→</span>
+    </div>
 </div>
  <!--Web Dewelopment-->
   <div class="service-card" data-service="web">
+    <span class="service-bar"></span>
+    <span class="service-mark mark-1">&lt;/&gt;</span>
+    <span class="service-mark mark-2">#</span>
+    <span class="service-mark mark-3">@</span>
   <div class="service-card-header">
     <div class="service-icon">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -355,10 +367,18 @@
     <li data-en="Clean &amp; Optimized Code" data-slo="Čista in optimizirana koda">Clean &amp; Optimized Code</li>
     <li data-en="SEO Friendly" data-slo="Prijazno za SEO">SEO Friendly</li>
   </ul>
+  <div class="service-more">
+    <span data-en="Read more about this service" data-slo="Preberi več o storitvi">Read more about this service</span>
+    <span class="service-arrow" aria-hidden="true">→</span>
+  </div>
 </div>
 
 <!--Scripts & automation-->
   <div class="service-card" data-service="scripts">
+    <span class="service-bar"></span>
+    <span class="service-mark mark-1">$_</span>
+    <span class="service-mark mark-2">|</span>
+    <span class="service-mark mark-3">~</span>
   <div class="service-card-header">
     <div class="service-icon">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -377,6 +397,10 @@
     <li data-en="System Administration" data-slo="Sistemska administracija">System Administration</li>
     <li data-en="Data Processing &amp; More" data-slo="Obdelava podatkov in več">Data Processing &amp; More</li>
   </ul>
+  <div class="service-more">
+    <span data-en="Read more about this service" data-slo="Preberi več o storitvi">Read more about this service</span>
+    <span class="service-arrow" aria-hidden="true">→</span>
+  </div>
 </div>
   
 
@@ -445,15 +469,18 @@
 
       <div class="process-steps">
         <svg class="process-wave" viewBox="0 0 1000 107" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M100,53.5 C200,150.5 200,-43.5 300,53.5 C400,150.5 400,-43.5 500,53.5 C600,150.5 600,-43.5 700,53.5 C800,150.5 800,-43.5 900,53.5" fill="none" stroke="#6B8547" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
-          <circle cx="200" cy="53.5" r="9" fill="#FFF3C4" opacity="0.4"/>
-          <circle cx="200" cy="53.5" r="4" fill="#ffffff"/>
-          <circle cx="400" cy="53.5" r="9" fill="#FFF3C4" opacity="0.4"/>
-          <circle cx="400" cy="53.5" r="4" fill="#ffffff"/>
-          <circle cx="600" cy="53.5" r="9" fill="#FFF3C4" opacity="0.4"/>
-          <circle cx="600" cy="53.5" r="4" fill="#ffffff"/>
-          <circle cx="800" cy="53.5" r="9" fill="#FFF3C4" opacity="0.4"/>
-          <circle cx="800" cy="53.5" r="4" fill="#ffffff"/>
+          <defs>
+            
+            <filter id="orbGlow" x="-200%" y="-200%" width="500%" height="500%">
+              <feGaussianBlur stdDeviation="5"/>
+            </filter>
+          </defs>
+          <path id="wavePath" d="M100,53.5 C200,150.5 200,-43.5 300,53.5 C400,150.5 400,-43.5 500,53.5 C600,150.5 600,-43.5 700,53.5 C800,150.5 800,-43.5 900,53.5" fill="none" stroke="#6B8547" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+
+          <!-- Energija: samo pika in iskre, ki odletijo od nje. -->
+          <g id="waveSparks"></g>
+          <g id="waveOrbGlow" filter="url(#orbGlow)" opacity="0"><circle r="13" fill="#FFF3C4" opacity="0.95"/></g>
+          <g id="waveOrb" opacity="0"><circle r="8.5" fill="#FFF3C4" opacity="0.85"/><circle r="4.2" fill="#ffffff"/></g>
         </svg>
 
         <div class="process-step">
@@ -465,7 +492,10 @@
   </div>
   <span class="step-num">01</span>
   <h3 data-en="Idea" data-slo="Ideja">Idea</h3>
-  <p data-en="You share your idea<br>and requirements." data-slo="Delite svojo idejo<br>in zahteve.">You share your idea<br>and requirements.</p>
+  <div class="step-text">
+    <p class="step-short" data-en="You share your idea<br>and requirements." data-slo="Delite svojo idejo<br>in zahteve.">You share your idea<br>and requirements.</p>
+    <p class="step-long" data-en="I listen and ask questions until I understand what you need." data-slo="Poslušam in sprašujem, dokler ne razumem, kaj potrebujete.">I listen and ask questions until I understand what you need.</p>
+  </div>
 </div>
 
 <div class="process-step">
@@ -477,7 +507,10 @@
   </div>
   <span class="step-num">02</span>
   <h3 data-en="Plan" data-slo="Plan">Plan</h3>
-  <p data-en="We discuss and plan<br>the best solution." data-slo="Skupaj načrtujeva<br>najboljšo rešitev.">We discuss and plan<br>the best solution.</p>
+  <div class="step-text">
+    <p class="step-short" data-en="We discuss and plan<br>the best solution." data-slo="Skupaj načrtujeva<br>najboljšo rešitev.">We discuss and plan<br>the best solution.</p>
+    <p class="step-long" data-en="Together we set the scope, the look and the order of the work." data-slo="Skupaj določiva obseg, videz in vrstni red dela.">Together we set the scope, the look and the order of the work.</p>
+  </div>
 </div>
 
 <div class="process-step">
@@ -488,7 +521,10 @@
   </div>
   <span class="step-num">03</span>
   <h3 data-en="Develop" data-slo="Razvoj">Develop</h3>
-  <p data-en="I build your solution<br>with clean code." data-slo="Vašo rešitev zgradim<br>s čisto kodo.">I build your solution<br>with clean code.</p>
+  <div class="step-text">
+    <p class="step-short" data-en="I build your solution<br>with clean code." data-slo="Vašo rešitev zgradim<br>s čisto kodo.">I build your solution<br>with clean code.</p>
+    <p class="step-long" data-en="You see progress as it happens, not only at the end." data-slo="Napredek vidite sproti, ne šele na koncu.">You see progress as it happens, not only at the end.</p>
+  </div>
 </div>
 
 <div class="process-step">
@@ -499,7 +535,10 @@
   </div>
   <span class="step-num">04</span>
   <h3 data-en="Test" data-slo="Test">Test</h3>
-  <p data-en="Testing and optimization<br>for perfect results." data-slo="Testiranje in optimizacija<br>za popolne rezultate.">Testing and optimization<br>for perfect results.</p>
+  <div class="step-text">
+    <p class="step-short" data-en="Testing and optimization<br>for perfect results." data-slo="Testiranje in optimizacija<br>za popolne rezultate.">Testing and optimization<br>for perfect results.</p>
+    <p class="step-long" data-en="Checked on phone, tablet and computer." data-slo="Preverjeno na telefonu, tablici in računalniku.">Checked on phone, tablet and computer.</p>
+  </div>
 </div>
 
 <div class="process-step">
@@ -513,7 +552,10 @@
   </div>
   <span class="step-num">05</span>
   <h3 data-en="Deliver" data-slo="Izročitev">Deliver</h3>
-  <p data-en="You get a complete,<br>ready-to-use product." data-slo="Prejmete popoln,<br>pripravljen izdelek.">You get a complete,<br>ready-to-use product.</p>
+  <div class="step-text">
+    <p class="step-short" data-en="You get a complete,<br>ready-to-use product." data-slo="Prejmete popoln,<br>pripravljen izdelek.">You get a complete,<br>ready-to-use product.</p>
+    <p class="step-long" data-en="You receive all the code and access — it stays yours." data-slo="Prejmete vso kodo in dostope — vse ostane vaše.">You receive all the code and access — it stays yours.</p>
+  </div>
 </div>
 
     </div>

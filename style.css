@@ -345,16 +345,120 @@ body {
 }
 
 .service-card {
+  position: relative;
+  overflow: hidden;
   background-color: #ffffff;
+  border: 1px solid var(--color-border);
   border-radius: 16px;
   padding: clamp(32px, 2.2vw, 56px) clamp(28px, 1.95vw, 50px);
   box-shadow: 0 4px 16px rgba(26, 35, 50, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-image: radial-gradient(#E2DED2 1px, transparent 1px);
+  background-size: 15px 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .service-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(26, 35, 50, 0.12);
+  border-color: var(--color-accent);
+}
+
+/* Zelena crta zdrsne cez vrh kartice. */
+.service-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--color-accent);
+  transition: width 0.35s ease;
+}
+
+.service-card:hover .service-bar {
+  width: 100%;
+}
+
+/* Znaki kode lezijo v ozadju, zato ne prestrezajo miske. */
+.service-mark {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-accent);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mark-1 {
+  right: clamp(10px, 0.8vw, 22px);
+  bottom: clamp(-30px, -1.7vw, -18px);
+  font-size: clamp(70px, 6vw, 150px);
+  opacity: 0.1;
+}
+
+.mark-2 {
+  right: 22%;
+  top: clamp(10px, 0.9vw, 24px);
+  font-size: clamp(32px, 2.6vw, 66px);
+  opacity: 0.07;
+}
+
+.mark-3 {
+  right: 12%;
+  bottom: 34%;
+  font-size: clamp(22px, 1.7vw, 44px);
+  opacity: 0.06;
+}
+
+.service-card:hover .mark-1 {
+  opacity: 0.18;
+  transform: translateY(-4px);
+}
+
+.service-card:hover .mark-2 {
+  opacity: 0.12;
+}
+
+.service-card:hover .mark-3 {
+  opacity: 0.11;
+}
+
+/* Vsebina mora ostati nad znaki v ozadju. */
+.service-card-header,
+.service-desc,
+.service-checklist,
+.service-more {
+  position: relative;
+  z-index: 1;
+}
+
+/* Namig, da se kartica odpre v pojavnem oknu. */
+.service-more {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  font-size: clamp(13px, 0.9vw, 22px);
+  font-weight: 500;
+  color: var(--color-accent);
+  opacity: 0.45;
+  transition: opacity 0.22s ease;
+}
+
+.service-card:hover .service-more {
+  opacity: 1;
+}
+
+.service-arrow {
+  display: inline-block;
+  transition: transform 0.22s ease;
+}
+
+.service-card:hover .service-arrow {
+  transform: translateX(4px);
 }
 
 .service-icon {
@@ -396,7 +500,7 @@ body {
 
 .service-checklist li {
   font-size: 14px;
-  color: var(--color-accent);
+  color: var(--color-text);
   margin-bottom: var(--space-xs);
   padding-left: 1.6em;
   position: relative;
@@ -925,6 +1029,12 @@ body {
 .step-number svg {
   width: 78%;
   height: 78%;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+/* Ikona se zavrti samo, ko je miska na samem krogu. */
+.step-number:hover svg {
+  transform: rotateY(360deg);
 }
 
 .step-number {
@@ -940,6 +1050,17 @@ body {
   margin-bottom: 8px;
   position: relative;
   z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Krog ob prehodu z misko malce zraste in zasveti. */
+.step-number:hover {
+  transform: scale(1.1);
+  border-color: #FFF3C4;
+  box-shadow: 0 0 22px 5px rgba(255, 255, 255, 1),
+              0 0 40px 14px rgba(255, 243, 196, 0.85),
+              0 6px 16px rgba(26, 35, 50, 0.1);
+  z-index: 2;
 }
 
 .step-num {
@@ -961,6 +1082,42 @@ body {
   line-height: 1.5;
   color: var(--color-text-muted);
   margin: 0;
+}
+
+/* Kratko in dolgo besedilo lezita eno na drugem, da se nic ne premakne. */
+.step-text {
+  position: relative;
+  width: 100%;
+  min-height: 4.5em;
+}
+
+.step-text p {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.step-short {
+  opacity: 1;
+  transition: opacity 0.2s ease 0.18s;
+}
+
+.step-long {
+  color: var(--color-text);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+/* Besedilo se zamenja samo, ko je miska na krogu z ikono. */
+.step-number:hover ~ .step-text .step-short {
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.step-number:hover ~ .step-text .step-long {
+  opacity: 1;
+  transition: opacity 0.2s ease 0.18s;
 }
 
 /* Hamburger gumb za mobilni prikaz */

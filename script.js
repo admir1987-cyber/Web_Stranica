@@ -169,6 +169,9 @@ document.querySelectorAll('.lang-btn').forEach((btn) => {
   });
 });
 
+/* Stran se odpre v slovenscini, obiskovalec lahko preklopi na anglescino. */
+setLanguage('slo');
+
 /* Poslje obrazec brez osvezitve strani in izpise sporocilo. */
 const cForm = document.getElementById('contactForm');
 const cStatus = document.getElementById('formStatus');
@@ -216,7 +219,7 @@ document.querySelectorAll('.js-tel').forEach((el) => {
   el.href = 'tel:' + broj.replace(/\s/g, '');
 });
 
-// Otvara i zatvara mobilni meni na klik hamburger gumba
+/* Gumb hamburger odpre in zapre meni na telefonu. */
 const hamburger = document.querySelector('.hamburger');
 const mobileMenu = document.querySelector('.mobile-menu');
 
@@ -226,7 +229,7 @@ if (hamburger && mobileMenu) {
   });
 }
 
-// Zatvara meni čim korisnik klikne na neki link unutra
+/* Meni se zapre takoj, ko obiskovalec klikne povezavo v njem. */
 document.querySelectorAll('.mobile-nav-links a').forEach((link) => {
   link.addEventListener('click', () => {
     mobileMenu.classList.remove('open');

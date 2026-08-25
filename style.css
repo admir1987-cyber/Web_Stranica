@@ -470,11 +470,11 @@ body {
 }
 
 .hero-bg-1 {
-  background-image: linear-gradient(to right, rgba(247, 245, 239, 0.95) 0%, rgba(247, 245, 239, 0) 80%), url('assets/images/photo-web.png');
+  background-image: linear-gradient(to right, rgba(247, 245, 239, 0.95) 0%, rgba(247, 245, 239, 0) 80%), url('assets/images/photo-web.webp');
 }
 
 .hero-bg-2 {
-  background-image: linear-gradient(to right, rgba(247, 245, 239, 0.95) 0%, rgba(247, 245, 239, 0) 80%), url('assets/images/photo-app.png');
+  background-image: linear-gradient(to right, rgba(247, 245, 239, 0.95) 0%, rgba(247, 245, 239, 0) 80%), url('assets/images/photo-app.webp');
   animation-delay: 6s;
 }
 

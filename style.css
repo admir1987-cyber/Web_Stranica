@@ -54,31 +54,58 @@ body {
   pointer-events: none;
 }
 
-/* Tla, ki bezijo v daljavo. */
+/* Tla v dveh ravninah: dalja je gostejsa, bledejsa in rahlo zamegljena. */
 .space-grid {
   position: absolute;
-  left: -25%;
-  right: -25%;
+  left: -30%;
+  right: -30%;
   bottom: 0;
-  height: 95%;
-  background-image:
-    repeating-linear-gradient(to right, rgba(107, 133, 71, 0.5) 0 1px, transparent 1px 44px),
-    repeating-linear-gradient(to bottom, rgba(107, 133, 71, 0.5) 0 1px, transparent 1px 94px);
-  transform: perspective(900px) rotateX(62deg);
   transform-origin: bottom center;
-  -webkit-mask-image: linear-gradient(to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.08) 18%,
-    rgba(0, 0, 0, 0.28) 38%,
-    rgba(0, 0, 0, 0.62) 66%,
-    rgba(0, 0, 0, 1) 100%);
-  mask-image: linear-gradient(to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.08) 18%,
-    rgba(0, 0, 0, 0.28) 38%,
-    rgba(0, 0, 0, 0.62) 66%,
-    rgba(0, 0, 0, 1) 100%);
+  will-change: transform;
 }
+
+.space-grid-far {
+  height: 165%;
+  background-image:
+    repeating-linear-gradient(to right, rgba(107, 133, 71, 0.3) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(to bottom, rgba(107, 133, 71, 0.3) 0 1px, transparent 1px 40px);
+  transform: perspective(1500px) rotateX(70.5deg);
+  filter: blur(0.4px);
+  -webkit-mask-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.06) 26%, rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.36) 74%, rgba(0, 0, 0, 0.3) 100%);
+  mask-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.06) 26%, rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.36) 74%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.space-grid-near {
+  height: 118%;
+  background-image:
+    repeating-linear-gradient(to right, rgba(107, 133, 71, 0.52) 0 1px, transparent 1px 52px),
+    repeating-linear-gradient(to bottom, rgba(107, 133, 71, 0.52) 0 1px, transparent 1px 84px);
+  transform: perspective(820px) rotateX(65deg);
+  -webkit-mask-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 30%, rgba(0, 0, 0, 0.24) 58%,
+    rgba(0, 0, 0, 0.62) 80%, rgba(0, 0, 0, 1) 100%);
+  mask-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 30%, rgba(0, 0, 0, 0.24) 58%,
+    rgba(0, 0, 0, 0.62) 80%, rgba(0, 0, 0, 1) 100%);
+}
+
+/* Meglica pokrije mesto, kjer mreza izgine — brez ostrega reza. */
+.space-haze {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 34%;
+  height: 30%;
+  background: linear-gradient(to bottom,
+    rgba(247, 245, 239, 0) 0%,
+    rgba(253, 251, 246, 0.9) 52%,
+    rgba(247, 245, 239, 0) 100%);
+}
+
 .space-stars {
   position: absolute;
   inset: 0;
@@ -97,13 +124,26 @@ body {
 .space-light {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 72% 58% at 50% 0%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 60%);
+  background: radial-gradient(ellipse 80% 64% at 50% -8%,
+    rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0) 58%);
 }
 
-/* Na telefonu so tla nizja, da ne pojedo pol zaslona. */
+/* Rahla senca ob robovih drzi pogled na sredini. */
+.space-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 92% 86% at 50% 46%,
+    rgba(0, 0, 0, 0) 48%, rgba(94, 120, 62, 0.15) 100%);
+}
+
+/* Na telefonu sta ravnini nizji, da ne pojesta pol zaslona. */
 @media (max-width: 768px) {
-  .space-grid {
-    height: 42%;
+  .space-grid-far {
+    height: 110%;
+  }
+
+  .space-grid-near {
+    height: 80%;
   }
 }
 
@@ -414,20 +454,34 @@ body {
 .service-card {
   position: relative;
   overflow: hidden;
-  background-color: #ffffff;
-  border: 1px solid var(--color-border);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  border: 1px solid #DDD8CA;
   border-radius: 16px;
   padding: clamp(32px, 2.2vw, 56px) clamp(28px, 1.95vw, 50px);
-  box-shadow: 0 4px 16px rgba(26, 35, 50, 0.06);
+  box-shadow:
+    0 26px 50px rgba(58, 74, 44, 0.13),
+    0 3px 8px rgba(58, 74, 44, 0.05);
   background-image: radial-gradient(#E2DED2 1px, transparent 1px);
   background-size: 15px 15px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.24s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.24s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.24s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(26, 35, 50, 0.12);
+  transform: translateY(-6px);
+  box-shadow:
+    0 36px 64px rgba(58, 74, 44, 0.18),
+    0 4px 10px rgba(58, 74, 44, 0.06);
   border-color: var(--color-accent);
+}
+
+/* Kartico je mogoce klikniti, zato se ob pritisku rahlo vdre. */
+.service-card:active {
+  transform: translateY(-6px) scale(0.985);
+  transition-duration: 0.12s;
 }
 
 /* Zelena crta zdrsne cez vrh kartice. */
@@ -668,33 +722,198 @@ body {
   text-align: center;
 }
 
-/* PRIKAZ PROJEKTA */
- .project-showcase {
+/* PROJEKTI — dve kartici v vrsti, rahlo obrnjeni v prostor. */
+.project-grid {
   display: grid;
-  grid-template-columns: 0.8fr 1.4fr;
-  gap: var(--space-lg);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
   margin-top: var(--space-lg);
   text-align: left;
-  align-items: start;
+  perspective: 1500px;
 }
 
-.project-image {
-  border-radius: 16px;
+.project-card {
+  position: relative;
   overflow: hidden;
-  height: clamp(380px, 30vw, 768px);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid #DDD8CA;
+  border-radius: 18px;
+  box-shadow:
+    0 22px 44px rgba(58, 74, 44, 0.12),
+    0 3px 8px rgba(58, 74, 44, 0.05);
+  opacity: 0;
+  transform: translateY(24px) rotateY(var(--zasuk)) scale(0.97);
+  transition:
+    transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.3s ease,
+    opacity 0.5s ease;
 }
 
-.project-image img {
+.project-card:first-child {
+  --zasuk: 7deg;
+}
+
+.project-card:last-child {
+  --zasuk: -7deg;
+}
+
+/* Kartica pride v pogled sele, ko razdelek prispe na zaslon. */
+.project-card.vidna {
+  opacity: 1;
+  transform: translateY(0) rotateY(var(--zasuk)) scale(1);
+}
+
+/* Ob pogledu miske se kartica obrne naravnost proti bralcu. */
+.project-card.vidna:hover {
+  transform: translateY(-10px) rotateY(0deg) scale(1.015);
+  box-shadow:
+    0 46px 80px rgba(58, 74, 44, 0.2),
+    0 6px 14px rgba(58, 74, 44, 0.07);
+  border-color: var(--color-accent);
+  z-index: 2;
+}
+
+.project-card.vidna:active {
+  transform: translateY(-10px) rotateY(0deg) scale(0.995);
+  transition-duration: 0.12s;
+}
+
+.project-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--color-accent);
+  transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 2;
+}
+
+.project-card:hover .project-bar {
+  width: 100%;
+}
+
+.project-num {
+  position: absolute;
+  right: clamp(10px, 0.8vw, 22px);
+  bottom: clamp(-24px, -1.4vw, -14px);
+  font-family: var(--font-mono);
+  font-size: clamp(72px, 6vw, 150px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #EEF0E6;
+  pointer-events: none;
+  transition: color 0.35s ease;
+}
+
+.project-card:hover .project-num {
+  color: #E5EBD5;
+}
+
+.project-shot {
+  position: relative;
+  height: clamp(150px, 13vw, 330px);
+  overflow: hidden;
+  background-color: #EFEDE4;
+  border-bottom: 1px solid #E6E2D6;
+}
+
+.project-shot img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center top;
   display: block;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.project-info h3 {
-  font-size: clamp(20px, 2.5vw, 64px);
-  font-weight: 600;
-  margin: 0 0 6px;
+.project-card:hover .project-shot img {
+  transform: scale(1.05);
+}
+
+.project-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-sm) var(--space-sm) var(--space-xs);
+}
+
+.project-name {
+  margin: 0;
+  font-size: clamp(18px, 1.35vw, 34px);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.project-short {
+  margin: var(--space-xs) 0 var(--space-sm);
+  font-size: clamp(13px, 0.9vw, 23px);
+  line-height: 1.62;
+  color: var(--color-text-muted);
+}
+
+.project-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--space-sm);
+}
+
+.project-chips b {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 0.7vw, 17px);
+  font-weight: 500;
+  color: #4E6034;
+  background-color: #EDF1E4;
+  border-radius: 5px;
+  padding: 3px 8px;
+}
+
+.project-more {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--color-border);
+  font-size: clamp(13px, 0.9vw, 22px);
+  font-weight: 500;
+  color: var(--color-accent);
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-more {
+  opacity: 1;
+}
+
+.project-arrow {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-card:hover .project-arrow {
+  transform: translateX(5px);
+}
+
+/* Na telefonu gresta kartici v vrsto in brez 3D nagiba. */
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    perspective: none;
+  }
+
+  .project-card:first-child,
+  .project-card:last-child {
+    --zasuk: 0deg;
+  }
 }
 
 .project-tag {
@@ -871,11 +1090,15 @@ body {
   align-items: flex-start;
   gap: var(--space-sm);
   padding: var(--space-md);
-  background-color: #ffffff;
-  border: 1px solid var(--color-border);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  border: 1px solid #DDD8CA;
   border-radius: clamp(14px, 1.1vw, 26px);
   background-image: radial-gradient(#DEDACE 1px, transparent 1px);
   background-size: clamp(12px, 0.9vw, 22px) clamp(12px, 0.9vw, 22px);
+  box-shadow:
+    0 26px 50px rgba(58, 74, 44, 0.13),
+    0 3px 8px rgba(58, 74, 44, 0.05);
 }
 
 /* Zelena plosca nima obrobe, pike na njej so svetle. */
@@ -1378,16 +1601,6 @@ body {
     padding: 20px 0;
   }
 
-  .project-showcase {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    margin-top: 32px;
-  }
-
-  .project-image {
-    height: 110px;
-  }
-
   .process {
     padding: 20px 0;
   }
@@ -1439,10 +1652,6 @@ body {
 
   .process-step p {
     font-size: 11px;
-  }
-
-  .project-info h3 {
-    font-size: 22px;
   }
 
   .project-features {

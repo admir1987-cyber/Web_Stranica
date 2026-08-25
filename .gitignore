@@ -1,0 +1,8 @@
+# Nastavitve orodij — ne spadajo v repozitorij.
+.agents/
+.claude/
+skills-lock.json
+
+# Zacasne kopije in smeti sistema.
+*.backup
+Thumbs.db

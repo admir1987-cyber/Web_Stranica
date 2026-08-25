@@ -371,44 +371,42 @@ if (pot && krogla && !manjGibanja) {
 /* ZVEZDE V PROSTORU — znaki kode, ki lebdijo za vsebino. */
 const prostor = document.querySelector('.space');
 const nebo = document.getElementById('spaceStars');
-const tla = document.querySelector('.space-grid');
+const tlaDalec = document.querySelector('.space-grid-far');
+const tlaBlizu = document.querySelector('.space-grid-near');
 
-if (prostor && nebo && tla && !manjGibanja) {
-  /* Vsak znak: [besedilo, x v %, y v %, velikost, globina 1-3]. */
+if (prostor && nebo && tlaDalec && tlaBlizu && !manjGibanja) {
+  /* Vsak znak: [besedilo, x v %, y v %, velikost, globina 1-4]. */
   const znaki = [
-    ['{ }', 6, 14, 34, 3],
-    ['</>', 84, 20, 27, 3],
-    ['$_', 16, 62, 29, 3],
-    ['_', 14, 90, 25, 3],
-    ['=>', 66, 74, 23, 2],
-    ['@', 91, 55, 25, 2],
-    ['~', 53, 46, 23, 2],
-    ['&&', 4, 80, 21, 2],
-    ['!=', 62, 92, 19, 2],
-    ['->', 38, 55, 22, 2],
-    ['0x', 8, 26, 19, 2],
-    ['//', 88, 78, 20, 2],
-    ['<>', 50, 33, 20, 2],
-    ['==', 80, 88, 18, 2],
-    ['()', 33, 86, 21, 1],
-    ['[ ]', 74, 10, 18, 1],
-    [';', 45, 9, 17, 1],
-    ['#', 10, 40, 20, 1],
-    ['||', 92, 34, 18, 1],
-    ['++', 27, 33, 17, 1],
-    ['/*', 46, 64, 17, 1],
-    ['::', 78, 44, 19, 1],
-    ['?.', 22, 8, 18, 1],
-    ['*/', 58, 18, 17, 1],
-    ['%', 70, 60, 17, 1],
-    ['^', 30, 70, 18, 1],
-    ['[]', 18, 47, 16, 1],
-    ['!', 96, 22, 16, 1],
-    ['|>', 41, 78, 18, 1],
-    ['let', 60, 6, 16, 1],
-    ['fn', 12, 74, 17, 1],
-    ['$', 36, 20, 16, 1]
+    ['{ }', 7, 13, 36, 4],
+    ['</>', 84, 18, 29, 4],
+    ['$_', 15, 60, 31, 4],
+    ['_', 13, 88, 27, 4],
+    ['=>', 67, 72, 24, 3],
+    ['@', 90, 53, 26, 3],
+    ['~', 53, 44, 24, 3],
+    ['&&', 5, 78, 22, 3],
+    ['->', 38, 53, 23, 3],
+    ['0x', 9, 24, 20, 3],
+    ['!=', 63, 90, 19, 2],
+    ['//', 87, 76, 20, 2],
+    ['<>', 50, 31, 20, 2],
+    ['==', 79, 86, 18, 2],
+    ['()', 33, 84, 21, 2],
+    ['[ ]', 73, 9, 18, 2],
+    [';', 45, 8, 16, 1],
+    ['#', 11, 38, 19, 1],
+    ['||', 91, 32, 17, 1],
+    ['++', 27, 31, 16, 1],
+    ['/*', 46, 62, 16, 1],
+    ['::', 77, 42, 17, 1],
+    ['?.', 22, 7, 17, 1],
+    ['*/', 58, 16, 16, 1],
+    ['%', 70, 58, 16, 1],
+    ['^', 30, 68, 17, 1],
+    ['[]', 18, 45, 15, 1],
+    ['|>', 41, 76, 17, 1]
   ];
+
   const zvezde = [];
 
   znaki.forEach((z) => {
@@ -418,84 +416,207 @@ if (prostor && nebo && tla && !manjGibanja) {
     s.style.left = z[1] + '%';
     s.style.top = z[2] + '%';
     s.style.fontSize = z[3] + 'px';
-    s.style.opacity = 0.11 + z[4] * 0.07;
+
+    const motnost = 0.09 + z[4] * 0.055;
+    s.style.opacity = motnost;
+
+    /* Kar je dlje, je mehkejse — tako oko prebere razdaljo. */
+    if (z[4] <= 2) {
+      s.style.filter = 'blur(' + (z[4] === 1 ? 0.9 : 0.45) + 'px)';
+    }
+
     nebo.appendChild(s);
-    zvezde.push({ el: s, x: z[1], y: z[2], globina: z[4], motnost: 0.11 + z[4] * 0.07 });
+    zvezde.push({ el: s, x: z[1], y: z[2], globina: z[4], motnost: motnost });
   });
 
-  let sirina = window.innerWidth;
-  let visina = window.innerHeight;
-  let misX = -9999;
-  let misY = -9999;
+  const cilj = { x: 0, y: 0 };
+  const zdaj = { x: 0, y: 0 };
   let imaMis = false;
-  let cakaSlika = false;
+  let drsenje = 0;
+  let tece = false;
 
   function narisi() {
-    cakaSlika = false;
-    const drsenje = window.scrollY;
-    const nagibX = imaMis ? misX / sirina - 0.5 : 0;
-    const nagibY = imaMis ? misY / visina - 0.5 : 0;
-    const pas = visina + 320;
+    /* Prostor lovi misko postopoma, zato ima tezo in ni prilepljen nanjo. */
+    zdaj.x += (cilj.x - zdaj.x) * 0.075;
+    zdaj.y += (cilj.y - zdaj.y) * 0.075;
 
-    tla.style.transform =
-      'perspective(300px) rotateX(67deg) translate3d(' + -nagibX * 26 + 'px, 0, 0)';
+    const sirina = window.innerWidth;
+    const visina = window.innerHeight;
+    const pas = visina + 340;
+
+    tlaDalec.style.transform =
+      'perspective(1500px) rotateX(70.5deg) translate3d(' + -zdaj.x * 10 + 'px, 0, 0)';
+    tlaBlizu.style.transform =
+      'perspective(820px) rotateX(65deg) translate3d(' + -zdaj.x * 26 + 'px, 0, 0)';
+
+    const misX = cilj.x * sirina + sirina / 2;
+    const misY = cilj.y * visina + visina / 2;
 
     zvezde.forEach((zv) => {
       const osnovaX = (zv.x / 100) * sirina;
       const osnovaY = (zv.y / 100) * visina;
+      const hitrost = zv.globina * 0.05;
+      const novaY = ((((osnovaY - drsenje * hitrost) % pas) + pas) % pas) - 170;
 
-      /* Ob drsenju znak potuje navzgor in se spodaj spet pojavi. */
-      const hitrost = zv.globina * 0.06;
-      const novaY = ((((osnovaY - drsenje * hitrost) % pas) + pas) % pas) - 160;
-
-      let px = -nagibX * zv.globina * 9;
-      let py = novaY - osnovaY - nagibY * zv.globina * 5;
+      let px = -zdaj.x * zv.globina * 7;
+      let py = novaY - osnovaY - zdaj.y * zv.globina * 4;
       let velikost = 1;
       let motnost = zv.motnost;
 
-      /* Ce je miska blizu, se znak umakne, poveca in potemni. */
-      const razX = osnovaX + px - misX;
-      const razY = novaY - misY;
-      const razdalja = Math.sqrt(razX * razX + razY * razY);
-
-      if (imaMis && razdalja < 120) {
-        const moc = 1 - razdalja / 120;
-        px += (razX / (razdalja || 1)) * moc * 40;
-        py += (razY / (razdalja || 1)) * moc * 40;
-        velikost = 1 + moc * 0.55;
-        motnost = zv.motnost + moc * 0.5;
+      if (imaMis) {
+        const razX = osnovaX + px - misX;
+        const razY = novaY - misY;
+        const razdalja = Math.sqrt(razX * razX + razY * razY);
+        if (razdalja < 130) {
+          const moc = 1 - razdalja / 130;
+          px += (razX / (razdalja || 1)) * moc * 44;
+          py += (razY / (razdalja || 1)) * moc * 44;
+          velikost = 1 + moc * 0.5;
+          motnost = zv.motnost + moc * 0.55;
+        }
       }
 
       zv.el.style.transform =
         'translate3d(' + px.toFixed(1) + 'px,' + py.toFixed(1) + 'px,0) scale(' + velikost.toFixed(2) + ')';
       zv.el.style.opacity = motnost.toFixed(3);
     });
+
+    /* Ko se nic vec ne premika, se risanje ustavi in ne jemlje baterije. */
+    if (Math.abs(cilj.x - zdaj.x) > 0.0005 || Math.abs(cilj.y - zdaj.y) > 0.0005) {
+      requestAnimationFrame(narisi);
+    } else {
+      tece = false;
+    }
   }
 
-  function zahtevaj() {
-    if (!cakaSlika) {
-      cakaSlika = true;
+  function zbudi() {
+    if (!tece) {
+      tece = true;
       requestAnimationFrame(narisi);
     }
   }
 
-  window.addEventListener('scroll', zahtevaj, { passive: true });
+  window.addEventListener('scroll', () => {
+    drsenje = window.scrollY;
+    zbudi();
+  }, { passive: true });
 
-  window.addEventListener('resize', () => {
-    sirina = window.innerWidth;
-    visina = window.innerHeight;
-    zahtevaj();
-  });
+  window.addEventListener('resize', zbudi);
 
   /* Na dotik miske ni, zato se ta del sploh ne vklopi. */
-  if (window.matchMedia('(hover: hover)').matches) {
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     window.addEventListener('mousemove', (e) => {
-      misX = e.clientX;
-      misY = e.clientY;
+      cilj.x = e.clientX / window.innerWidth - 0.5;
+      cilj.y = e.clientY / window.innerHeight - 0.5;
       imaMis = true;
-      zahtevaj();
+      zbudi();
     }, { passive: true });
+
+    window.addEventListener('mouseleave', () => {
+      cilj.x = 0;
+      cilj.y = 0;
+      imaMis = false;
+      zbudi();
+    });
   }
 
   narisi();
+}
+
+/* PROJEKTI — kartici prideta v pogled, podrobnosti se odprejo v istem oknu. */
+const projektneKartice = document.querySelectorAll('.project-card');
+
+if (projektneKartice.length) {
+  /* Vsebina obeh projektov na enem mestu, v obeh jezikih. */
+  const projekti = {
+    tekton: {
+      naslov: 'Tekton',
+      oznakaEn: 'Construction Diary App',
+      oznakaSlo: 'Aplikacija za gradbeni dnevnik',
+      opisEn: 'Tekton is an AI app that automates the construction site diary. The site manager simply describes what was done on site — Tekton turns it into a structured daily report and an official PDF, linked with photos and audio recordings from the field. No typing, no paperwork, no wasted time at the end of the shift.',
+      opisSlo: 'Tekton je AI aplikacija, ki avtomatizira gradbeni dnevnik. Vodja gradbišča preprosto pove, kaj je bilo narejeno na gradbišču — Tekton to spremeni v strukturirano dnevno poročilo in uradni PDF, povezan s fotografijami in avdio posnetki s terena. Brez tipkanja, brez papirja, brez izgubljanja časa ob koncu izmene.',
+      tocke: [
+        ['AI integration (Google Gemini)', 'AI integracija (Google Gemini)'],
+        ['Voice input instead of typing', 'Glasovni vnos namesto tipkanja'],
+        ['Automatic PDF reports', 'Samodejna PDF poročila'],
+        ['Cloud sync for photos and audio', 'Sinhronizacija fotografij in zvoka v oblaku'],
+        ['Multi-device, multi-project support', 'Podpora za več naprav in projektov'],
+        ['Secure user authentication', 'Varna avtentikacija uporabnikov'],
+        ['Support for 6 languages', 'Podpora za 6 jezikov'],
+        ['Day-by-day view — ready evidence if disputes arise', 'Pregled po dnevih — pripravljen dokaz ob morebitnem sporu']
+      ]
+    },
+    kaden: {
+      naslov: 'Kaden Digital',
+      oznakaEn: 'Portfolio Website',
+      oznakaSlo: 'Predstavitvena spletna stran',
+      opisEn: 'No framework, no page builder, no plugins — only HTML, CSS and JavaScript. The 3D space in the background, the animations and the language switch are all built from basic parts, which is why the whole site stays under one megabyte and opens in less than a second. What you see here is the same standard I apply to client work.',
+      opisSlo: 'Brez ogrodij, brez urejevalnikov strani, brez vtičnikov — samo HTML, CSS in JavaScript. 3D prostor v ozadju, animacije in preklop med jezikoma so sestavljeni iz osnovnih gradnikov, zato vsa stran ostane pod enim megabajtom in se odpre v manj kot sekundi. To, kar vidite tukaj, je isti standard, ki ga uporabim pri delu za naročnike.',
+      tocke: [
+        ['No frameworks, no build tools', 'Brez ogrodij in brez orodij za gradnjo'],
+        ['Bilingual with a language switch', 'Dvojezična, s preklopnikom jezika'],
+        ['Fluid from 375px to 4K screens', 'Tekoča od 375px do 4K zaslonov'],
+        ['3D space in pure CSS and SVG', '3D prostor v čistem CSS in SVG'],
+        ['Images in WebP — whole site under 1 MB', 'Slike v WebP — vsa stran pod 1 MB'],
+        ['Contact form without a server', 'Kontaktni obrazec brez strežnika'],
+        ['Sitemap, robots and JSON-LD for Google', 'Sitemap, robots in JSON-LD za Google'],
+        ['Published through GitHub Pages', 'Objavljeno prek GitHub Pages']
+      ]
+    }
+  };
+
+  function odpriProjekt(kljuc) {
+    const p = projekti[kljuc];
+    if (!p || !modal) return;
+
+    /* Tocke razdelimo v dva stolpca, kot je bilo prej. */
+    const pol = Math.ceil(p.tocke.length / 2);
+    const stolpec = (od, do_) =>
+      '<ul>' +
+      p.tocke.slice(od, do_).map((t) => `<li data-en="${t[0]}" data-slo="${t[1]}">${t[0]}</li>`).join('') +
+      '</ul>';
+
+    modalBody.innerHTML = `
+      <div class="modal-head">
+        <div>
+          <h3 class="modal-title">${p.naslov}</h3>
+          <p class="project-tag" data-en="${p.oznakaEn}" data-slo="${p.oznakaSlo}">${p.oznakaEn}</p>
+        </div>
+      </div>
+      <p class="project-desc" data-en="${p.opisEn}" data-slo="${p.opisSlo}">${p.opisEn}</p>
+      <p class="modal-label" data-en="What is inside" data-slo="Kaj je notri">What is inside</p>
+      <div class="project-features">${stolpec(0, pol)}${stolpec(pol, p.tocke.length)}</div>
+      <div class="modal-actions">
+        <a href="#contact" class="btn btn-primary" data-en="Ask about this project" data-slo="Vprašajte o tem projektu">Ask about this project</a>
+      </div>
+    `;
+
+    modalBody.querySelectorAll('.modal-actions a').forEach((a) => {
+      a.addEventListener('click', closeModal);
+    });
+
+    setLanguage(document.documentElement.lang === 'sl' ? 'slo' : 'en');
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+  }
+
+  projektneKartice.forEach((k) => {
+    k.addEventListener('click', () => odpriProjekt(k.dataset.project));
+  });
+
+  /* Kdor ima animacije izklopljene, dobi kartici takoj. */
+  if (manjGibanja) {
+    projektneKartice.forEach((k) => k.classList.add('vidna'));
+  } else {
+    const opazovalec = new IntersectionObserver((vnosi) => {
+      vnosi.forEach((v) => {
+        if (!v.isIntersecting) return;
+        const i = [...projektneKartice].indexOf(v.target);
+        setTimeout(() => v.target.classList.add('vidna'), i * 70);
+        opazovalec.unobserve(v.target);
+      });
+    }, { threshold: 0.2 });
+
+    projektneKartice.forEach((k) => opazovalec.observe(k));
+  }
 }

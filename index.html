@@ -61,9 +61,12 @@
 
   <!-- PROSTOR V OZADJU — pribit na zaslon, vsebina drsi cez njega. -->
   <div class="space" aria-hidden="true">
-    <div class="space-grid"></div>
+    <div class="space-grid space-grid-far"></div>
+    <div class="space-grid space-grid-near"></div>
+    <div class="space-haze"></div>
     <div class="space-stars" id="spaceStars"></div>
     <div class="space-light"></div>
+    <div class="space-vignette"></div>
   </div>
 
   <!-- GLAVA / NAVIGACIJA — logotip -->
@@ -428,40 +431,45 @@
         <span class="divider-line"></span>
       </div>
 
-      <div class="project-showcase">
+      <div class="project-grid">
 
-  <div class="project-image">
-    <img src="assets/images/project-tekton.webp" alt="Tekton AI app screens">
-  </div>
+        <div class="project-card" data-project="tekton">
+          <span class="project-bar"></span>
+          <span class="project-num" aria-hidden="true">01</span>
+          <div class="project-shot">
+            <img src="assets/images/project-tekton.webp" alt="Tekton — zasloni aplikacije">
+          </div>
+          <div class="project-body">
+            <h3 class="project-name">Tekton</h3>
+            <p class="project-tag" data-en="Construction Diary App" data-slo="Aplikacija za gradbeni dnevnik">Construction Diary App</p>
+            <p class="project-short" data-en="The site manager says what was done — the app turns it into a report and an official PDF." data-slo="Vodja gradbišča pove, kaj je bilo narejeno — aplikacija iz tega naredi poročilo in uradni PDF.">The site manager says what was done — the app turns it into a report and an official PDF.</p>
+            <div class="project-chips"><b>Flutter</b><b>Dart</b><b>Supabase</b><b>Gemini AI</b></div>
+            <div class="project-more">
+              <span data-en="View project" data-slo="Poglejte projekt">View project</span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </div>
+          </div>
+        </div>
 
-  <div class="project-info">
-    <h3>Tekton</h3>
-    <p class="project-tag" data-en="Construction Diary App" data-slo="Aplikacija za gradbeni dnevnik">Construction Diary App</p>
+        <div class="project-card" data-project="kaden">
+          <span class="project-bar"></span>
+          <span class="project-num" aria-hidden="true">02</span>
+          <div class="project-shot">
+            <img src="assets/images/project-kaden.webp" alt="Kaden Digital — spletna stran">
+          </div>
+          <div class="project-body">
+            <h3 class="project-name">Kaden Digital</h3>
+            <p class="project-tag" data-en="Portfolio Website" data-slo="Predstavitvena spletna stran">Portfolio Website</p>
+            <p class="project-short" data-en="Built without frameworks — plain HTML, CSS and JavaScript. Bilingual, fast, with a 3D space in the background." data-slo="Zgrajena brez ogrodij — čisti HTML, CSS in JavaScript. Dvojezična, hitra, s 3D prostorom v ozadju.">Built without frameworks — plain HTML, CSS and JavaScript. Bilingual, fast, with a 3D space in the background.</p>
+            <div class="project-chips"><b>HTML</b><b>CSS</b><b>JavaScript</b><b>SVG</b></div>
+            <div class="project-more">
+              <span data-en="View project" data-slo="Poglejte projekt">View project</span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </div>
+          </div>
+        </div>
 
-    <p class="project-desc" data-en="Tekton is an AI app that automates the construction site diary. The site manager simply describes what was done on site — Tekton turns it into a structured daily report and an official PDF, linked with photos and audio recordings from the field. No typing, no paperwork, no wasted time at the end of the shift." data-slo="Tekton je AI aplikacija, ki avtomatizira gradbeni dnevnik. Vodja gradbišča preprosto pove, kaj je bilo narejeno na gradbišču — Tekton to spremeni v strukturirano dnevno poročilo in uradni PDF, povezan s fotografijami in avdio posnetki s terena. Brez tipkanja, brez papirja, brez izgubljanja časa ob koncu izmene.">
-      Tekton is an AI app that automates the construction site diary. The site manager simply describes what was done on site — Tekton turns it into a structured daily report and an official PDF, linked with photos and audio recordings from the field. No typing, no paperwork, no wasted time at the end of the shift.
-    </p>
-
-    <div class="project-features">
-      <ul>
-        <li data-en="AI integration (Google Gemini)" data-slo="AI integracija (Google Gemini)">AI integration (Google Gemini)</li>
-        <li data-en="Voice input instead of typing" data-slo="Glasovni vnos namesto tipkanja">Voice input instead of typing</li>
-        <li data-en="Automatic PDF reports" data-slo="Samodejna PDF poročila">Automatic PDF reports</li>
-        <li data-en="Cloud sync for photos and audio" data-slo="Sinhronizacija fotografij in zvoka v oblaku">Cloud sync for photos and audio</li>
-      </ul>
-      <ul>
-        <li data-en="Multi-device, multi-project support" data-slo="Podpora za več naprav in projektov">Multi-device, multi-project support</li>
-        <li data-en="Secure user authentication" data-slo="Varna avtentikacija uporabnikov">Secure user authentication</li>
-        <li data-en="Support for 6 languages" data-slo="Podpora za 6 jezikov">Support for 6 languages</li>
-        <li data-en="Day-by-day, project-by-project view — ready evidence if disputes arise" data-slo="Pregled po dnevih in projektih — pripravljen dokaz ob morebitnem sporu">Day-by-day, project-by-project view — ready evidence if disputes arise</li>
-      </ul>
-    </div>
-
-    <a href="#contact" class="btn btn-primary" data-en="View Project" data-slo="Poglejte projekt">View Project</a>
-  </div>
-
-</div>
-
+      </div>
     </div>
   </section>
 

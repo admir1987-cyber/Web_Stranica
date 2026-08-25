@@ -367,3 +367,135 @@ if (pot && krogla && !manjGibanja) {
 
   opazovalec.observe(pot.closest('.process-steps'));
 }
+
+/* ZVEZDE V PROSTORU — znaki kode, ki lebdijo za vsebino. */
+const prostor = document.querySelector('.space');
+const nebo = document.getElementById('spaceStars');
+const tla = document.querySelector('.space-grid');
+
+if (prostor && nebo && tla && !manjGibanja) {
+  /* Vsak znak: [besedilo, x v %, y v %, velikost, globina 1-3]. */
+  const znaki = [
+    ['{ }', 6, 14, 34, 3],
+    ['</>', 84, 20, 27, 3],
+    ['$_', 16, 62, 29, 3],
+    ['_', 14, 90, 25, 3],
+    ['=>', 66, 74, 23, 2],
+    ['@', 91, 55, 25, 2],
+    ['~', 53, 46, 23, 2],
+    ['&&', 4, 80, 21, 2],
+    ['!=', 62, 92, 19, 2],
+    ['->', 38, 55, 22, 2],
+    ['0x', 8, 26, 19, 2],
+    ['//', 88, 78, 20, 2],
+    ['<>', 50, 33, 20, 2],
+    ['==', 80, 88, 18, 2],
+    ['()', 33, 86, 21, 1],
+    ['[ ]', 74, 10, 18, 1],
+    [';', 45, 9, 17, 1],
+    ['#', 10, 40, 20, 1],
+    ['||', 92, 34, 18, 1],
+    ['++', 27, 33, 17, 1],
+    ['/*', 46, 64, 17, 1],
+    ['::', 78, 44, 19, 1],
+    ['?.', 22, 8, 18, 1],
+    ['*/', 58, 18, 17, 1],
+    ['%', 70, 60, 17, 1],
+    ['^', 30, 70, 18, 1],
+    ['[]', 18, 47, 16, 1],
+    ['!', 96, 22, 16, 1],
+    ['|>', 41, 78, 18, 1],
+    ['let', 60, 6, 16, 1],
+    ['fn', 12, 74, 17, 1],
+    ['$', 36, 20, 16, 1]
+  ];
+  const zvezde = [];
+
+  znaki.forEach((z) => {
+    const s = document.createElement('span');
+    s.className = 'space-star';
+    s.textContent = z[0];
+    s.style.left = z[1] + '%';
+    s.style.top = z[2] + '%';
+    s.style.fontSize = z[3] + 'px';
+    s.style.opacity = 0.11 + z[4] * 0.07;
+    nebo.appendChild(s);
+    zvezde.push({ el: s, x: z[1], y: z[2], globina: z[4], motnost: 0.11 + z[4] * 0.07 });
+  });
+
+  let sirina = window.innerWidth;
+  let visina = window.innerHeight;
+  let misX = -9999;
+  let misY = -9999;
+  let imaMis = false;
+  let cakaSlika = false;
+
+  function narisi() {
+    cakaSlika = false;
+    const drsenje = window.scrollY;
+    const nagibX = imaMis ? misX / sirina - 0.5 : 0;
+    const nagibY = imaMis ? misY / visina - 0.5 : 0;
+    const pas = visina + 320;
+
+    tla.style.transform =
+      'perspective(300px) rotateX(67deg) translate3d(' + -nagibX * 26 + 'px, 0, 0)';
+
+    zvezde.forEach((zv) => {
+      const osnovaX = (zv.x / 100) * sirina;
+      const osnovaY = (zv.y / 100) * visina;
+
+      /* Ob drsenju znak potuje navzgor in se spodaj spet pojavi. */
+      const hitrost = zv.globina * 0.06;
+      const novaY = ((((osnovaY - drsenje * hitrost) % pas) + pas) % pas) - 160;
+
+      let px = -nagibX * zv.globina * 9;
+      let py = novaY - osnovaY - nagibY * zv.globina * 5;
+      let velikost = 1;
+      let motnost = zv.motnost;
+
+      /* Ce je miska blizu, se znak umakne, poveca in potemni. */
+      const razX = osnovaX + px - misX;
+      const razY = novaY - misY;
+      const razdalja = Math.sqrt(razX * razX + razY * razY);
+
+      if (imaMis && razdalja < 120) {
+        const moc = 1 - razdalja / 120;
+        px += (razX / (razdalja || 1)) * moc * 40;
+        py += (razY / (razdalja || 1)) * moc * 40;
+        velikost = 1 + moc * 0.55;
+        motnost = zv.motnost + moc * 0.5;
+      }
+
+      zv.el.style.transform =
+        'translate3d(' + px.toFixed(1) + 'px,' + py.toFixed(1) + 'px,0) scale(' + velikost.toFixed(2) + ')';
+      zv.el.style.opacity = motnost.toFixed(3);
+    });
+  }
+
+  function zahtevaj() {
+    if (!cakaSlika) {
+      cakaSlika = true;
+      requestAnimationFrame(narisi);
+    }
+  }
+
+  window.addEventListener('scroll', zahtevaj, { passive: true });
+
+  window.addEventListener('resize', () => {
+    sirina = window.innerWidth;
+    visina = window.innerHeight;
+    zahtevaj();
+  });
+
+  /* Na dotik miske ni, zato se ta del sploh ne vklopi. */
+  if (window.matchMedia('(hover: hover)').matches) {
+    window.addEventListener('mousemove', (e) => {
+      misX = e.clientX;
+      misY = e.clientY;
+      imaMis = true;
+      zahtevaj();
+    }, { passive: true });
+  }
+
+  narisi();
+}

@@ -2545,3 +2545,22 @@ body.modal-open {
   }
 
 }
+
+/* ==================================================== */
+/* DOTIK — na napravah brez miske hover ne obstaja */
+/* ==================================================== */
+@media (hover: none) {
+  /* Kar se ob dotiku dvigne, ostane dvignjeno. Zato dviga tukaj ni. */
+  .btn:hover,
+  .service-card:hover,
+  .skill-logo:hover,
+  .social-icon:hover,
+  .why-card:hover {
+    transform: none;
+  }
+
+  /* Kartica projekta je nagnjena tudi v mirovanju, zato jo vrnemo tja. */
+  .project-card.vidna:hover {
+    transform: translateY(0) rotateY(var(--zasuk)) scale(1);
+  }
+}

@@ -620,3 +620,62 @@ if (projektneKartice.length) {
     projektneKartice.forEach((k) => opazovalec.observe(k));
   }
 }
+
+/* TIPKOVNICA — kartice se odprejo tudi brez miske. */
+const gumbneKartice = document.querySelectorAll('.service-card, .project-card');
+const okno = document.getElementById('serviceModal');
+
+gumbneKartice.forEach((k) => {
+  /* Brez skripte kartica sploh ni gumb, zato ji vlogo damo sele tukaj. */
+  k.setAttribute('role', 'button');
+  k.setAttribute('tabindex', '0');
+
+  k.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      k.click();
+    }
+  });
+});
+
+if (okno) {
+  let vrniFokus = null;
+
+  gumbneKartice.forEach((k) => {
+    k.addEventListener('click', () => {
+      vrniFokus = k;
+    });
+  });
+
+  /* Ko se okno odpre, gre fokus vanj; ko se zapre, se vrne na kartico. */
+  const opazovalecOkna = new MutationObserver(() => {
+    if (!okno.hidden) {
+      const zapri = okno.querySelector('.modal-close');
+      if (zapri) zapri.focus();
+    } else if (vrniFokus) {
+      vrniFokus.focus();
+      vrniFokus = null;
+    }
+  });
+
+  opazovalecOkna.observe(okno, { attributes: true, attributeFilter: ['hidden'] });
+
+  /* Tabulator ostane ujet v oknu, dokler je to odprto. */
+  okno.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+
+    const dosegljivi = okno.querySelectorAll('a[href], button, [tabindex]:not([tabindex="-1"])');
+    if (!dosegljivi.length) return;
+
+    const prvi = dosegljivi[0];
+    const zadnji = dosegljivi[dosegljivi.length - 1];
+
+    if (e.shiftKey && document.activeElement === prvi) {
+      e.preventDefault();
+      zadnji.focus();
+    } else if (!e.shiftKey && document.activeElement === zadnji) {
+      e.preventDefault();
+      prvi.focus();
+    }
+  });
+}

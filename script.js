@@ -688,3 +688,116 @@ if (okno) {
     }
   });
 }
+
+/* SKLAD NAPRAV V HERO SEKCIJI */
+const sklad = document.getElementById('heroStack');
+
+if (sklad) {
+  const naprave = [...sklad.querySelectorAll('.hero-dev')];
+  const pike = [...sklad.querySelectorAll('.hero-pike button')];
+  const oznaka = document.getElementById('heroOznaka');
+
+  /* Ime storitve pod skladom, v obeh jezikih. */
+  const imena = [
+    ['Mobile apps', 'Mobilne aplikacije'],
+    ['Websites', 'Spletne strani'],
+    ['Scripts & automation', 'Skripte in avtomatizacija']
+  ];
+
+  const koliko = naprave.length;
+  let spredaj = 0;
+  let zaklep = false;
+
+  function narisiSklad() {
+    naprave.forEach((el, i) => {
+      const globina = (i - spredaj + koliko) % koliko;
+
+      /* Naprave stojijo na loku: prva naravnost, vsaka naslednja bolj obrnjena. */
+      /* Polozaj na loku in zasuk naprave sta loceni stvari. */
+      const kot = globina * 28;
+      const zasuk = globina * 11;
+      const rad = (kot * Math.PI) / 180;
+      /* Polmer raste z zaslonom, da lok ostane enak na vsaki sirini. */
+      const polmer = sklad.clientWidth * 0.95;
+      /* Vsak naslednji dobi se dodaten sunek v levo, zadnji najvec. */
+      const x = -polmer * Math.sin(rad) - globina * globina * 45;
+      const z = -polmer * (1 - Math.cos(rad)) - globina * 190;
+
+      el.style.transform =
+        'translate(-50%, -50%)' +
+        ' translateX(' + x.toFixed(1) + 'px)' +
+        ' translateY(' + -globina * 10 + 'px)' +
+        ' translateZ(' + z.toFixed(1) + 'px)' +
+        ' rotateY(' + -zasuk + 'deg)' +
+        ' scale(' + (1 - globina * 0.15).toFixed(2) + ')';
+
+      el.style.opacity = 1;
+      el.style.setProperty('--megla', (globina * 0.34).toFixed(2));
+      el.style.zIndex = koliko - globina;
+      el.style.filter = globina ? 'blur(' + globina * 0.7 + 'px)' : 'none';
+    });
+
+    pike.forEach((b, i) => b.classList.toggle('on', i === spredaj));
+    osveziOznako();
+  }
+
+  function osveziOznako() {
+    if (!oznaka) return;
+    const slo = document.documentElement.lang === 'sl';
+    oznaka.style.opacity = 0;
+    setTimeout(() => {
+      oznaka.textContent = (slo ? imena[spredaj][1] : imena[spredaj][0]).toUpperCase();
+      oznaka.style.opacity = 1;
+    }, 170);
+  }
+
+  function premakni(korak) {
+    if (zaklep) return;
+    zaklep = true;
+    spredaj += korak;
+    narisiSklad();
+    setTimeout(() => { zaklep = false; }, 400);
+  }
+
+  /* Kolesce dela povsod v Hero sekciji, ne le nad samimi napravami. */
+  const herojSekcija = document.getElementById('hero') || sklad;
+
+  herojSekcija.addEventListener('wheel', (e) => {
+    const navzdol = e.deltaY > 0;
+    if (navzdol && spredaj >= koliko - 1) return;
+    if (!navzdol && spredaj <= 0) return;
+    e.preventDefault();
+    premakni(navzdol ? 1 : -1);
+  }, { passive: false });
+
+  /* Na dotik isto, samo s potegom prsta. */
+  let zacetekY = null;
+
+  sklad.addEventListener('touchstart', (e) => {
+    zacetekY = e.touches[0].clientY;
+  }, { passive: true });
+
+  sklad.addEventListener('touchend', (e) => {
+    if (zacetekY === null) return;
+    const razlika = zacetekY - e.changedTouches[0].clientY;
+    zacetekY = null;
+    if (Math.abs(razlika) < 40) return;
+    if (razlika > 0 && spredaj < koliko - 1) premakni(1);
+    if (razlika < 0 && spredaj > 0) premakni(-1);
+  }, { passive: true });
+
+  pike.forEach((b, i) => {
+    b.addEventListener('click', () => {
+      if (i === spredaj) return;
+      spredaj = i;
+      narisiSklad();
+    });
+  });
+
+  /* Ob menjavi jezika se napis pod skladom prevede takoj. */
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setTimeout(osveziOznako, 10));
+  });
+
+  narisiSklad();
+}

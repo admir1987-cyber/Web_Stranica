@@ -24,7 +24,8 @@ if (navServices && navDropdown) {
 
 navDropdownItems.forEach((item) => {
   item.addEventListener('click', (e) => {
-    e.preventDefault();
+    /* Prave povezave pustimo delovati, prazne ustavimo. */
+    if (item.getAttribute('href') === '#') e.preventDefault();
     navDropdown.classList.remove('open');
   });
 });
@@ -801,3 +802,9 @@ if (sklad) {
 
   narisiSklad();
 }
+
+/* KARTICE, KI SE OBRNEJO — klik pokaze hrbtno stran. */
+document.querySelectorAll('.obrnljiva').forEach((k) => {
+  k.addEventListener('click', () => k.classList.toggle('obrnjena'));
+  k.addEventListener('mouseleave', () => k.classList.remove('obrnjena'));
+});

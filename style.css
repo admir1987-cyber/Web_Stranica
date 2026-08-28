@@ -822,6 +822,123 @@ body {
   position: relative;
 }
 
+/* PODSTRANI STORITEV — uvod, drobtine in paketi. */
+.storitev-uvod {
+  padding: var(--space-md) 0 var(--space-lg);
+}
+.storitev-konec {
+  padding: var(--space-lg) 0 var(--space-xl);
+}
+
+/* UVOD PODSTRANI — besedilo levo, slika desno. */
+.uvod-mreza {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+.uvod-slika {
+  transition:
+    transform 0.32s cubic-bezier(0.23, 1, 0.32, 1),
+    filter 0.32s ease;
+  filter: drop-shadow(0 26px 34px rgba(45, 58, 34, 0.45));
+}
+
+/* Miska nad sliko: rahlo se dvigne, senca se poglobi, lebdenje se ustavi. */
+@media (hover: hover) and (pointer: fine) {
+  .uvod-slika:hover {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 38px 48px rgba(45, 58, 34, 0.55));
+  }
+  .uvod-slika:hover img {
+    animation-play-state: paused;
+  }
+}
+
+.uvod-slika img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  animation: lebdenje 6s ease-in-out infinite;
+}
+@keyframes lebdenje {
+  0%, 100% {
+    transform: translateY(0) scaleX(-1);
+  }
+  50% {
+    transform: translateY(-10px) scaleX(-1);
+  }
+}
+@media (max-width: 900px) {
+  .uvod-mreza {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .uvod-slika img {
+    animation: none;
+  }
+}
+.drobtine {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+.drobtine a {
+  color: inherit;
+}
+.drobtine span {
+  margin-left: 6px;
+}
+
+/* Kartice na podstraneh se ne klikajo. */
+.usluga-card {
+  cursor: default;
+}
+.usluga-card.poudarjena {
+  background-color: var(--color-accent);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  border-color: var(--color-accent);
+  box-shadow: 0 26px 50px rgba(58, 74, 44, 0.24);
+}
+.usluga-card.poudarjena .paket-ime,
+.usluga-card.poudarjena .paket-cena,
+.usluga-card.poudarjena .service-checklist li,
+.usluga-card.poudarjena .service-checklist li::before {
+  color: #FFFFFF;
+}
+.usluga-card.poudarjena .paket-znacka {
+  color: rgba(255, 255, 255, 0.75);
+}
+.usluga-card.poudarjena .service-mark {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+/* Paketi nimajo ikone, zato seznam ni uvlecen. */
+.paket .service-checklist {
+  padding-left: 0;
+}
+.paket-znacka {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 6px;
+}
+.paket-ime {
+  font-size: 15px;
+  font-weight: 600;
+}
+.paket-cena {
+  font-size: clamp(24px, 1.9vw, 40px);
+  font-weight: 600;
+  margin: 4px 0 var(--space-sm);
+}
+
 /* SKLAD NAPRAV — tri storitve v globini. */
 .hero-stack {
   position: relative;
@@ -2460,6 +2577,63 @@ body.modal-open {
 /* Kartice storitev je zdaj mogoce klikniti. */
 .service-card {
   cursor: pointer;
+}
+
+/* Kartica, ki je povezava, ne sme dobiti barve povezave. */
+a.service-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* KARTICA, KI SE OBRNE — podrobnosti so na hrbtni strani. */
+.obrnljiva {
+  perspective: 1200px;
+  cursor: pointer;
+}
+.obrni-notranjost {
+  position: relative;
+  min-height: 360px;
+  transform-style: preserve-3d;
+  transition: transform 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.obrnljiva.obrnjena .obrni-notranjost {
+  transform: rotateY(180deg);
+}
+.obrni-lice,
+.obrni-hrbet {
+  backface-visibility: hidden;
+}
+.obrni-hrbet {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+.obrni-hrbet h3 {
+  font-size: 17px;
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+.obrni-hrbet p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-text);
+}
+.obrni-namig {
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .obrni-notranjost {
+    transition: none;
+  }
 }
 
 /* NOGA STRANI — dve vrstici, zgoraj povezave, spodaj podatki. */

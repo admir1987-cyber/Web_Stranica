@@ -435,15 +435,15 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-lg);
-  align-items: center;
+  align-items: start;
 }
 
 /* HERO NASLOV */
 .hero-title {
-  font-size: clamp(28px, 5vw, 128px);
+  font-size: clamp(28px, 3.7vw, 95px);
   line-height: 1.2;
   font-weight: 600;
-  margin: var(--space-lg) 0 var(--space-sm);
+  margin: var(--space-md) 0 var(--space-sm);
 }
 .accent {
   color: var(--color-accent-light);
@@ -817,9 +817,6 @@ body {
   padding-left: calc(var(--icon-size) + var(--icon-gap));
 }
 
-
-
-/* HERO OZADJE — fotografija  photo-web*/
 .hero {
   padding-bottom: var(--space-xl);
   position: relative;
@@ -828,7 +825,7 @@ body {
 /* SKLAD NAPRAV — tri storitve v globini. */
 .hero-stack {
   position: relative;
-  height: clamp(505px, 49vw, 985px);
+  height: clamp(430px, 38vw, 760px);
   perspective: 820px;
   perspective-origin: 62% 45%;
 }
@@ -862,7 +859,7 @@ body {
 .hero-dev {
   position: absolute;
   left: 68%;
-  top: 48%;
+  top: 42%;
   transform-style: preserve-3d;
   transition:
     transform 0.55s cubic-bezier(0.23, 1, 0.32, 1),
@@ -873,7 +870,7 @@ body {
 /* TELEFON — ohisje je risano, zaslon je prava slika. */
 .naprava-telefon {
   position: relative;
-  width: clamp(226px, 18.8vw, 430px);
+  width: clamp(190px, 16.6vw, 380px);
   padding: clamp(4px, 0.35vw, 8px);
   border-radius: clamp(22px, 1.9vw, 42px);
   background: linear-gradient(150deg, #4A5462 0%, #232A36 38%, #161B24 100%);
@@ -2554,6 +2551,7 @@ body.modal-open {
 /* Značke zaupanja v hero sekciji (Reliable, Fast, Secure) */
 .trust-badges {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-md);
   margin-bottom: var(--space-md);
 }

@@ -835,7 +835,35 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-lg);
-  align-items: center;
+  align-items: start;
+}
+
+/* Pokoncna slika (telefon) — nizja in obrnjena na drugo stran. */
+.uvod-slika.uvod-slika-pokoncna img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: clamp(300px, 26vw, 440px);
+  margin: 0 auto;
+  animation-name: lebdenje-pokoncna;
+}
+
+/* Slika, ki se ne zrcali — besedilo na zaslonu mora ostati berljivo. */
+.uvod-slika.uvod-slika-ravna img {
+  animation-name: lebdenje-pokoncna;
+}
+
+/* Daljsi naslov potrebuje manjso crko, da gre v dve vrstici. */
+.naslov-ozji {
+  font-size: clamp(26px, 3vw, 76px);
+}
+@keyframes lebdenje-pokoncna {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 .uvod-slika {
   transition:
@@ -2637,6 +2665,133 @@ a.service-card {
 }
 
 /* NOGA STRANI — dve vrstici, zgoraj povezave, spodaj podatki. */
+
+/* SKROL HERO — animacija tece z drsenjem, naslovi se menjajo. */
+.skrol-hero {
+  position: relative;
+  height: 320vh;
+}
+.skrol-lepilo {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skrol-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Temna tancica, da je belo besedilo berljivo cez vsak kader. */
+.skrol-tema {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 26, 16, 0.55) 0%, rgba(20, 26, 16, 0.25) 45%, rgba(20, 26, 16, 0.75) 100%);
+}
+
+.skrol-besedila {
+  position: relative;
+  width: min(90%, 980px);
+  text-align: center;
+}
+.skrol-blok {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(calc(-50% + 70px));
+  transition:
+    opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+    filter 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: none;
+}
+
+/* Naslov, ki je na vrsti: pride iz megle in se ustavi na sredini. */
+.skrol-blok.viden {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(-50%);
+}
+
+/* Naslov, ki je ze bil: odide navzgor in izgine. */
+.skrol-blok.mimo {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(calc(-50% - 70px));
+}
+
+.skrol-blok h1,
+.skrol-blok h2 {
+  font-size: clamp(28px, 3.6vw, 84px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  text-wrap: balance;
+}
+.skrol-blok p {
+  margin-top: var(--space-sm);
+  font-size: clamp(16px, 1.15vw, 26px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skrol-namig {
+  position: absolute;
+  bottom: clamp(20px, 3vw, 46px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+.skrol-puscica {
+  animation: skrol-skok 1.8s ease-in-out infinite;
+}
+@keyframes skrol-skok {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* Na telefonu je hero krajsi, ker video tece sam. */
+@media (max-width: 900px) {
+  .skrol-hero {
+    height: 260vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skrol-blok {
+    transition-duration: 0.01s;
+    filter: none;
+  }
+  .skrol-puscica {
+    animation: none;
+  }
+}
+
 .footer {
   background-color: #1A1B20;
   padding: var(--space-lg) 0 var(--space-md);

@@ -808,3 +808,52 @@ document.querySelectorAll('.obrnljiva').forEach((k) => {
   k.addEventListener('click', () => k.classList.toggle('obrnjena'));
   k.addEventListener('mouseleave', () => k.classList.remove('obrnjena'));
 });
+
+/* SKROL HERO — drsenje premika animacijo in menja naslove. */
+const skrolHero = document.getElementById('skrolHero');
+const skrolVideo = document.getElementById('skrolVideo');
+
+if (skrolHero && skrolVideo) {
+  const bloki = [...skrolHero.querySelectorAll('.skrol-blok')];
+
+  /* Na telefonih premikanje videa z drsenjem ne dela zanesljivo. */
+  const naDotik = window.matchMedia('(hover: none), (max-width: 900px)').matches;
+
+  if (naDotik) {
+    skrolVideo.loop = true;
+    skrolVideo.play().catch(() => {});
+  }
+
+  let cakam = false;
+
+  function osveziHero() {
+    const visina = skrolHero.offsetHeight - window.innerHeight;
+    const prevozeno = Math.min(Math.max(-skrolHero.getBoundingClientRect().top, 0), visina);
+    const delez = visina > 0 ? prevozeno / visina : 0;
+
+    /* Vsak kader ima svoje mesto na poti drsenja. */
+    if (!naDotik && skrolVideo.duration) {
+      skrolVideo.currentTime = delez * skrolVideo.duration;
+    }
+
+    /* Pot razdelimo na toliko delov, kolikor je naslovov. */
+    const naVrsti = Math.min(Math.floor(delez * bloki.length), bloki.length - 1);
+
+    bloki.forEach((b, i) => {
+      b.classList.toggle('viden', i === naVrsti);
+      b.classList.toggle('mimo', i < naVrsti);
+    });
+
+    cakam = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (cakam) return;
+    cakam = true;
+    requestAnimationFrame(osveziHero);
+  }, { passive: true });
+
+  window.addEventListener('resize', osveziHero);
+  skrolVideo.addEventListener('loadedmetadata', osveziHero);
+  osveziHero();
+}

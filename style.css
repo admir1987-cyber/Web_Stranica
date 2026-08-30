@@ -19,23 +19,6 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('assets/fonts/jetbrains-mono-700-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('assets/fonts/jetbrains-mono-700-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 
 @font-face {
   font-family: 'Plus Jakarta Sans';
@@ -303,12 +286,6 @@ body {
   height: clamp(28px, 2.2vw, 44px);
   width: auto;
   display: block;
-}
-
-.logo-mark {
-  font-family: var(--font-mono);
-  font-size: 15px;
-  font-weight: 700;
 }
 
 .logo-text {
@@ -2675,31 +2652,33 @@ a.service-card {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: center;
+  gap: var(--space-lg);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Okvir drzi razmerje, da stran ob nalaganju ne poskoci. */
+.skrol-okvir {
+  position: relative;
+  margin-top: -2cm;
+  margin-right: -2cm;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
 }
 .skrol-video {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* Temna tancica, da je belo besedilo berljivo cez vsak kader. */
-.skrol-tema {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(20, 26, 16, 0.55) 0%, rgba(20, 26, 16, 0.25) 45%, rgba(20, 26, 16, 0.75) 100%);
+  display: block;
 }
 
 .skrol-besedila {
   position: relative;
-  width: min(90%, 980px);
-  text-align: center;
+  min-height: 46vh;
 }
 .skrol-blok {
   position: absolute;
@@ -2736,14 +2715,13 @@ a.service-card {
   line-height: 1.15;
   font-weight: 600;
   letter-spacing: -0.015em;
-  color: #FFFFFF;
-  text-wrap: balance;
+  color: var(--color-text);
 }
 .skrol-blok p {
   margin-top: var(--space-sm);
   font-size: clamp(16px, 1.15vw, 26px);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--color-text-muted);
   max-width: 60ch;
   margin-left: auto;
   margin-right: auto;

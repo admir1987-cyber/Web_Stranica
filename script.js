@@ -719,9 +719,11 @@ if (sklad) {
       const zasuk = globina * 11;
       const rad = (kot * Math.PI) / 180;
       /* Polmer raste z zaslonom, da lok ostane enak na vsaki sirini. */
-      const polmer = sklad.clientWidth * 0.95;
+      /* Na ozjem stolpcu se naprave razmaknejo manj, da ne prekrijejo besedila. */
+      const ozko = sklad.clientWidth < 560;
+      const polmer = sklad.clientWidth * (ozko ? 0.6 : 0.95);
       /* Vsak naslednji dobi se dodaten sunek v levo, zadnji najvec. */
-      const x = -polmer * Math.sin(rad) - globina * globina * 45;
+      const x = -polmer * Math.sin(rad) - globina * globina * (ozko ? 24 : 45);
       const z = -polmer * (1 - Math.cos(rad)) - globina * 190;
 
       el.style.transform =

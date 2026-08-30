@@ -879,6 +879,11 @@ body {
   .uvod-mreza {
     grid-template-columns: 1fr;
   }
+
+  /* Na telefonu slika samo daljsa zaslon, zato je ne prikazemo. */
+  .uvod-slika {
+    display: none;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .uvod-slika img {
@@ -976,6 +981,16 @@ body {
   transform: translateZ(2px);
   pointer-events: none;
   transition: opacity 0.55s ease;
+}
+
+/* Na ozjih zaslonih naprave pomaknemo levo, da terminal ne uide cez rob. */
+@media (max-width: 1200px) {
+  .hero-stack .hero-dev {
+    left: 64%;
+  }
+  .hero-stack .naprava-terminal {
+    width: clamp(300px, 30vw, 420px);
+  }
 }
 
 .hero-dev {
@@ -1221,7 +1236,7 @@ body {
   }
 
   .hero-stack {
-    height: clamp(450px, 92vw, 680px);
+    display: none;
   }
 }
 

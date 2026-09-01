@@ -7,3 +7,5 @@ skills-lock.json
 *.backup
 assets/mockup/
 Thumbs.db
+# Izpis orodja graphify — ni del spletne strani.
+graphify-out/

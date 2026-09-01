@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>3D spletne strani in 3D spletno oblikovanje | Kaden</title>
+
+  <meta name="description" content="Izdelava 3D in interaktivnih spletnih strani. 3D spletno oblikovanje, ki tece v brskalniku brez vticnikov. Ljubljana, Slovenija.">
+  <meta name="author" content="Admir Pajic">
+
+  <link rel="canonical" href="https://www.kaden-digital.com/3dspletnestrani.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="sl_SI">
+  <meta property="og:title" content="3D spletne strani in 3D spletno oblikovanje | Kaden">
+  <meta property="og:description" content="Izdelava 3D in interaktivnih spletnih strani, ki tecejo kar v brskalniku.">
+  <meta property="og:url" content="https://www.kaden-digital.com/3dspletnestrani.html">
+  <meta property="og:image" content="https://www.kaden-digital.com/assets/images/photo-logo.png">
+
+  <link rel="icon" href="assets/images/logo-nav.webp">
+
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- PROSTOR V OZADJU — plasti se ob drsenju premikajo razlicno hitro. -->
+  <div class="space" aria-hidden="true">
+    <div class="space-grid space-grid-far" data-globina="0.06"></div>
+    <div class="space-grid space-grid-near" data-globina="0.14"></div>
+    <div class="space-haze" data-globina="0.03"></div>
+    <div class="space-stars" id="spaceStars" data-globina="0.09"></div>
+    <div class="space-light"></div>
+    <div class="space-vignette"></div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo-nav.webp" alt="Kaden Digital" width="420" height="96">
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html" data-en="Home" data-slo="Domov">Domov</a></li>
+          <li><a href="index.html#about" data-en="About" data-slo="O nas">O nas</a></li>
+          <li class="nav-services">
+            <a href="index.html#services" class="nav-dropdown-toggle" data-en="Services" data-slo="Storitve">Storitve</a>
+            <div class="nav-dropdown">
+              <a href="razvojmobilnihaplikacij.html" class="nav-dropdown-item" data-en="App Development" data-slo="Razvoj aplikacij">Razvoj aplikacij</a>
+              <a href="izdelavaspletnihstrani.html" class="nav-dropdown-item" data-en="Web Development" data-slo="Spletni razvoj">Spletni razvoj</a>
+              <a href="3dspletnestrani.html" class="nav-dropdown-item" data-en="3D websites" data-slo="3D spletne strani">3D spletne strani</a>
+              <a href="skripteinavtomatizacija.html" class="nav-dropdown-item" data-en="Scripts &amp; Automation" data-slo="Skripte in avtomatizacija">Skripte in avtomatizacija</a>
+            </div>
+          </li>
+          <li><a href="index.html#projects" data-en="Projects" data-slo="Projekti">Projekti</a></li>
+          <li><a href="index.html#process" data-en="Process" data-slo="Proces">Proces</a></li>
+        </ul>
+
+        <div class="lang-switch">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <span class="lang-divider">|</span>
+          <button type="button" class="lang-btn active" data-lang="slo">SLO</button>
+        </div>
+
+        <a href="index.html#contact" class="btn btn-primary nav-cta" data-en="Contact" data-slo="Kontakt">Kontakt</a>
+      </div>
+
+      <button class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" data-en="Home" data-slo="Domov">Domov</a></li>
+        <li><a href="index.html#about" data-en="About" data-slo="O nas">O nas</a></li>
+        <li><a href="index.html#services" data-en="Services" data-slo="Storitve">Storitve</a></li>
+        <li><a href="index.html#projects" data-en="Projects" data-slo="Projekti">Projekti</a></li>
+        <li><a href="index.html#process" data-en="Process" data-slo="Proces">Proces</a></li>
+      </ul>
+      <div class="lang-switch">
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <span class="lang-divider">|</span>
+        <button type="button" class="lang-btn active" data-lang="slo">SLO</button>
+      </div>
+      <a href="index.html#contact" class="btn btn-primary" data-en="Contact" data-slo="Kontakt">Kontakt</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO — besedilo levo, terminal in 3D scena desno -->
+    <section class="storitev-uvod hero3d">
+      <div class="hero3d-tir" id="hero3dTir">
+        <div class="hero3d-lepilo">
+          <div class="container">
+            <div class="uvod-mreza-3d">
+
+              <div class="uvod-besedilo">
+
+                <p class="drobtine razkrij">
+                  <a href="index.html" data-en="Home" data-slo="Domov">Domov</a>
+                  <span>/</span>
+                  <span data-en="3D websites" data-slo="3D spletne strani">3D spletne strani</span>
+                </p>
+
+                <div class="badge razkrij" data-zamik="1">
+                  <span class="badge-dot"></span>
+                  <span data-en="Available for new projects" data-slo="Na voljo za nove projekte">Na voljo za nove projekte</span>
+                </div>
+
+                <h1 class="hero-title naslov-ozji razkrij" data-zamik="2">
+                  <span data-en="3D and" data-slo="3D in">3D in</span>
+                  <span class="accent" data-en="interactive" data-slo="interaktivne">interaktivne</span>
+                  <br>
+                  <span data-en="websites" data-slo="spletne strani">spletne strani</span>
+                </h1>
+
+                <p class="hero-subtitle razkrij" data-zamik="3" data-en="3D web design that runs straight in the browser — no plugins, no downloads. A website the visitor turns, opens and looks into, instead of scrolling past another photo." data-slo="3D spletno oblikovanje, ki tece kar v brskalniku — brez vticnikov in brez prenosov. Stran, ki jo obiskovalec obrne, odpre in pogleda vanjo, namesto da zdrsne mimo se ene fotografije. V regiji isto storitev poznajo kot 3D web dizajn.">3D spletno oblikovanje, ki tece kar v brskalniku — brez vticnikov in brez prenosov. Stran, ki jo obiskovalec obrne, odpre in pogleda vanjo, namesto da zdrsne mimo se ene fotografije. V regiji isto storitev poznajo kot 3D web dizajn.</p>
+
+                <div class="hero-buttons razkrij" data-zamik="4">
+                  <a href="index.html#contact" class="btn btn-primary" data-en="Start a conversation" data-slo="Zacnimo pogovor">Zacnimo pogovor</a>
+                  <a href="#cena" class="btn btn-secondary" data-en="See prices" data-slo="Poglejte cene">Poglejte cene</a>
+                </div>
+
+                <div class="stevilke razkrij" data-zamik="5">
+                  <div class="stevilka">
+                    <strong>0</strong>
+                    <span data-en="plugins to install" data-slo="vticnikov za namestitev">vticnikov za namestitev</span>
+                  </div>
+                  <div class="stevilka">
+                    <strong>60 fps</strong>
+                    <span data-en="on a modern phone" data-slo="na sodobnem telefonu">na sodobnem telefonu</span>
+                  </div>
+                  <div class="stevilka">
+                    <strong>&lt; 2 s</strong>
+                    <span data-en="to first view" data-slo="do prvega prikaza">do prvega prikaza</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="scena3d razkrij" data-zamik="3" aria-hidden="true">
+                <div class="scena3d-notranjost" id="scena3d">
+
+                  <div class="okno3d" id="okno3d">
+                    <div class="okno3d-vrh">
+                      <span class="okno3d-pika"></span>
+                      <span class="okno3d-pika"></span>
+                      <span class="okno3d-pika"></span>
+                      <span class="okno3d-url">www.kaden-digital.com/3d</span>
+                    </div>
+
+                    <div class="okno3d-oder">
+                      <pre class="term" id="term"></pre>
+                    </div>
+
+                    <div class="okno3d-noga">
+                      <span>WebGL &middot; brez vticnikov</span>
+                      <span><em>60 fps</em> &middot; 1.4 MB</span>
+                    </div>
+                  </div>
+
+                  <span class="okno3d-senca" id="okno3dSenca" aria-hidden="true"></span>
+
+                  <div class="delci" id="delci"></div>
+
+                  <div class="plocica plocica-1">
+                    <span class="plocica-znak">3D</span>
+                    <span>Model v brskalniku<small>nic za namestiti</small></span>
+                  </div>
+                  <div class="plocica plocica-2">
+                    <span class="plocica-znak">&#9889;</span>
+                    <span>Nalozi se v 1.8 s<small>tudi na telefonu</small></span>
+                  </div>
+                  <div class="plocica plocica-3">
+                    <span class="plocica-znak">360</span>
+                    <span>Obrni in poglej<small>z vseh strani</small></span>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- KAJ DOBITE -->
+    <section class="services">
+      <div class="container">
+
+        <p class="section-eyebrow razkrij" data-en="What you get" data-slo="Kaj dobite">Kaj dobite</p>
+        <h2 class="section-title razkrij" data-zamik="1" data-en="3D that <span class='accent'>actually sells</span>" data-slo="3D, ki <span class='accent'>zares proda</span>">3D, ki <span class='accent'>zares proda</span></h2>
+        <div class="title-divider razkrij" data-zamik="2">
+          <span class="divider-line"></span>
+          <span class="divider-dot"></span>
+          <span class="divider-line"></span>
+        </div>
+
+        <div class="services-grid">
+
+          <div class="service-card usluga-card obrnljiva razkrij" data-zamik="1">
+            <span class="service-bar"></span>
+           <div class="obrni-notranjost">
+            <div class="obrni-lice">
+            <span class="service-mark mark-1">&lt;/&gt;</span>
+            <span class="service-mark mark-2">#</span>
+            <span class="service-mark mark-3">@</span>
+            <div class="service-card-header">
+              <div class="service-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2 3 7v10l9 5 9-5V7z" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                  <path d="m3 7 9 5 9-5M12 12v10" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                </svg>
+              </div>
+              <div class="service-heading">
+                <h3 data-en="3D without plugins" data-slo="3D brez vticnikov">3D brez vticnikov</h3>
+                <p class="service-stack">WebGL &middot; Three.js</p>
+              </div>
+            </div>
+            <p class="service-desc" data-en="The 3D runs in the browser itself. The visitor installs nothing and downloads nothing." data-slo="3D tece kar v brskalniku. Obiskovalec ne namesti nicesar in nicesar ne prenese.">3D tece kar v brskalniku. Obiskovalec ne namesti nicesar in nicesar ne prenese.</p>
+            <ul class="service-checklist">
+              <li data-en="Opens in every browser" data-slo="Odpre se v vsakem brskalniku">Odpre se v vsakem brskalniku</li>
+              <li data-en="Works on a phone too" data-slo="Deluje tudi na telefonu">Deluje tudi na telefonu</li>
+              <li data-en="Nothing to install" data-slo="Nicesar ni treba namestiti">Nicesar ni treba namestiti</li>
+            </ul>
+            <p class="obrni-namig" data-en="Tap for details" data-slo="Kliknite za podrobnosti">Kliknite za podrobnosti</p>
+            </div>
+            <div class="obrni-hrbet">
+              <h3 data-en="Why it matters" data-slo="Zakaj je to pomembno">Zakaj je to pomembno</h3>
+              <p><strong data-en="Opens in every browser" data-slo="Odpre se v vsakem brskalniku">Odpre se v vsakem brskalniku</strong> <span data-en="means nobody drops off because they use a different browser. Chrome, Safari and Firefox all show the same thing." data-slo="pomeni, da nihce ne odpade zato, ker uporablja drug brskalnik. Chrome, Safari in Firefox pokazejo isto.">pomeni, da nihce ne odpade zato, ker uporablja drug brskalnik. Chrome, Safari in Firefox pokazejo isto.</span></p>
+              <p><strong data-en="Works on a phone too" data-slo="Deluje tudi na telefonu">Deluje tudi na telefonu</strong> <span data-en="means the half of your visitors who arrive from a phone see the same 3D as those on a computer." data-slo="pomeni, da polovica obiskovalcev, ki pride s telefona, vidi isti 3D kot tisti za racunalnikom.">pomeni, da polovica obiskovalcev, ki pride s telefona, vidi isti 3D kot tisti za racunalnikom.</span></p>
+              <p><strong data-en="Nothing to install" data-slo="Nicesar ni treba namestiti">Nicesar ni treba namestiti</strong> <span data-en="means no downloads and no plugins. Every extra step you ask of a visitor costs you a part of them." data-slo="pomeni nic prenosov in nic vticnikov. Vsak dodaten korak, ki ga zahtevate od obiskovalca, vas stane del njih.">pomeni nic prenosov in nic vticnikov. Vsak dodaten korak, ki ga zahtevate od obiskovalca, vas stane del njih.</span></p>
+            </div>
+           </div>
+          </div>
+
+          <div class="service-card usluga-card obrnljiva razkrij" data-zamik="2">
+            <span class="service-bar"></span>
+           <div class="obrni-notranjost">
+            <div class="obrni-lice">
+            <span class="service-mark mark-1">{ }</span>
+            <span class="service-mark mark-2">=&gt;</span>
+            <span class="service-mark mark-3">;</span>
+            <div class="service-card-header">
+              <div class="service-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a9 9 0 1 1-9 9" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                  <path d="M3 7V3h4" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                </svg>
+              </div>
+              <div class="service-heading">
+                <h3 data-en="Interaction with a point" data-slo="Interaktivnost z namenom">Interaktivnost z namenom</h3>
+                <p class="service-stack" data-en="Interactive website" data-slo="Interaktivna spletna stran">Interaktivna spletna stran</p>
+              </div>
+            </div>
+            <p class="service-desc" data-en="The visitor turns the product, looks inside and picks a colour." data-slo="Obiskovalec izdelek obrne, pogleda vanj in izbere barvo.">Obiskovalec izdelek obrne, pogleda vanj in izbere barvo.</p>
+            <ul class="service-checklist">
+              <li data-en="Turn and zoom the product" data-slo="Vrtenje in priblizevanje izdelka">Vrtenje in priblizevanje izdelka</li>
+              <li data-en="Choose colours and versions" data-slo="Izbira barv in razlicic">Izbira barv in razlicic</li>
+              <li data-en="Walk through a space" data-slo="Sprehod skozi prostor">Sprehod skozi prostor</li>
+            </ul>
+            <p class="obrni-namig" data-en="Tap for details" data-slo="Kliknite za podrobnosti">Kliknite za podrobnosti</p>
+            </div>
+            <div class="obrni-hrbet">
+              <h3 data-en="Why it matters" data-slo="Zakaj je to pomembno">Zakaj je to pomembno</h3>
+              <p><strong data-en="Turn and zoom the product" data-slo="Vrtenje in priblizevanje izdelka">Vrtenje in priblizevanje izdelka</strong> <span data-en="means the buyer sees it from every side. Fewer questions before the sale and fewer parcels coming back." data-slo="pomeni, da kupec izdelek vidi z vseh strani. Manj vprasanj pred nakupom in manj vrnjenih paketov.">pomeni, da kupec izdelek vidi z vseh strani. Manj vprasanj pred nakupom in manj vrnjenih paketov.</span></p>
+              <p><strong data-en="Choose colours and versions" data-slo="Izbira barv in razlicic">Izbira barv in razlicic</strong> <span data-en="means one model replaces a photo shoot for every colour. The buyer assembles exactly what he wants to order." data-slo="pomeni, da en model nadomesti fotografiranje vsake barve. Kupec sam sestavi tocno to, kar hoce narociti.">pomeni, da en model nadomesti fotografiranje vsake barve. Kupec sam sestavi tocno to, kar hoce narociti.</span></p>
+              <p><strong data-en="Walk through a space" data-slo="Sprehod skozi prostor">Sprehod skozi prostor</strong> <span data-en="means you can show a room that does not exist yet. A flat or a showroom sells before the first wall goes up." data-slo="pomeni, da lahko pokazete prostor, ki ga se ni. Stanovanje ali salon prodate, preden zraste prva stena.">pomeni, da lahko pokazete prostor, ki ga se ni. Stanovanje ali salon prodate, preden zraste prva stena.</span></p>
+            </div>
+           </div>
+          </div>
+
+          <div class="service-card usluga-card obrnljiva razkrij" data-zamik="3">
+            <span class="service-bar"></span>
+           <div class="obrni-notranjost">
+            <div class="obrni-lice">
+            <span class="service-mark mark-1">$</span>
+            <span class="service-mark mark-2">&rarr;</span>
+            <span class="service-mark mark-3">*</span>
+            <div class="service-card-header">
+              <div class="service-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2 4 14h7l-1 8 9-12h-7z" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                </svg>
+              </div>
+              <div class="service-heading">
+                <h3 data-en="Fast even with 3D" data-slo="Hitro tudi s 3D">Hitro tudi s 3D</h3>
+                <p class="service-stack" data-en="Performance" data-slo="Delovanje">Delovanje</p>
+              </div>
+            </div>
+            <p class="service-desc" data-en="Most 3D sites are heavy and slow. Models get compressed and loaded in steps." data-slo="Vecina 3D strani je tezkih in pocasnih. Modeli se stisnejo in nalagajo po korakih.">Vecina 3D strani je tezkih in pocasnih. Modeli se stisnejo in nalagajo po korakih.</p>
+            <ul class="service-checklist">
+              <li data-en="Compressed 3D models" data-slo="Stisnjeni 3D modeli">Stisnjeni 3D modeli</li>
+              <li data-en="Loads in steps" data-slo="Nalaganje po korakih">Nalaganje po korakih</li>
+              <li data-en="Simpler version on phones" data-slo="Enostavnejsa razlicica na telefonu">Enostavnejsa razlicica na telefonu</li>
+            </ul>
+            <p class="obrni-namig" data-en="Tap for details" data-slo="Kliknite za podrobnosti">Kliknite za podrobnosti</p>
+            </div>
+            <div class="obrni-hrbet">
+              <h3 data-en="Why it matters" data-slo="Zakaj je to pomembno">Zakaj je to pomembno</h3>
+              <p><strong data-en="Compressed 3D models" data-slo="Stisnjeni 3D modeli">Stisnjeni 3D modeli</strong> <span data-en="means a model that would weigh 40 MB reaches the visitor as a few. Without that step nobody waits for a 3D page." data-slo="pomeni, da model, ki bi tehtal 40 MB, pride do obiskovalca stisnjen na nekaj megabajtov. Brez tega koraka 3D strani nihce ne docaka.">pomeni, da model, ki bi tehtal 40 MB, pride do obiskovalca stisnjen na nekaj megabajtov. Brez tega koraka 3D strani nihce ne docaka.</span></p>
+              <p><strong data-en="Loads in steps" data-slo="Nalaganje po korakih">Nalaganje po korakih</strong> <span data-en="means the page shows up immediately and the 3D arrives right after. The visitor never stares at an empty screen." data-slo="pomeni, da se stran pokaze takoj, 3D pa se dolozi zatem. Obiskovalec ne gleda praznega zaslona.">pomeni, da se stran pokaze takoj, 3D pa se dolozi zatem. Obiskovalec ne gleda praznega zaslona.</span></p>
+              <p><strong data-en="Simpler version on phones" data-slo="Enostavnejsa razlicica na telefonu">Enostavnejsa razlicica na telefonu</strong> <span data-en="means an older phone gets a lighter scene instead of a stuttering one. Nobody leaves because the page will not run." data-slo="pomeni, da starejsi telefon dobi lazjo sceno namesto zatikanja. Nihce ne odide zato, ker mu stran ne tece.">pomeni, da starejsi telefon dobi lazjo sceno namesto zatikanja. Nihce ne odide zato, ker mu stran ne tece.</span></p>
+            </div>
+           </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ZA KOGA -->
+    <section class="services">
+      <div class="container">
+
+        <p class="section-eyebrow razkrij" data-en="Where it pays off" data-slo="Kje se splaca">Kje se splaca</p>
+        <h2 class="section-title razkrij" data-zamik="1" data-en="Not for <span class='accent'>everyone</span>" data-slo="Ni za <span class='accent'>vsakogar</span>">Ni za <span class='accent'>vsakogar</span></h2>
+        <div class="title-divider razkrij" data-zamik="2">
+          <span class="divider-line"></span>
+          <span class="divider-dot"></span>
+          <span class="divider-line"></span>
+        </div>
+
+        <div class="primeri">
+          <div class="primer razkrij" data-zamik="1">
+            <span class="primer-st">01</span>
+            <h3 data-en="Products with variants" data-slo="Izdelki z razlicicami">Izdelki z razlicicami</h3>
+            <p data-en="Furniture, machines, equipment. One model replaces a photo shoot for every colour and size." data-slo="Pohistvo, stroji, oprema. En model nadomesti fotografiranje vsake barve in velikosti.">Pohistvo, stroji, oprema. En model nadomesti fotografiranje vsake barve in velikosti.</p>
+          </div>
+          <div class="primer razkrij" data-zamik="2">
+            <span class="primer-st">02</span>
+            <h3 data-en="Space you cannot visit yet" data-slo="Prostor, ki ga se ni">Prostor, ki ga se ni</h3>
+            <p data-en="Flats, showrooms, interiors. People walk through before the first wall goes up." data-slo="Stanovanja, saloni, interierji. Ljudje se sprehodijo, preden zraste prva stena.">Stanovanja, saloni, interierji. Ljudje se sprehodijo, preden zraste prva stena.</p>
+          </div>
+          <div class="primer razkrij" data-zamik="3">
+            <span class="primer-st">03</span>
+            <h3 data-en="Something hard to explain" data-slo="Nekaj, kar je tezko razloziti">Nekaj, kar je tezko razloziti</h3>
+            <p data-en="A process, a machine, a technology. What takes three paragraphs takes one turn of the model." data-slo="Postopek, stroj, tehnologija. Kar zahteva tri odstavke, pojasni en obrat modela.">Postopek, stroj, tehnologija. Kar zahteva tri odstavke, pojasni en obrat modela.</p>
+          </div>
+        </div>
+
+        <p class="opomba razkrij" data-zamik="4" data-en="If you sell a service without a physical product, an ordinary fast website will do more for you. I will say so." data-slo="Ce prodajate storitev brez fizicnega izdelka, vam bo navadna hitra stran koristila bolj. To vam bom tudi povedal.">Ce prodajate storitev brez fizicnega izdelka, vam bo navadna hitra stran koristila bolj. To vam bom tudi povedal.</p>
+
+      </div>
+    </section>
+
+    <!-- CENA -->
+    <section class="services" id="cena">
+      <div class="container">
+
+        <p class="section-eyebrow razkrij" data-en="Price" data-slo="Cena">Cena</p>
+        <h2 class="section-title razkrij" data-zamik="1" data-en="Price of a <span class='accent'>3D website</span>" data-slo="Cena <span class='accent'>3D spletne strani</span>">Cena <span class='accent'>3D spletne strani</span></h2>
+        <div class="title-divider razkrij" data-zamik="2">
+          <span class="divider-line"></span>
+          <span class="divider-dot"></span>
+          <span class="divider-line"></span>
+        </div>
+
+        <div class="services-grid">
+
+          <div class="service-card usluga-card paket razkrij" data-zamik="1">
+            <span class="service-bar"></span>
+            <span class="service-mark mark-1">1</span>
+            <p class="paket-ime" data-en="3D element" data-slo="3D element">3D element</p>
+            <p class="paket-cena">od 2.000 &euro;</p>
+            <ul class="service-checklist">
+              <li data-en="One 3D model on the page" data-slo="En 3D model na strani">En 3D model na strani</li>
+              <li data-en="Turning and zooming" data-slo="Vrtenje in priblizevanje">Vrtenje in priblizevanje</li>
+              <li data-en="Works on phone and computer" data-slo="Deluje na telefonu in racunalniku">Deluje na telefonu in racunalniku</li>
+            </ul>
+          </div>
+
+          <div class="service-card usluga-card paket poudarjena razkrij" data-zamik="2">
+            <span class="service-bar"></span>
+            <span class="service-mark mark-1">2</span>
+            <p class="paket-znacka" data-en="Most chosen" data-slo="Najpogosteje izbrano">Najpogosteje izbrano</p>
+            <p class="paket-ime" data-en="Interactive website" data-slo="Interaktivna stran">Interaktivna stran</p>
+            <p class="paket-cena">2.500 &ndash; 4.000 &euro;</p>
+            <ul class="service-checklist">
+              <li data-en="3D through the whole site" data-slo="3D skozi celotno stran">3D skozi celotno stran</li>
+              <li data-en="Colours and versions to choose" data-slo="Izbira barv in razlicic">Izbira barv in razlicic</li>
+              <li data-en="Animation on scroll" data-slo="Animacija ob drsenju">Animacija ob drsenju</li>
+              <li data-en="Full Google setup" data-slo="Polna nastavitev za Google">Polna nastavitev za Google</li>
+            </ul>
+          </div>
+
+          <div class="service-card usluga-card paket razkrij" data-zamik="3">
+            <span class="service-bar"></span>
+            <span class="service-mark mark-1">3</span>
+            <p class="paket-ime" data-en="Custom" data-slo="Po meri">Po meri</p>
+            <p class="paket-cena" data-en="by agreement" data-slo="po dogovoru">po dogovoru</p>
+            <ul class="service-checklist">
+              <li data-en="Configurator or shop" data-slo="Konfigurator ali trgovina">Konfigurator ali trgovina</li>
+              <li data-en="Walk through a space" data-slo="Sprehod skozi prostor">Sprehod skozi prostor</li>
+              <li data-en="Modelling from your drawings" data-slo="Modeliranje po vasih nacrtih">Modeliranje po vasih nacrtih</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="storitev-konec">
+      <div class="container">
+        <h2 class="section-title razkrij" data-en="Something worth showing in 3D?" data-slo="Imate kaj, kar bi bilo vredno pokazati v 3D?">Imate kaj, kar bi bilo vredno pokazati v 3D?</h2>
+        <p class="hero-subtitle razkrij" data-zamik="1" data-en="Tell me what you sell and I will say whether 3D pays off." data-slo="Povejte mi, kaj prodajate, in vam povem, ali se 3D splaca.">Povejte mi, kaj prodajate, in vam povem, ali se 3D splaca.</p>
+        <div class="hero-buttons razkrij" data-zamik="2">
+          <a href="index.html#contact" class="btn btn-primary" data-en="Start a conversation" data-slo="Zacnimo pogovor">Zacnimo pogovor</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top container">
+      <a href="index.html" data-en="Home" data-slo="Domov">Domov</a>
+      <a href="index.html#about" data-en="About" data-slo="O nas">O nas</a>
+      <a href="index.html#services" data-en="Services" data-slo="Storitve">Storitve</a>
+      <a href="index.html#projects" data-en="Projects" data-slo="Projekti">Projekti</a>
+      <a href="index.html#process" data-en="Process" data-slo="Proces">Proces</a>
+      <a href="index.html#contact" data-en="Contact" data-slo="Kontakt">Kontakt</a>
+    </div>
+
+    <div class="footer-bottom container">
+      <span class="footer-brand">
+        <img src="assets/images/logo-nav.webp" alt="" width="420" height="96">
+        Kaden Digital
+      </span>
+      <a class="footer-link" href="zasebnost.html" data-en="Privacy" data-slo="Zasebnost">Zasebnost</a>
+      <span class="footer-geo" data-en="Ljubljana, SI" data-slo="Ljubljana, SI">Ljubljana, SI</span>
+      <span class="footer-copy" data-en="&copy; 2026 Kaden Digital &middot; All rights reserved" data-slo="&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane">&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

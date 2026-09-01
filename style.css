@@ -19,6 +19,25 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Debela razlicica — brez nje brskalnik krepko pisavo le ponaredi. */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/jetbrains-mono-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/jetbrains-mono-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 
 @font-face {
   font-family: 'Plus Jakarta Sans';
@@ -557,6 +576,19 @@ body {
   text-align: left;
 }
 
+/* Kadar so kartice stiri (domaca stran), gredo v stiri stolpce.
+   Podstrani s tremi karticami ostanejo tri. */
+.services-grid:has(> :nth-child(4)) {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Na srednjih zaslonih so stiri kartice pretesne, zato dve po dve. */
+@media (max-width: 1400px) {
+  .services-grid:has(> :nth-child(4)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .service-card {
   position: relative;
   overflow: hidden;
@@ -843,20 +875,78 @@ body {
   }
 }
 .uvod-slika {
+  position: relative;
+  /* Identitete, da premik za misko ne ustvari novega konteksta zlaganja.
+     Premik gre skozi translate/rotate, dvig ob hoverju skozi transform —
+     tako se ne tepeta. */
+  translate: 0;
+  rotate: 0deg;
   transition:
     transform 0.32s cubic-bezier(0.23, 1, 0.32, 1),
-    filter 0.32s ease;
-  filter: drop-shadow(0 26px 34px rgba(45, 58, 34, 0.45));
+    translate 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    rotate 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+/* Senca je na sami sliki, ne na skatli, da ne pade tudi na elipso pod njo. */
+.uvod-slika img {
+  filter: drop-shadow(0 26px 34px rgba(45, 58, 34, 0.45));
+  transition: filter 0.32s ease;
+}
+
+/* Okvir se skrci na samo sliko, da se senca meri po napravi in ne po
+   siroki skatli. Brez tega je senca pod telefonom precej sirsa od njega. */
+.uvod-okvir {
+  position: relative;
+  display: block;
+  margin-inline: auto;
+}
+
+/* Telefon je omejen po visini, zato se okvir skrci nanj.
+   Prenosnik in monitor polnita sirino, pri njiju okvir ostane cez celo sirino
+   — ce bi mu tu dali fit-content, bi se sirina vrtela v krogu in padla na nic. */
+.uvod-slika-pokoncna .uvod-okvir {
+  width: fit-content;
+}
+
+/* MASLINASTA SENCA POD NAPRAVO — ista kot na domaci strani.
+   Lezi nizje od naprave, z vidno rezo, da naprava lebdi. */
+.uvod-senca {
+  position: absolute;
+  left: 50%;
+  width: 60%;
+  height: 7%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(66, 90, 38, 0.74) 0%,
+    rgba(88, 114, 56, 0.52) 30%,
+    rgba(107, 133, 71, 0.2) 52%,
+    rgba(107, 133, 71, 0) 74%);
+  filter: blur(7px);
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.32s ease;
+}
+
+/* Vsak render ima svoj prazen rob pod napravo — izmerjeno iz alfa kanala:
+   telefon konca na 96.8 %, prenosnik 97.1 %, terminal 91.9 % visine slike.
+   Splosno pravilo je prvo, razlicice ga potem popravijo. */
+.uvod-slika .uvod-senca          { bottom: -12.5%; width: 66%; }
+.uvod-slika-pokoncna .uvod-senca { bottom: -12.5%; width: 54%; }
+.uvod-slika-ravna .uvod-senca    { bottom: -7.5%;  width: 62%; }
 
 /* Miska nad sliko: rahlo se dvigne, senca se poglobi, lebdenje se ustavi. */
 @media (hover: hover) and (pointer: fine) {
   .uvod-slika:hover {
     transform: translateY(-6px);
-    filter: drop-shadow(0 38px 48px rgba(45, 58, 34, 0.55));
   }
   .uvod-slika:hover img {
     animation-play-state: paused;
+    filter: drop-shadow(0 38px 48px rgba(45, 58, 34, 0.55));
+  }
+  /* Ko se naprava dvigne, senca zbledi — kot v resnici.
+     Premik sence vodi skripta, zato tu ne diramo transform. */
+  .uvod-slika:hover .uvod-senca {
+    opacity: 0.72;
   }
 }
 
@@ -949,54 +1039,46 @@ body {
   margin: 4px 0 var(--space-sm);
 }
 
-/* SKLAD NAPRAV — tri storitve v globini. */
+/* SKLAD NAPRAV — trije renderi na treh globinah v skupnem prostoru. */
 .hero-stack {
+  /* container-type: size da napravam mero glede na visino prostora,
+     tako da nikoli ne uidejo iz kompozicije. */
+  container-type: size;
   position: relative;
   height: clamp(430px, 38vw, 760px);
-  perspective: 820px;
-  perspective-origin: 62% 45%;
+  perspective: 1500px;
+  perspective-origin: 56% 44%;
 }
 
-/* Brez sence bi naprave lebdele v nicemer. */
-.hero-senca {
+/* Difuzen krog svetlobe, ki napravam da okolje. */
+.hero-luc {
   position: absolute;
-  left: 68%;
-  bottom: 12%;
-  width: clamp(240px, 20vw, 440px);
-  height: clamp(16px, 1.4vw, 30px);
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background-color: rgba(58, 74, 44, 0.22);
-  filter: blur(9px);
+  inset: 4% 0 8% 12%;
+  background:
+    radial-gradient(ellipse 42% 40% at 54% 44%, rgba(147, 173, 108, 0.3), transparent 70%),
+    radial-gradient(ellipse 70% 60% at 56% 56%, rgba(255, 255, 255, 0.72), transparent 74%);
+  filter: blur(8px);
+  pointer-events: none;
 }
 
-/* Meglica cez naprave v ozadju - namesto prosojnosti, ki bi razkrila spodnjo. */
-.hero-dev::after {
-  content: "";
+/* Komaj vidne tehnicne linije — opazis jih sele, ce jih iscés. */
+.hero-linije {
   position: absolute;
   inset: 0;
-  border-radius: clamp(10px, 1vw, 26px);
-  background-color: var(--color-bg);
-  opacity: var(--megla, 0);
-  transform: translateZ(2px);
+  opacity: 0.5;
+  background:
+    repeating-linear-gradient(to right, rgba(107, 133, 71, 0.09) 0 1px, transparent 1px 58px),
+    repeating-linear-gradient(to bottom, rgba(107, 133, 71, 0.07) 0 1px, transparent 1px 58px);
+  -webkit-mask-image: radial-gradient(ellipse 60% 56% at 58% 46%, #000 20%, transparent 72%);
+  mask-image: radial-gradient(ellipse 60% 56% at 58% 46%, #000 20%, transparent 72%);
   pointer-events: none;
-  transition: opacity 0.55s ease;
 }
 
-/* Na ozjih zaslonih naprave pomaknemo levo, da terminal ne uide cez rob. */
-@media (max-width: 1200px) {
-  .hero-stack .hero-dev {
-    left: 64%;
-  }
-  .hero-stack .naprava-terminal {
-    width: clamp(300px, 30vw, 420px);
-  }
-}
-
+/* Aktivna naprava stoji na sredini prostora, drugi dve za njo levo in desno. */
 .hero-dev {
   position: absolute;
-  left: 68%;
-  top: 42%;
+  left: 50%;
+  top: 44%;
   transform-style: preserve-3d;
   transition:
     transform 0.55s cubic-bezier(0.23, 1, 0.32, 1),
@@ -1004,184 +1086,74 @@ body {
     filter 0.55s ease;
 }
 
-/* TELEFON — ohisje je risano, zaslon je prava slika. */
-.naprava-telefon {
-  position: relative;
-  width: clamp(190px, 16.6vw, 380px);
-  padding: clamp(4px, 0.35vw, 8px);
-  border-radius: clamp(22px, 1.9vw, 42px);
-  background: linear-gradient(150deg, #4A5462 0%, #232A36 38%, #161B24 100%);
-  box-shadow:
-    0 34px 60px rgba(28, 38, 22, 0.34),
-    0 3px 8px rgba(28, 38, 22, 0.2);
-}
-
-/* Svetel rob zgoraj in temen spodaj - tako kovina lovi svetlobo. */
-.naprava-telefon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.28),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-  z-index: 3;
-}
-
-.naprava-telefon img {
+/* Renderi imajo prozorno ozadje, zato jih merimo po visini prostora. */
+.hero-dev img {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
-  border-radius: clamp(18px, 1.6vw, 36px);
 }
+.dev-term img { height: 62cqh; }
+.dev-lap  img { height: 60cqh; }
+.dev-tel  img { height: 78cqh; }
 
-/* Bocna stranica - brez nje je telefon le nagnjena slika. */
-.naprava-telefon::after {
-  content: "";
+/* TLA — siroka maslinasta luza pod celo skupino naprav. Se ne premika
+   z vrtiljakom, naprave hodijo cez njo. Rahlo zamaknjena v levo. */
+.hero-tla {
   position: absolute;
-  top: 4%;
-  bottom: 4%;
-  right: 0;
-  width: clamp(9px, 0.75vw, 16px);
-  border-radius: 0 4px 4px 0;
-  background: linear-gradient(90deg, #39424F 0%, #1A2029 60%, #0D1117 100%);
-  transform: rotateY(90deg);
-  transform-origin: right center;
-}
-
-.tel-zareza {
-  position: absolute;
-  top: clamp(6px, 0.5vw, 12px);
-  left: 50%;
+  left: 46%;
+  bottom: 12%;
+  width: 88%;
+  height: 9%;
   transform: translateX(-50%);
-  width: clamp(44px, 3.6vw, 82px);
-  height: clamp(11px, 0.9vw, 20px);
-  border-radius: 999px;
-  background-color: #05080E;
-  z-index: 2;
-}
-
-.tel-tipka {
-  position: absolute;
-  right: -2px;
-  width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(#5A6472, #2B323E);
-}
-
-.tel-t1 {
-  top: 24%;
-  height: 11%;
-}
-
-.tel-t2 {
-  top: 38%;
-  height: 6%;
-}
-
-/* LAPTOP — baza je zavrtena in bezi v globino. */
-.naprava-laptop {
-  position: relative;
-  transform-style: preserve-3d;
-}
-
-.lap-zaslon {
-  width: clamp(395px, 32.5vw, 735px);
-  padding: clamp(6px, 0.5vw, 11px) clamp(6px, 0.5vw, 11px) clamp(8px, 0.7vw, 15px);
-  border-radius: clamp(9px, 0.8vw, 16px) clamp(9px, 0.8vw, 16px) 3px 3px;
-  background: linear-gradient(150deg, #4A5462, #1B2029);
-  box-shadow: 0 30px 54px rgba(28, 38, 22, 0.3);
-}
-
-.lap-zaslon img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.lap-baza {
-  display: block;
-  width: 116%;
-  height: clamp(8px, 0.7vw, 14px);
-  margin-left: -8%;
-  background: linear-gradient(#D2D6DC, #8E949E);
-  border-radius: 0 0 clamp(8px, 0.7vw, 14px) clamp(8px, 0.7vw, 14px);
-  transform: rotateX(76deg);
-  transform-origin: top center;
-  box-shadow: 0 8px 16px rgba(28, 38, 22, 0.24);
-}
-
-/* TERMINAL — risan v celoti, zato nic ne tehta. */
-.naprava-terminal {
-  width: clamp(398px, 32.5vw, 735px);
-  aspect-ratio: 1.72 / 1;
-  border-radius: clamp(9px, 0.8vw, 16px);
-  overflow: hidden;
-  background-color: #0B1017;
-  border: 1px solid #222B36;
-  box-shadow: 0 30px 54px rgba(28, 38, 22, 0.3);
-  font-family: var(--font-mono);
-}
-
-.naprava-terminal::after,
-.lap-zaslon::after {
-  content: "";
-  position: absolute;
-  top: 5%;
-  bottom: 5%;
-  right: 0;
-  width: clamp(10px, 0.85vw, 18px);
-  border-radius: 0 4px 4px 0;
-  background: linear-gradient(90deg, #39424F 0%, #1A2029 60%, #0D1117 100%);
-  transform: rotateY(90deg);
-  transform-origin: right center;
-}
-
-.naprava-terminal,
-.lap-zaslon {
-  position: relative;
-  transform-style: preserve-3d;
-}
-
-.term-vrstica {
-  height: clamp(18px, 1.5vw, 32px);
-  background: linear-gradient(#1B222C, #141A22);
-  border-bottom: 1px solid #222B36;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 0 clamp(7px, 0.6vw, 13px);
-}
-
-.term-vrstica i {
-  width: clamp(5px, 0.42vw, 9px);
-  height: clamp(5px, 0.42vw, 9px);
   border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(94, 120, 62, 0.22) 0%,
+    rgba(107, 133, 71, 0.12) 40%,
+    rgba(107, 133, 71, 0) 74%);
+  filter: blur(22px);
+  pointer-events: none;
 }
 
-.term-vrstica i:nth-child(1) { background-color: #E05A55; }
-.term-vrstica i:nth-child(2) { background-color: #E0B44F; }
-.term-vrstica i:nth-child(3) { background-color: #5FBF6B; }
-
-.term-vrstica span {
-  margin-left: 6px;
-  font-size: clamp(7px, 0.58vw, 12px);
-  color: #5C6A7A;
-  letter-spacing: 0.08em;
+/* SENCA NA TLEH — lezi NIZJE od naprave, z vidno rezo med njima.
+   Ravno ta reza naredi, da naprava lebdi. Elipsa je ozja od naprave
+   in ostreje omejena, ne razlita megla. */
+.dev-senca {
+  position: absolute;
+  left: 50%;
+  width: 60%;
+  height: 7%;
+  /* Brez lastnega odmika v globino: senca mora biti na isti dubini kot
+     naprava, sicer jo perspektiva projicira drugace in se reza med njima
+     med vrtenjem spreminja. */
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(66, 90, 38, 0.74) 0%,
+    rgba(88, 114, 56, 0.52) 30%,
+    rgba(107, 133, 71, 0.2) 52%,
+    rgba(107, 133, 71, 0) 74%);
+  filter: blur(7px);
+  pointer-events: none;
+  /* Ista krivulja kot pri napravi, da senca ne zaostaja za njo. */
+  transition:
+    opacity 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+    filter 0.55s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.term-besedilo {
-  padding: clamp(9px, 0.75vw, 16px) clamp(11px, 0.9vw, 20px);
-  font-size: clamp(8px, 0.66vw, 14px);
-  line-height: 1.85;
-  color: #93AABF;
-}
+/* Vsak render ima svoj prazen rob pod napravo — izmerjeno iz alfa kanala:
+   telefon konca na 96.8 %, prenosnik 97.1 %, terminal 91.9 % visine slike.
+   Senco postavimo priblizno 12 % nizje od tega roba. */
+.dev-tel  .dev-senca { bottom: -12.5%; width: 54%; }
+.dev-lap  .dev-senca { bottom: -12.5%; width: 66%; }
+.dev-term .dev-senca { bottom: -7.5%;  width: 62%; }
 
-.term-besedilo .tz { color: #6BD07A; }
-.term-besedilo .tr { color: #F2C94C; }
-.term-besedilo .tp { color: #5C6A7A; }
+/* Na ozjem prostoru naprave pomanjsamo, da se stranski dve se vidita
+   izza aktivne in je ne skrijeta. */
+@media (max-width: 1400px) {
+  .dev-term img { height: 54cqh; }
+  .dev-lap  img { height: 52cqh; }
+  .dev-tel  img { height: 68cqh; }
+}
 
 /* Napis pove, katero storitev gledas. */
 .hero-oznaka {
@@ -1222,6 +1194,17 @@ body {
   width: 16px;
   border-radius: 3px;
   background-color: var(--color-accent);
+}
+
+/* Aktivna pika rahlo utripa, da se oko ve, kje je. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-pike button.on {
+    animation: pika-utrip 2.6s ease-in-out infinite;
+  }
+  @keyframes pika-utrip {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(107, 133, 71, 0.45); }
+    50%      { box-shadow: 0 0 0 6px rgba(107, 133, 71, 0); }
+  }
 }
 
 .hero-pike button:focus-visible {
@@ -2656,6 +2639,140 @@ a.service-card {
   }
 }
 
+/* ================================================== */
+/* POJAVLJANJE OB DRSENJU IN GLOBINA OZADJA           */
+/* Brez JavaScripta — brskalnik sam vodi animacijo.   */
+/* ================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+
+    @keyframes razkrij-navzgor {
+      from {
+        opacity: 0;
+        translate: 0 56px;
+        scale: 0.94;
+        filter: blur(8px);
+      }
+      to {
+        opacity: 1;
+        translate: 0 0;
+        scale: 1;
+        filter: blur(0);
+      }
+    }
+
+    /* Element je oster, ze preden pride do sredine zaslona. */
+    .razkrij {
+      animation: razkrij-navzgor linear both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 55%;
+    }
+
+    /* Zamik: vsak naslednji element konca nekaj kasneje. */
+    .razkrij[data-zamik="1"] {
+      animation-range: entry 8% entry 62%;
+    }
+    .razkrij[data-zamik="2"] {
+      animation-range: entry 12% entry 69%;
+    }
+    .razkrij[data-zamik="3"] {
+      animation-range: entry 16% entry 76%;
+    }
+    .razkrij[data-zamik="4"] {
+      animation-range: entry 20% entry 83%;
+    }
+    .razkrij[data-zamik="5"] {
+      animation-range: entry 24% entry 90%;
+    }
+
+    /* Plasti ozadja se premikajo pocasneje od vsebine. */
+    @keyframes paralaksa {
+      to {
+        translate: 0 var(--pomik);
+      }
+    }
+
+    .space [data-globina] {
+      animation: paralaksa linear both;
+      animation-timeline: scroll(root block);
+    }
+    .space-grid-far {
+      --pomik: -70px;
+    }
+    .space-grid-near {
+      --pomik: -160px;
+    }
+    .space-haze {
+      --pomik: -40px;
+    }
+    .space-stars {
+      --pomik: -110px;
+    }
+  }
+}
+
+/* STEVILKE POD UVODOM */
+.stevilke {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+.stevilka {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stevilka strong {
+  font-family: var(--font-mono);
+  font-size: clamp(20px, 1.6vw, 32px);
+  font-weight: 500;
+  color: var(--color-accent);
+}
+.stevilka span {
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+/* PRIMERI UPORABE */
+.primeri {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  text-align: left;
+}
+.primer {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-sm);
+}
+.primer-st {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+}
+.primer h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 6px 0 8px;
+}
+.primer p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+.opomba {
+  margin-top: var(--space-lg);
+  padding-left: var(--space-sm);
+  border-left: 2px solid var(--color-accent);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  max-width: 68ch;
+}
+
 /* NOGA STRANI — dve vrstici, zgoraj povezave, spodaj podatki. */
 
 /* SKROL HERO — animacija tece z drsenjem, naslovi se menjajo. */
@@ -3261,4 +3378,659 @@ a.service-card {
   .project-card.vidna:hover {
     transform: translateY(0) rotateY(var(--zasuk)) scale(1);
   }
+}
+
+/* ------------------------------------------------------------
+   2. HERO — besedilo levo, 3D scena desno
+   ------------------------------------------------------------ */
+.storitev-uvod { padding: var(--space-lg) 0 var(--space-xl); }
+
+.uvod-mreza-3d {
+  display: grid;
+  grid-template-columns: 1.02fr .98fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+@media (max-width: 1000px) {
+  .uvod-mreza-3d { grid-template-columns: 1fr; }
+  .scena3d { display: none; }
+}
+
+/* Naslov na podstraneh je enako velik kot na domaci strani. */
+.storitev-uvod .hero-title,
+.storitev-uvod .naslov-ozji {
+  font-size: clamp(28px, 3.7vw, 95px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -.035em;
+  margin: var(--space-sm) 0 var(--space-sm);
+}
+.storitev-uvod .hero-title .accent,
+.storitev-uvod .naslov-ozji .accent {
+  background: linear-gradient(118deg, var(--color-accent), var(--color-accent-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.storitev-uvod .hero-subtitle {
+  font-size: clamp(17px, 1.2vw, 23px);
+  line-height: 1.62;
+  max-width: 54ch;
+  color: var(--color-text-muted);
+}
+.storitev-uvod .badge {
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(107,133,71,.28);
+  backdrop-filter: blur(8px);
+  padding: 9px 17px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px -12px rgba(58,74,44,.7);
+}
+.storitev-uvod .badge-dot { box-shadow: 0 0 0 4px rgba(107,133,71,.18); }
+.storitev-uvod .badge span:last-child { font-size: 13.5px; letter-spacing: .01em; }
+
+.stevilke {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(26px, 3.2vw, 68px);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+.stevilka strong {
+  display: block;
+  font-size: clamp(26px, 2.3vw, 44px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+.stevilka span {
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+/* ------------------------------------------------------------
+   3. 3D SCENA DESNO — steklo, kocka, lebdece plocice
+   ------------------------------------------------------------ */
+.scena3d {
+  position: relative;
+  perspective: 1500px;
+  perspective-origin: 58% 42%;
+}
+.scena3d-notranjost {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 11deg)) rotateY(var(--ry, -15deg));
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+  animation: scena-lebdi 7s ease-in-out infinite;
+}
+@keyframes scena-lebdi { 0%,100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+
+.okno3d {
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(160deg, rgba(255,255,255,.95), rgba(247,245,239,.82));
+  border: 1px solid rgba(255,255,255,.85);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.9) inset,
+    44px 64px 96px -54px rgba(26,35,50,.7),
+    0 0 0 1px rgba(107,133,71,.1);
+}
+.okno3d-vrh {
+  display: flex; align-items: center; gap: 7px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255,255,255,.62);
+}
+.okno3d-pika { width: 10px; height: 10px; border-radius: 50%; background: var(--color-border); }
+.okno3d-pika:nth-child(1) { background: #E2A0A0; }
+.okno3d-pika:nth-child(2) { background: #E5CC96; }
+.okno3d-pika:nth-child(3) { background: var(--color-accent-light); }
+.okno3d-url {
+  margin-left: 10px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+}
+.okno3d-oder {
+  height: clamp(260px, 24vw, 400px);
+  display: grid;
+  place-items: center;
+  perspective: 900px;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(147,173,108,.14), transparent 70%),
+    repeating-linear-gradient(to right, rgba(107,133,71,.09) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(to bottom, rgba(107,133,71,.09) 0 1px, transparent 1px 34px);
+}
+
+.kocka {
+  --k: clamp(90px, 9vw, 150px);
+  position: relative;
+  width: var(--k); height: var(--k);
+  transform-style: preserve-3d;
+  animation: kocka-vrti 18s linear infinite;
+}
+@keyframes kocka-vrti {
+  from { transform: rotateX(-22deg) rotateY(0deg); }
+  to   { transform: rotateX(-22deg) rotateY(360deg); }
+}
+.kocka-stran {
+  position: absolute; inset: 0;
+  border: 1.5px solid rgba(107,133,71,.55);
+  background: linear-gradient(150deg, rgba(147,173,108,.16), rgba(255,255,255,.04));
+  box-shadow: 0 0 24px -10px rgba(107,133,71,.6) inset;
+}
+.kocka-stran:nth-child(1) { transform: translateZ(calc(var(--k) / 2)); }
+.kocka-stran:nth-child(2) { transform: rotateY(180deg) translateZ(calc(var(--k) / 2)); }
+.kocka-stran:nth-child(3) { transform: rotateY(90deg)  translateZ(calc(var(--k) / 2)); }
+.kocka-stran:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--k) / 2)); }
+.kocka-stran:nth-child(5) { transform: rotateX(90deg)  translateZ(calc(var(--k) / 2)); }
+.kocka-stran:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--k) / 2)); }
+.kocka-senca {
+  position: absolute;
+  left: 50%; bottom: -14%;
+  width: 120%; height: 16px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(58,74,44,.25);
+  filter: blur(10px);
+}
+
+.okno3d-noga {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  background: rgba(255,255,255,.5);
+}
+.okno3d-noga em { font-style: normal; color: var(--color-accent); }
+
+/* Maslinasta senca pod oknom — ista kot pod napravami na domaci strani. */
+.okno3d-senca {
+  position: absolute;
+  left: 50%;
+  bottom: -9%;
+  width: 62%;
+  height: 8%;
+  transform: translateX(-50%) translateZ(-40px);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(66, 90, 38, 0.7) 0%,
+    rgba(88, 114, 56, 0.48) 30%,
+    rgba(107, 133, 71, 0.18) 52%,
+    rgba(107, 133, 71, 0) 74%);
+  filter: blur(9px);
+  pointer-events: none;
+}
+
+.plocica {
+  position: absolute;
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 17px;
+  border-radius: 15px;
+  white-space: nowrap;
+  font-size: 13px; font-weight: 600;
+  background: linear-gradient(160deg, rgba(255,255,255,.9), rgba(255,255,255,.62));
+  border: 1px solid rgba(255,255,255,.8);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.9) inset,
+    0 20px 44px -24px rgba(26,35,50,.55);
+}
+.plocica small { display: block; font-weight: 500; font-size: 11px; color: var(--color-text-muted); }
+.plocica-znak {
+  width: 34px; height: 34px; border-radius: 10px;
+  display: grid; place-items: center;
+  background: linear-gradient(140deg, var(--color-accent-light), var(--color-accent));
+  color: #fff; font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+}
+.plocica-1 { top: -24px; left: -36px;  transform: translateZ(90px);  animation: scena-lebdi 5.5s ease-in-out infinite; }
+.plocica-2 { bottom: -26px; right: -22px; transform: translateZ(120px); animation: scena-lebdi 6.5s ease-in-out .8s infinite; }
+.plocica-3 { top: 46%; right: -54px;   transform: translateZ(160px); animation: scena-lebdi 6s ease-in-out .4s infinite; }
+@media (max-width: 1240px) { .plocica-3 { display: none; } }
+
+/* ------------------------------------------------------------
+   4. GUMBI — okrugli, premium
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition:
+    transform .3s cubic-bezier(.2,.8,.2,1),
+    box-shadow .3s cubic-bezier(.2,.8,.2,1),
+    background .3s ease;
+}
+.btn-primary {
+  background: linear-gradient(140deg, var(--color-accent-light), var(--color-accent));
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.35) inset,
+    0 14px 28px -14px rgba(107,133,71,.9);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.45) inset,
+    0 24px 40px -16px rgba(107,133,71,.95);
+}
+.btn-secondary {
+  background: rgba(255,255,255,.62);
+  border-color: var(--color-border);
+  color: var(--color-text);
+  backdrop-filter: blur(8px);
+}
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,.95);
+  border-color: var(--color-accent-light);
+  box-shadow: 0 18px 34px -20px rgba(26,35,50,.55);
+}
+.hero-buttons .btn {
+  font-size: clamp(16px, 1.05vw, 21px);
+  padding: clamp(14px, 1vw, 20px) clamp(30px, 2.1vw, 44px);
+  border-radius: 999px;
+}
+.nav-cta { border-radius: 999px; }
+
+/* ------------------------------------------------------------
+   5. KARTICE — 3D nagib pod misem + gletki lesk
+   ------------------------------------------------------------ */
+.service-card {
+  transform-style: preserve-3d;
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    box-shadow .45s cubic-bezier(.2,.8,.2,1),
+    border-color .45s ease;
+}
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease;
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,.9), transparent 62%);
+}
+.service-card:hover::after { opacity: 1; }
+.service-card.nagnjena {
+  box-shadow:
+    0 46px 78px -40px rgba(58,74,44,.42),
+    0 6px 16px -8px rgba(58,74,44,.14);
+  border-color: var(--color-accent-light);
+}
+.usluga-card.poudarjena::after {
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,.34), transparent 62%);
+}
+.service-icon {
+  box-shadow: 0 14px 26px -14px rgba(107,133,71,.9);
+  transition: transform .45s cubic-bezier(.2,.8,.2,1);
+}
+.service-card:hover .service-icon { transform: translateY(-3px) scale(1.06); }
+
+/* ------------------------------------------------------------
+   6. "KJE SE SPLACA"
+   ------------------------------------------------------------ */
+.primeri {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  text-align: left;
+}
+@media (max-width: 900px) { .primeri { grid-template-columns: 1fr; } }
+
+.primer {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 2.1vw, 48px) clamp(26px, 1.9vw, 44px);
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(255,255,255,.88), rgba(255,255,255,.58));
+  border: 1px solid rgba(255,255,255,.78);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.9) inset,
+    0 24px 48px -30px rgba(58,74,44,.45);
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    box-shadow .45s cubic-bezier(.2,.8,.2,1);
+}
+.primer::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--color-accent-light), transparent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.primer:hover::before { transform: scaleY(1); }
+.primer:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.9) inset,
+    0 42px 70px -38px rgba(58,74,44,.5);
+}
+.primer-st {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(30px, 2.6vw, 48px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: .28;
+  margin-bottom: var(--space-sm);
+  transition: opacity .45s ease;
+}
+.primer:hover .primer-st { opacity: .55; }
+.primer h3 {
+  font-size: clamp(18px, 1.3vw, 25px);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+.primer p {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.62;
+  color: var(--color-text-muted);
+}
+
+.opomba {
+  position: relative;
+  max-width: 74ch;
+  margin: var(--space-lg) auto 0;
+  padding: clamp(20px, 1.6vw, 30px) clamp(24px, 2vw, 38px);
+  border-radius: 16px;
+  border: 1px dashed rgba(107,133,71,.42);
+  background: rgba(255,255,255,.5);
+  backdrop-filter: blur(8px);
+  font-size: 15.5px;
+  line-height: 1.62;
+  color: var(--color-text-muted);
+  text-align: left;
+}
+.opomba::before {
+  content: "!";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-weight: 700; font-size: 13px;
+  color: #fff;
+  background: linear-gradient(140deg, var(--color-accent-light), var(--color-accent));
+  box-shadow: 0 8px 16px -8px rgba(107,133,71,.9);
+}
+
+/* ------------------------------------------------------------
+   7. PAKETI
+   ------------------------------------------------------------ */
+.paket-cena {
+  font-size: clamp(28px, 2.2vw, 48px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+}
+.paket-ime {
+  font-size: 15px;
+  letter-spacing: .01em;
+  color: var(--color-text-muted);
+}
+.usluga-card.poudarjena .paket-ime { color: rgba(255,255,255,.82); }
+.usluga-card.poudarjena {
+  box-shadow:
+    0 34px 62px -30px rgba(58,74,44,.55),
+    0 4px 12px -6px rgba(58,74,44,.2);
+}
+.paket-znacka {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.32);
+}
+
+/* ------------------------------------------------------------
+   8. NASLOVI SEKCIJ
+   ------------------------------------------------------------ */
+.section-title { font-weight: 700; letter-spacing: -.035em; line-height: 1.06; }
+.section-title .accent {
+  background: linear-gradient(118deg, var(--color-accent), var(--color-accent-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ------------------------------------------------------------
+   9. HERO S TERMINALOM — pisanje, big bang, sestavljanje
+   ------------------------------------------------------------ */
+.hero3d { padding: 0; }
+
+.hero3d-tir {
+  position: relative;
+  height: 340vh;
+}
+.hero3d-lepilo {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero3d-lepilo > .container { width: 100%; }
+
+.okno3d { transform-origin: 50% 50%; }
+.okno3d-oder { position: relative; }
+
+/* terminal, ki se izpisuje ob drsenju */
+.term {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: clamp(16px, 1.4vw, 28px);
+  font-family: var(--font-mono);
+  font-size: clamp(11px, .82vw, 15px);
+  line-height: 1.9;
+  color: var(--color-text);
+  text-align: left;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+.term::after {
+  content: "\258B";
+  color: var(--color-accent);
+  animation: term-utrip 1s steps(1) infinite;
+}
+.term.koncan::after { content: none; }
+@keyframes term-utrip { 50% { opacity: 0; } }
+
+/* delci — big bang, razleti se cez cel zaslon */
+.delci {
+  position: absolute;
+  inset: -160%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  opacity: 0;
+}
+.delec {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-accent);
+  text-shadow: 0 0 16px rgba(107, 133, 71, .45);
+  will-change: transform;
+}
+
+/* plocice se pokazejo sele, ko je scena sestavljena */
+.plocica { opacity: 0; transition: opacity .6s ease; }
+.scena3d-notranjost.koncano .plocica { opacity: 1; }
+
+@media (max-width: 1000px) {
+  .hero3d-tir { height: auto; }
+  .hero3d-lepilo {
+    position: static;
+    height: auto;
+    padding: var(--space-lg) 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero3d-tir { height: auto; }
+  .hero3d-lepilo { position: static; height: auto; }
+  .scena3d-notranjost, .kocka, .plocica { animation: none; }
+}
+
+/* ------------------------------------------------------------
+   10. HERO — pojavljanje ob nalaganju (ne ob drsenju,
+       ker je hero med drsenjem prilepljen na zaslon)
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  .hero3d .razkrij {
+    animation: hero-vstop .9s cubic-bezier(.2,.8,.2,1) both;
+    animation-timeline: auto;
+    animation-range: normal;
+  }
+  .hero3d .razkrij[data-zamik="1"] { animation-delay: .08s; }
+  .hero3d .razkrij[data-zamik="2"] { animation-delay: .16s; }
+  .hero3d .razkrij[data-zamik="3"] { animation-delay: .24s; }
+  .hero3d .razkrij[data-zamik="4"] { animation-delay: .32s; }
+  .hero3d .razkrij[data-zamik="5"] { animation-delay: .40s; }
+
+  @keyframes hero-vstop {
+    from {
+      opacity: 0;
+      translate: 0 34px;
+      filter: blur(6px);
+    }
+  }
+}
+
+/* ------------------------------------------------------------
+   11. HOME — pojavljanje ob drsenju za vse razdelke pod Hero.
+       Hero se ne dotika, ker ima svojo animacijo.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+
+    .about-content > .section-eyebrow,
+    .about-content > .section-title,
+    .about-content > .title-divider,
+    .about-grid > *,
+    .skills > .section-eyebrow,
+    .skills .skill-panel,
+    .services-content > .section-eyebrow,
+    .services-content > .section-title,
+    .services-content > .title-divider,
+    .services-grid > .service-card,
+    .projects-content > .section-eyebrow,
+    .projects-content > .section-title,
+    .projects-content > .title-divider,
+    .process-content > .section-eyebrow,
+    .process-content > .section-title,
+    .process-content > .section-subtitle,
+    .why-work-card,
+    .contact-content > .section-eyebrow,
+    .contact-content > .section-title,
+    .contact-content > .title-divider,
+    .contact-content > .section-subtitle,
+    .contact-grid > * {
+      animation: razkrij-navzgor linear both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 58%;
+    }
+
+    /* Zamik — druga in tretja kartica prideta malo za prvo. */
+    .about-grid > *:nth-child(2),
+    .skills .skill-panel:nth-of-type(2),
+    .services-grid > .service-card:nth-child(2),
+    .why-work-cards > .why-card:nth-child(2),
+    .contact-grid > *:nth-child(2) {
+      animation-range: entry 10% entry 70%;
+    }
+
+    .skills .skill-panel:nth-of-type(3),
+    .services-grid > .service-card:nth-child(3),
+    .why-work-cards > .why-card:nth-child(3) {
+      animation-range: entry 16% entry 82%;
+    }
+
+    .services-grid > .service-card:nth-child(4),
+    .why-work-cards > .why-card:nth-child(4) {
+      animation-range: entry 22% entry 94%;
+    }
+  }
+}
+
+/* ------------------------------------------------------------
+   12. 3D NAGIB IN LESK NA OSTALIH KARTICAH
+       Izgled ostaja isti — dodan je samo ucinek.
+   ------------------------------------------------------------ */
+.project-card,
+.skill-panel,
+.why-card {
+  transform-style: preserve-3d;
+}
+
+/* .why-card doslej ni imela svoje tocke naslona za lesk. */
+.why-card {
+  position: relative;
+}
+
+.skill-panel {
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    box-shadow .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.project-card::after,
+.skill-panel::after,
+.why-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease;
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, .9), transparent 62%);
+}
+
+/* Na zelenih ploscah in temni podlagi je lesk blazji. */
+.skill-panel-accent::after,
+.why-card::after {
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, .3), transparent 62%);
+}
+
+.project-card:hover::after,
+.skill-panel:hover::after,
+.why-card:hover::after {
+  opacity: 1;
+}
+
+.project-card.nagnjena,
+.skill-panel.nagnjena {
+  box-shadow:
+    0 46px 78px -40px rgba(58, 74, 44, .42),
+    0 6px 16px -8px rgba(58, 74, 44, .14);
 }

@@ -56,6 +56,7 @@
   <link rel="preload" href="assets/fonts/plus-jakarta-sans-500-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Prva slika v Hero sekciji - brskalnik jo zacne nalagati takoj. -->
+  <link rel="preload" href="assets/images/hero-1-app.webp" as="image" fetchpriority="high">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -88,6 +89,7 @@
   <div class="nav-dropdown">
     <a href="razvojmobilnihaplikacij.html" class="nav-dropdown-item" data-en="App Development" data-slo="Razvoj aplikacij">Razvoj aplikacij</a>
     <a href="izdelavaspletnihstrani.html" class="nav-dropdown-item" data-en="Web Development" data-slo="Spletni razvoj">Spletni razvoj</a>
+    <a href="3dspletnestrani.html" class="nav-dropdown-item" data-en="3D websites" data-slo="3D spletne strani">3D spletne strani</a>
     <a href="skripteinavtomatizacija.html" class="nav-dropdown-item" data-en="Scripts &amp; Automation" data-slo="Skripte in avtomatizacija">Skripte in avtomatizacija</a>
   </div>
 </li>
@@ -196,43 +198,26 @@
 
       <!-- SKLAD NAPRAV — tri storitve, ki jih kolesce premetava. -->
       <div class="hero-stack" id="heroStack">
-        <span class="hero-senca"></span>
+        <span class="hero-luc" aria-hidden="true"></span>
+        <span class="hero-linije" aria-hidden="true"></span>
+        <span class="hero-tla" aria-hidden="true"></span>
 
-        <div class="hero-dev">
-          <div class="naprava-telefon">
-            <span class="tel-tipka tel-t1"></span>
-            <span class="tel-tipka tel-t2"></span>
-            <span class="tel-zareza"></span>
-            <img src="assets/images/hero-app.webp" alt="Mobilna aplikacija Tekton" width="500" height="1000">
-          </div>
+        <div class="hero-dev dev-tel">
+          <img src="assets/images/hero-1-app.webp" alt="Mobilna aplikacija Tekton na telefonu"
+               width="1024" height="1536" fetchpriority="high">
+          <span class="dev-senca"></span>
         </div>
 
-        <div class="hero-dev">
-          <div class="naprava-laptop">
-            <div class="lap-zaslon">
-              <img src="assets/images/hero-web.webp" alt="Spletna stran Kaden Digital" width="900" height="463">
-            </div>
-            <span class="lap-baza"></span>
-          </div>
+        <div class="hero-dev dev-lap">
+          <img src="assets/images/hero-2-web.webp" alt="Spletna stran Kaden Digital na prenosniku"
+               width="1536" height="1024" decoding="async">
+          <span class="dev-senca"></span>
         </div>
 
-        <div class="hero-dev">
-          <div class="naprava-terminal">
-            <div class="term-vrstica"><i></i><i></i><i></i><span>bash</span></div>
-            <div class="term-besedilo">
-              <span class="tp">$</span> ./dnevno-porocilo.sh<br>
-              <span class="tr">&rarr;</span> povezujem se na streznik <span class="tp">...</span> <span class="tz">ok</span><br>
-              <span class="tr">&rarr;</span> berem podatke <span class="tp">...</span> 128 vrstic<br>
-              <span class="tr">&rarr;</span> preverjam vnose <span class="tp">...</span> <span class="tz">0 napak</span><br>
-              <span class="tr">&rarr;</span> racunam kolicine <span class="tp">...</span> 42 postavk<br>
-              <span class="tr">&rarr;</span> ustvarjam PDF <span class="tp">...</span> <span class="tz">ok</span><br>
-              <span class="tr">&rarr;</span> nalagam v arhiv <span class="tp">...</span> <span class="tz">ok</span><br>
-              <span class="tr">&rarr;</span> posiljam na e-posto <span class="tp">...</span> 3 prejemniki<br>
-              <br>
-              <span class="tz">Koncano v 1.4 s</span><br>
-              <span class="tp">$</span> _
-            </div>
-          </div>
+        <div class="hero-dev dev-term">
+          <img src="assets/images/hero-3-term.webp" alt="Skripta za dnevno porocilo v Linux terminalu"
+               width="1536" height="1024" decoding="async">
+          <span class="dev-senca"></span>
         </div>
 
         <span class="hero-oznaka" id="heroOznaka">MOBILNE APLIKACIJE</span>
@@ -460,7 +445,36 @@
     <span class="service-arrow" aria-hidden="true">→</span>
   </div>
 </a>
-  
+
+  <!-- 3D spletne strani -->
+  <a href="3dspletnestrani.html" class="service-card">
+    <span class="service-bar"></span>
+    <span class="service-mark mark-1">◇</span>
+    <span class="service-mark mark-2">::</span>
+    <span class="service-mark mark-3">□</span>
+  <div class="service-card-header">
+    <div class="service-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2 3 7v10l9 5 9-5V7z" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+        <path d="m3 7 9 5 9-5M12 12v10" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+      </svg>
+    </div>
+    <div class="service-heading">
+      <h3 data-en="3D websites" data-slo="3D spletne strani">3D spletne strani</h3>
+      <p class="service-stack">WebGL · Three.js</p>
+    </div>
+  </div>
+  <p class="service-desc" data-en="Interactive 3D that runs straight in the browser — the visitor turns the product and looks inside it." data-slo="Interaktivni 3D, ki teče kar v brskalniku — obiskovalec izdelek obrne in pogleda vanj.">Interaktivni 3D, ki teče kar v brskalniku — obiskovalec izdelek obrne in pogleda vanj.</p>
+  <ul class="service-checklist">
+    <li data-en="3D without plugins" data-slo="3D brez vtičnikov">3D brez vtičnikov</li>
+    <li data-en="Product configurators" data-slo="Konfiguratorji izdelkov">Konfiguratorji izdelkov</li>
+    <li data-en="Walk through a space" data-slo="Sprehod skozi prostor">Sprehod skozi prostor</li>
+  </ul>
+  <div class="service-more">
+    <span data-en="Read more about this service" data-slo="Preberi več o storitvi">Preberi več o storitvi</span>
+    <span class="service-arrow" aria-hidden="true">→</span>
+  </div>
+</a>
 
 </div>
 

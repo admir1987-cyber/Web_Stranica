@@ -709,35 +709,47 @@ if (sklad) {
   let spredaj = 0;
   let zaklep = false;
 
+  /* Naprave stojijo v krogu: aktivna na sredini in blizje gledalcu,
+     drugi dve za njo — ena levo, druga desno. Ob vsakem koraku
+     se zavrtijo naprej, kot vrtiljak. */
+  const MERILA     = [1, 0.68, 0.68];   /* aktivna 100 %, stranski 68 % */
+  const ZAMEGLITEV = [0, 1.7, 1.7];
+  const MOTNOST    = [1, 0.84, 0.84];
+  const POTISK     = [70, -300, -300];  /* aktivna stopi naprej */
+  const STRAN      = [0, -1, 1];        /* sredina, levo, desno */
+  const ZASUK      = [0, 20, -20];      /* stranski sta obrnjeni proti sredini */
+  const DVIG       = [0, -18, -18];     /* stranski stojita malo visje */
+
   function narisiSklad() {
     naprave.forEach((el, i) => {
       const globina = (i - spredaj + koliko) % koliko;
 
-      /* Naprave stojijo na loku: prva naravnost, vsaka naslednja bolj obrnjena. */
-      /* Polozaj na loku in zasuk naprave sta loceni stvari. */
-      const kot = globina * 28;
-      const zasuk = globina * 11;
-      const rad = (kot * Math.PI) / 180;
-      /* Polmer raste z zaslonom, da lok ostane enak na vsaki sirini. */
-      /* Na ozjem stolpcu se naprave razmaknejo manj, da ne prekrijejo besedila. */
-      const ozko = sklad.clientWidth < 560;
-      const polmer = sklad.clientWidth * (ozko ? 0.6 : 0.95);
-      /* Vsak naslednji dobi se dodaten sunek v levo, zadnji najvec. */
-      const x = -polmer * Math.sin(rad) - globina * globina * (ozko ? 24 : 45);
-      const z = -polmer * (1 - Math.cos(rad)) - globina * 190;
+      /* Razmik raste s sirino prostora, da krog ostane enak na vsakem zaslonu.
+         Na ozjem stolpcu se stranski napravi priblizata sredini. */
+      const ozko = sklad.clientWidth < 460;
+      const razmik = sklad.clientWidth * (ozko ? 0.36 : 0.43);
+      const x = STRAN[globina] * razmik;
 
       el.style.transform =
         'translate(-50%, -50%)' +
         ' translateX(' + x.toFixed(1) + 'px)' +
-        ' translateY(' + -globina * 10 + 'px)' +
-        ' translateZ(' + z.toFixed(1) + 'px)' +
-        ' rotateY(' + -zasuk + 'deg)' +
-        ' scale(' + (1 - globina * 0.15).toFixed(2) + ')';
+        ' translateY(' + DVIG[globina] + 'px)' +
+        ' translateZ(' + POTISK[globina] + 'px)' +
+        ' rotateY(' + ZASUK[globina] + 'deg)' +
+        ' scale(' + MERILA[globina] + ')';
 
-      el.style.opacity = 1;
-      el.style.setProperty('--megla', (globina * 0.34).toFixed(2));
+      /* Renderi imajo prozorno ozadje, zato globino nosi motnost,
+         ne vec meglica cez pravokotnik. */
+      el.style.opacity = MOTNOST[globina];
       el.style.zIndex = koliko - globina;
-      el.style.filter = globina ? 'blur(' + globina * 0.7 + 'px)' : 'none';
+      el.style.filter = globina ? 'blur(' + ZAMEGLITEV[globina] + 'px)' : 'none';
+
+      /* Senca stranskih naprav je bledejsa in bolj razlita. */
+      const senca = el.querySelector('.dev-senca');
+      if (senca) {
+        senca.style.opacity = globina ? '0.55' : '1';
+        senca.style.filter = 'blur(' + (globina ? 9 : 7) + 'px)';
+      }
     });
 
     pike.forEach((b, i) => b.classList.toggle('on', i === spredaj));
@@ -802,6 +814,17 @@ if (sklad) {
     btn.addEventListener('click', () => setTimeout(osveziOznako, 10));
   });
 
+  /* Lok se racuna iz sirine sklada, zato ga ob spremembi okna narisemo znova. */
+  let cakamSklad = false;
+  window.addEventListener('resize', () => {
+    if (cakamSklad) return;
+    cakamSklad = true;
+    requestAnimationFrame(() => {
+      cakamSklad = false;
+      narisiSklad();
+    });
+  });
+
   narisiSklad();
 }
 
@@ -859,3 +882,214 @@ if (skrolHero && skrolVideo) {
   skrolVideo.addEventListener('loadedmetadata', osveziHero);
   osveziHero();
 }
+
+/* ==================================================== */
+/* HERO S TERMINALOM — pisanje, big bang, vrnitev       */
+/* ==================================================== */
+(function () {
+  const tir = document.getElementById('hero3dTir');
+  const scena = document.getElementById('scena3d');
+  const okno = document.getElementById('okno3d');
+  const term = document.getElementById('term');
+  const skatla = document.getElementById('delci');
+  const oknoSenca = document.getElementById('okno3dSenca');
+
+  if (!tir || !scena || !okno || !term || !skatla) return;
+
+  /* Besedilo, ki se izpisuje v terminalu. */
+  const vrstice = [
+    '// 3D model, ki tece v brskalniku',
+    'const izdelek = await nalozi(',
+    "  'izdelek.glb'",
+    ');',
+    '',
+    'izdelek.vrtenje = true;',
+    'izdelek.barva   = izbira;',
+    '',
+    'oder.dodaj(izdelek);'
+  ];
+  const besedilo = vrstice.join('\n');
+
+  /* Delci, ki ob poku odletijo daleko na vse strani. */
+  const znaki = ['{', '}', '<', '>', '/', '#', '$', ';', '*', '[', ']', '=', '+', '~', '0', '1'];
+  const delci = [];
+
+  for (let i = 0; i < 130; i++) {
+    const s = document.createElement('span');
+    s.className = 'delec';
+    s.textContent = znaki[Math.floor(Math.random() * znaki.length)];
+    s.style.fontSize = (10 + Math.random() * 22).toFixed(1) + 'px';
+
+    const kot = Math.random() * Math.PI * 2;
+    const dolzina = 180 + Math.random() * 780;
+
+    delci.push({
+      el: s,
+      x: Math.cos(kot) * dolzina,
+      y: Math.sin(kot) * dolzina * 0.88,
+      z: (Math.random() - 0.5) * 1100,
+      obrat: (Math.random() - 0.5) * 900
+    });
+
+    skatla.appendChild(s);
+  }
+
+  const gladko = (t) => t * t * (3 - 2 * t);
+  const odsek = (p, a, b) => Math.min(Math.max((p - a) / (b - a), 0), 1);
+
+  /* p gre od 0 (vrh) do 1 (dno prilepljenega dela). */
+  function narisi(p) {
+    const pisanje = gladko(odsek(p, 0.00, 0.44));
+
+    /* pok: hitro navzven, potem se umiri */
+    const pok = Math.pow(gladko(odsek(p, 0.48, 0.70)), 0.55);
+    /* vsrkavanje: pospesi proti sredini */
+    const vsrk = Math.pow(odsek(p, 0.70, 0.78), 2.2);
+    /* sestavljanje: okno in besedilo se vrneta */
+    const sestava = gladko(odsek(p, 0.78, 0.94));
+
+    /* 1. terminal se izpisuje; po poku je besedilo ze cel cas polno */
+    term.textContent = pok > 0
+      ? besedilo
+      : besedilo.slice(0, Math.round(besedilo.length * pisanje));
+    term.classList.toggle('koncan', pisanje >= 1);
+
+    /* 2. pok navzven, 3. hitro nazaj v sredino */
+    const razmah = pok * (1 - vsrk);
+    skatla.style.opacity = razmah.toFixed(3);
+
+    for (const d of delci) {
+      d.el.style.transform =
+        'translate3d(' + (d.x * razmah).toFixed(1) + 'px,' +
+        (d.y * razmah).toFixed(1) + 'px,' +
+        (d.z * razmah).toFixed(1) + 'px)' +
+        ' rotate(' + (d.obrat * razmah).toFixed(1) + 'deg)' +
+        ' scale(' + (0.5 + razmah).toFixed(3) + ')';
+    }
+
+    /* 4. okno in besedilo izgineta ob poku ter se vrneta na koncu */
+    const skrito = pok * (1 - sestava);
+    okno.style.opacity = (1 - skrito).toFixed(3);
+    okno.style.transform = 'scale(' + (1 - 0.22 * skrito).toFixed(3) + ')';
+    term.style.opacity = (1 - skrito).toFixed(3);
+    /* Senca izgine skupaj z oknom in se z njim tudi vrne. */
+    if (oknoSenca) oknoSenca.style.opacity = (1 - skrito).toFixed(3);
+
+    scena.classList.toggle('koncano', p > 0.9);
+  }
+
+  /* Na telefonu in pri manj gibanja pokazemo kar koncno stanje. */
+  if (manjGibanja || window.innerWidth <= 1000) {
+    narisi(1);
+    return;
+  }
+
+  let cakamHero = false;
+
+  function osveziProstor3d() {
+    cakamHero = false;
+    const visina = tir.offsetHeight - window.innerHeight;
+    const p = visina > 0
+      ? Math.min(Math.max(-tir.getBoundingClientRect().top / visina, 0), 1)
+      : 1;
+    narisi(p);
+  }
+
+  window.addEventListener('scroll', () => {
+    if (cakamHero) return;
+    cakamHero = true;
+    requestAnimationFrame(osveziProstor3d);
+  }, { passive: true });
+
+  window.addEventListener('resize', osveziProstor3d);
+  osveziProstor3d();
+
+  /* Scena se rahlo nagne za misko. */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    window.addEventListener('pointermove', (e) => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      scena.style.setProperty('--ry', (-15 + x * 13).toFixed(2) + 'deg');
+      scena.style.setProperty('--rx', (11 - y * 11).toFixed(2) + 'deg');
+    }, { passive: true });
+  }
+})();
+
+/* ==================================================== */
+/* NAPRAVA V HERO PODSTRANI — sledi miski po sekciji    */
+/* ==================================================== */
+(function () {
+  if (manjGibanja) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const slike = [...document.querySelectorAll('.uvod-slika')];
+  if (!slike.length) return;
+
+  slike.forEach((slika) => {
+    /* Misko lovimo po celi uvodni sekciji, ne le nad sliko —
+       tako se naprava premakne ze, ko se ji priblizas. */
+    const obmocje = slika.closest('.storitev-uvod') || slika;
+    const senca = slika.querySelector('.uvod-senca');
+    let cakam = false;
+
+    obmocje.addEventListener('pointermove', (e) => {
+      if (cakam) return;
+      cakam = true;
+      requestAnimationFrame(() => {
+        cakam = false;
+        const r = obmocje.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+
+        slika.style.translate = (x * 26).toFixed(1) + 'px ' + (y * 16).toFixed(1) + 'px';
+        slika.style.rotate = (x * 1.6).toFixed(2) + 'deg';
+
+        /* Senca gre v nasprotno smer in manj — kot da luc stoji pri miru. */
+        if (senca) {
+          senca.style.transform =
+            'translateX(-50%) translate(' + (-x * 12).toFixed(1) + 'px, 0)';
+        }
+      });
+    }, { passive: true });
+
+    obmocje.addEventListener('pointerleave', () => {
+      slika.style.translate = '0';
+      slika.style.rotate = '0deg';
+      if (senca) senca.style.transform = 'translateX(-50%)';
+    });
+  });
+})();
+
+/* ==================================================== */
+/* KARTICE — 3D nagib pod misko in lesk za kazalcem     */
+/* ==================================================== */
+(function () {
+  if (manjGibanja) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const kartice = document.querySelectorAll(
+    '.service-card, .project-card, .skill-panel, .why-card'
+  );
+
+  kartice.forEach((kartica) => {
+    kartica.addEventListener('pointermove', (e) => {
+      const r = kartica.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+
+      kartica.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+      kartica.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      kartica.style.transform =
+        'perspective(1000px)' +
+        ' rotateY(' + ((x - 0.5) * 8).toFixed(2) + 'deg)' +
+        ' rotateX(' + ((0.5 - y) * 8).toFixed(2) + 'deg)' +
+        ' translateY(-8px)';
+      kartica.classList.add('nagnjena');
+    }, { passive: true });
+
+    kartica.addEventListener('pointerleave', () => {
+      kartica.style.transform = '';
+      kartica.classList.remove('nagnjena');
+    });
+  });
+})();

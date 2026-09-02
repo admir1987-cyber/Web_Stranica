@@ -56,7 +56,7 @@
   <link rel="preload" href="assets/fonts/plus-jakarta-sans-500-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Prva slika v Hero sekciji - brskalnik jo zacne nalagati takoj. -->
-  <link rel="preload" href="assets/images/hero-1-app.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/images/hero-1-app.webp" as="image" fetchpriority="high" media="(min-width: 901px)">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -204,19 +204,19 @@
 
         <div class="hero-dev dev-tel">
           <img src="assets/images/hero-1-app.webp" alt="Mobilna aplikacija Tekton na telefonu"
-               width="1024" height="1536" fetchpriority="high">
+               width="1024" height="1536" fetchpriority="high" loading="lazy">
           <span class="dev-senca"></span>
         </div>
 
         <div class="hero-dev dev-lap">
           <img src="assets/images/hero-2-web.webp" alt="Spletna stran Kaden Digital na prenosniku"
-               width="1536" height="1024" decoding="async">
+               width="1536" height="1024" decoding="async" loading="lazy">
           <span class="dev-senca"></span>
         </div>
 
         <div class="hero-dev dev-term">
           <img src="assets/images/hero-3-term.webp" alt="Skripta za dnevno porocilo v Linux terminalu"
-               width="1536" height="1024" decoding="async">
+               width="1536" height="1024" decoding="async" loading="lazy">
           <span class="dev-senca"></span>
         </div>
 

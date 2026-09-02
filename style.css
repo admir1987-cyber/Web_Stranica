@@ -576,14 +576,20 @@ body {
   text-align: left;
 }
 
-/* Kadar so kartice stiri (domaca stran), gredo v stiri stolpce.
-   Podstrani s tremi karticami ostanejo tri. */
-.services-grid:has(> :nth-child(4)) {
-  grid-template-columns: repeat(4, 1fr);
+/* Kadar so kartice stiri (domaca stran), gredo v stiri stolpce,
+   na srednjem zaslonu pa dve po dve. Podstrani s tremi karticami
+   ostanejo tri.
+
+   Obe pravili sta omejeni z min-width: 769px. :has() je mocnejsi od
+   golega .services-grid, zato bi brez te meje povozil mobilno pravilo
+   in bi na telefonu dobili dva ozka stolpca namesto ene kartice v vrsti. */
+@media (min-width: 769px) {
+  .services-grid:has(> :nth-child(4)) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-/* Na srednjih zaslonih so stiri kartice pretesne, zato dve po dve. */
-@media (max-width: 1400px) {
+@media (min-width: 769px) and (max-width: 1400px) {
   .services-grid:has(> :nth-child(4)) {
     grid-template-columns: repeat(2, 1fr);
   }

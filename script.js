@@ -239,7 +239,7 @@ document.querySelectorAll('.mobile-nav-links a').forEach((link) => {
 
 /* RAZLAGE ORODIJ — besedilo se pokaze, ko gres z misko cez logotip. */
 const orodja = {
-  Flutter: ['One build — the app runs on both Android and iPhone.', 'Ena izdelava — aplikacija deluje na Androidu in iPhonu.'],
+  Flutter: ['One build, the app runs on both Android and iPhone.', 'Ena izdelava, aplikacija deluje na Androidu in iPhonu.'],
   Dart: ['The language behind Flutter. Fast, and fewer bugs.', 'Jezik za Flutterjem. Hiter, z manj napakami.'],
   Supabase: ['Cloud database. Logins, data and backups included.', 'Baza v oblaku. Prijava, podatki in varnostne kopije.'],
   HTML5: ['The skeleton of the page. Clean structure Google understands.', 'Ogrodje strani. Čista struktura, ki jo Google razume.'],
@@ -248,7 +248,7 @@ const orodja = {
   Git: ['Every change is saved. Going back is always possible.', 'Vsaka sprememba je shranjena. Vrnitev nazaj je vedno možna.'],
   Linux: ['Servers run on Linux. The terminal is home ground.', 'Strežniki tečejo na Linuxu. Terminal je moj teren.'],
   Python: ['Data processing and automation of repetitive work.', 'Obdelava podatkov in avtomatizacija ponavljajočega se dela.'],
-  Bash: ['Scripts that do the job for you — same time, every day.', 'Skripte, ki delo opravijo namesto vas — vsak dan ob isti uri.'],
+  Bash: ['Scripts that do the job for you, same time every day.', 'Skripte, ki delo opravijo namesto vas, vsak dan ob isti uri.'],
   PostgreSQL: ['Data kept in order and fast to reach, even when there is a lot.', 'Podatki urejeni in hitro dosegljivi, tudi ko jih je veliko.']
 };
 
@@ -537,8 +537,8 @@ if (projektneKartice.length) {
       povezavaSlo: 'Odprite v trgovini Google Play',
       ikona: '<path fill="#00A0FF" d="M1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924z"/><path fill="#00F076" d="M13.544 10.989l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973z"/><path fill="#FFCE00" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594z"/><path fill="#FF3A44" d="M13.544 13.056l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/>',      oznakaEn: 'Construction Diary App',
       oznakaSlo: 'Aplikacija za gradbeni dnevnik',
-      opisEn: 'Tekton is an AI app that automates the construction site diary. The site manager simply describes what was done on site — Tekton turns it into a structured daily report and an official PDF, linked with photos and audio recordings from the field. No typing, no paperwork, no wasted time at the end of the shift.',
-      opisSlo: 'Tekton je AI aplikacija, ki avtomatizira gradbeni dnevnik. Vodja gradbišča preprosto pove, kaj je bilo narejeno na gradbišču — Tekton to spremeni v strukturirano dnevno poročilo in uradni PDF, povezan s fotografijami in avdio posnetki s terena. Brez tipkanja, brez papirja, brez izgubljanja časa ob koncu izmene.',
+      opisEn: 'Tekton is an AI app that automates the construction site diary. The site manager simply describes what was done on site, and Tekton turns it into a structured daily report and an official PDF, linked with photos and audio recordings from the field. No typing, no paperwork, no wasted time at the end of the shift.',
+      opisSlo: 'Tekton je AI aplikacija, ki avtomatizira gradbeni dnevnik. Vodja gradbišča preprosto pove, kaj je bilo narejeno na gradbišču, Tekton pa to spremeni v strukturirano dnevno poročilo in uradni PDF, povezan s fotografijami in avdio posnetki s terena. Brez tipkanja, brez papirja, brez izgubljanja časa ob koncu izmene.',
       tocke: [
         ['AI integration (Google Gemini)', 'AI integracija (Google Gemini)'],
         ['Voice input instead of typing', 'Glasovni vnos namesto tipkanja'],
@@ -547,7 +547,7 @@ if (projektneKartice.length) {
         ['Multi-device, multi-project support', 'Podpora za več naprav in projektov'],
         ['Secure user authentication', 'Varna avtentikacija uporabnikov'],
         ['Support for 6 languages', 'Podpora za 6 jezikov'],
-        ['Day-by-day view — ready evidence if disputes arise', 'Pregled po dnevih — pripravljen dokaz ob morebitnem sporu']
+        ['Day-by-day view, ready evidence if disputes arise', 'Pregled po dnevih, pripravljen dokaz ob morebitnem sporu']
       ]
     },
     kaden: {
@@ -558,14 +558,14 @@ if (projektneKartice.length) {
       ikona: 'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12',
             ikona: '<path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>',
       oznakaSlo: 'Predstavitvena spletna stran',
-      opisEn: 'No framework, no page builder, no plugins — only HTML, CSS and JavaScript. The 3D space in the background, the animations and the language switch are all built from basic parts, which is why the whole site stays under one megabyte and opens in less than a second. What you see here is the same standard I apply to client work.',
-      opisSlo: 'Brez ogrodij, brez urejevalnikov strani, brez vtičnikov — samo HTML, CSS in JavaScript. 3D prostor v ozadju, animacije in preklop med jezikoma so sestavljeni iz osnovnih gradnikov, zato vsa stran ostane pod enim megabajtom in se odpre v manj kot sekundi. To, kar vidite tukaj, je isti standard, ki ga uporabim pri delu za naročnike.',
+      opisEn: 'No framework, no page builder, no plugins, only HTML, CSS and JavaScript. The 3D space in the background, the animations and the language switch are all built from basic parts, which is why the whole site stays under one megabyte and opens in less than a second. What you see here is the same standard I apply to client work.',
+      opisSlo: 'Brez ogrodij, brez urejevalnikov strani, brez vtičnikov, samo HTML, CSS in JavaScript. 3D prostor v ozadju, animacije in preklop med jezikoma so sestavljeni iz osnovnih gradnikov, zato vsa stran ostane pod enim megabajtom in se odpre v manj kot sekundi. To, kar vidite tukaj, je isti standard, ki ga uporabim pri delu za naročnike.',
       tocke: [
         ['No frameworks, no build tools', 'Brez ogrodij in brez orodij za gradnjo'],
         ['Bilingual with a language switch', 'Dvojezična, s preklopnikom jezika'],
         ['Fluid from 375px to 4K screens', 'Tekoča od 375px do 4K zaslonov'],
         ['3D space in pure CSS and SVG', '3D prostor v čistem CSS in SVG'],
-        ['Images in WebP — whole site under 1 MB', 'Slike v WebP — vsa stran pod 1 MB'],
+        ['Images in WebP, whole site under 1 MB', 'Slike v WebP, vsa stran pod 1 MB'],
         ['Contact form without a server', 'Kontaktni obrazec brez strežnika'],
         ['Sitemap, robots and JSON-LD for Google', 'Sitemap, robots in JSON-LD za Google'],
         ['Published through GitHub Pages', 'Objavljeno prek GitHub Pages']

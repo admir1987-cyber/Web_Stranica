@@ -183,14 +183,14 @@ if (cForm) {
   /* Vsako polje ve, kje stoji njegovo sporocilo in kaj mora povedati. */
   const polja = [
     { vnos: 'f-name', napaka: 'e-name',
-      prazno: ['Vpisite svoje ime.', 'Please enter your name.'] },
+      prazno: ['Vpišite svoje ime.', 'Please enter your name.'] },
     { vnos: 'f-mail', napaka: 'e-mail',
-      prazno: ['Vpisite svoj e-naslov.', 'Please enter your email.'],
+      prazno: ['Vpišite svoj e-naslov.', 'Please enter your email.'],
       napacno: ['E-naslov ni pravilen. Primer: ime@podjetje.si', 'That email does not look right. Example: name@company.com'] },
     { vnos: 'f-msg', napaka: 'e-msg',
-      prazno: ['Napisite kratko sporocilo.', 'Please write a short message.'] },
+      prazno: ['Napišite kratko sporočilo.', 'Please write a short message.'] },
     { vnos: 'f-privolitev', napaka: 'e-privolitev',
-      prazno: ['Brez privolitve sporocila ne morem obdelati.', 'I cannot process your message without your consent.'] }
+      prazno: ['Brez privolitve sporočila ne morem obdelati.', 'I cannot process your message without your consent.'] }
   ];
 
   const jeSlo = () => document.documentElement.lang === 'sl';
@@ -247,7 +247,7 @@ if (cForm) {
 
     /* Gumb ugasnemo, da isto sporocilo ne odide dvakrat. */
     gumb.disabled = true;
-    cStatus.textContent = slo ? 'Posiljam...' : 'Sending...';
+    cStatus.textContent = slo ? 'Pošiljam...' : 'Sending...';
 
     try {
       const r = await fetch('https://api.web3forms.com/submit', {
@@ -259,7 +259,7 @@ if (cForm) {
       if (data.success) {
         cStatus.className = 'form-status ok';
         cStatus.textContent = slo
-          ? 'Hvala! Sporocilo je poslano. Odgovorim v enem delovnem dnevu.'
+          ? 'Hvala! Sporočilo je poslano. Odgovorim v enem delovnem dnevu.'
           : 'Thank you! Your message was sent. I reply within one working day.';
         cForm.reset();
         polja.forEach(pocisti);
@@ -269,7 +269,7 @@ if (cForm) {
     } catch {
       cStatus.className = 'form-status err';
       cStatus.textContent = slo
-        ? 'Napaka pri posiljanju. Vase besedilo je ostalo tukaj, poskusite znova ali mi pisite na e-posto.'
+        ? 'Napaka pri pošiljanju. Vaše besedilo je ostalo tukaj, poskusite znova ali mi pišite na e-pošto.'
         : 'Sending failed. Your text is still here, try again or email me directly.';
     } finally {
       gumb.disabled = false;

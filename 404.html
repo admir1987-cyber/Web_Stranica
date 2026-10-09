@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Strani ni mogoce najti | Kaden Digital</title>
+
+  <!-- Ta stran se lahko pokaze na katerem koli naslovu, zato so vse poti od korena. -->
+  <link rel="preload" href="/assets/fonts/plus-jakarta-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/plus-jakarta-sans-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="icon" href="/assets/images/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Prva postaja za tipkovnico: preskoci meni naravnost do vsebine. -->
+  <a class="preskoci" href="#glavno" data-en="Skip to content" data-slo="Preskoci na vsebino">Preskoci na vsebino</a>
+
+  <!-- PROSTOR V OZADJU — enak kot na glavni strani. -->
+  <div class="space" aria-hidden="true">
+    <div class="space-grid space-grid-far"></div>
+    <div class="space-grid space-grid-near"></div>
+    <div class="space-haze"></div>
+    <div class="space-stars" id="spaceStars"></div>
+    <div class="space-light"></div>
+    <div class="space-vignette"></div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="/" class="logo">
+        <img src="/assets/images/logo-nav.webp" alt="Kaden Digital" width="420" height="96">
+      </a>
+      <div class="lang-switch">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <span class="lang-divider">|</span>
+        <button type="button" class="lang-btn" data-lang="slo">SLO</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="napaka" id="glavno" tabindex="-1">
+    <div class="napaka-inner container">
+
+      <p class="napaka-koda" aria-hidden="true">404</p>
+
+      <h1 data-en="This page does not exist" data-slo="Te strani ni">Te strani ni</h1>
+
+      <p class="napaka-opis" data-en="The address you opened leads nowhere. It was either mistyped, or the page has been moved. Everything else on the site works normally." data-slo="Naslov, ki ste ga odprli, ne vodi nikamor. Ali je bil napacno vpisan, ali pa je bila stran premaknjena. Vse ostalo na mestu deluje normalno.">Naslov, ki ste ga odprli, ne vodi nikamor. Ali je bil napacno vpisan, ali pa je bila stran premaknjena. Vse ostalo na mestu deluje normalno.</p>
+
+      <div class="napaka-gumbi">
+        <a href="/" class="btn btn-primary" data-en="Back to home" data-slo="Nazaj na domaco stran">Nazaj na domaco stran</a>
+        <a href="/index.html#contact" class="btn btn-secondary" data-en="Contact me" data-slo="Pisite mi">Pisite mi</a>
+      </div>
+
+      <p class="napaka-label" data-en="Or go straight to a service" data-slo="Ali pa naravnost do storitve">Ali pa naravnost do storitve</p>
+
+      <ul class="napaka-povezave">
+        <li><a href="/izdelavaspletnihstrani.html" data-en="Websites" data-slo="Izdelava spletnih strani">Izdelava spletnih strani</a></li>
+        <li><a href="/razvojmobilnihaplikacij.html" data-en="Mobile apps" data-slo="Razvoj mobilnih aplikacij">Razvoj mobilnih aplikacij</a></li>
+        <li><a href="/skripteinavtomatizacija.html" data-en="Scripts and automation" data-slo="Skripte in avtomatizacija">Skripte in avtomatizacija</a></li>
+        <li><a href="/3dspletnestrani.html" data-en="3D websites" data-slo="3D spletne strani">3D spletne strani</a></li>
+      </ul>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-bottom container">
+      <span class="footer-brand">
+        <img src="/assets/images/logo-nav.webp" alt="" width="420" height="96">
+        Kaden Digital
+      </span>
+      <a class="footer-link js-mail" data-u="admir" data-d="kaden-digital.com" href="#">&nbsp;</a>
+      <a class="footer-link js-tel" data-a="+386 30" data-b="230 620" href="#">&nbsp;</a>
+      <a class="footer-link" href="/zasebnost.html" data-en="Privacy" data-slo="Zasebnost">Zasebnost</a>
+      <span class="footer-geo">Ljubljana, SI</span>
+      <span class="footer-copy" data-en="&copy; 2026 Kaden Digital &middot; All rights reserved" data-slo="&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane">&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane</span>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

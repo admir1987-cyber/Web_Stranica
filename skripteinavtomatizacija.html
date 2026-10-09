@@ -20,9 +20,17 @@
   <meta property="og:title" content="Skripte in avtomatizacija procesa porocanja | Kaden">
   <meta property="og:description" content="Avtomatizacija procesa porocanja in ponavljajocih se opravil. Dnevno porocilo se sestavi samo, brez rocnega dela in brez napak.">
   <meta property="og:url" content="https://www.kaden-digital.com/skripteinavtomatizacija.html">
-  <meta property="og:image" content="https://www.kaden-digital.com/assets/images/photo-logo.png">
+  <meta property="og:image" content="https://www.kaden-digital.com/assets/images/og-kaden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="assets/images/logo-nav.webp">
+  <link rel="icon" href="assets/images/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="assets/images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+  <!-- Uvodna slika se na siroko kaze takoj, telefon je ne prenasa. -->
+  <link rel="preload" href="assets/images/hero-3-term.webp" as="image" fetchpriority="high" media="(min-width: 901px)">
 
   <!-- Pisave so na nasem strezniku. -->
   <link rel="preload" href="assets/fonts/plus-jakarta-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -31,6 +39,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Prva postaja za tipkovnico: preskoci meni naravnost do vsebine. -->
+  <a class="preskoci" href="#glavno" data-en="Skip to content" data-slo="Preskoci na vsebino">Preskoci na vsebino</a>
 
   <!-- PROSTOR V OZADJU — enak kot na glavni strani. -->
   <div class="space" aria-hidden="true">
@@ -74,14 +85,14 @@
         <a href="index.html#contact" class="btn btn-primary nav-cta" data-en="Contact" data-slo="Kontakt">Kontakt</a>
       </div>
 
-      <button class="hamburger" aria-label="Menu">
+      <button class="hamburger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobilniMeni">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </nav>
 
-    <div class="mobile-menu">
+    <div class="mobile-menu" id="mobilniMeni">
       <ul class="mobile-nav-links">
         <li><a href="index.html" data-en="Home" data-slo="Domov">Domov</a></li>
         <li><a href="index.html#about" data-en="About" data-slo="O nas">O nas</a></li>
@@ -98,7 +109,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="glavno" tabindex="-1">
 
     <section class="storitev-uvod">
       <div class="container uvod-mreza">
@@ -133,7 +144,7 @@
 
        <div class="uvod-slika uvod-slika-ravna">
          <span class="uvod-okvir">
-           <img src="assets/images/hero-3-term.webp" alt="Skripta za avtomatizacijo dnevnega porocila" width="1536" height="1024" loading="lazy" decoding="async">
+           <img src="assets/images/hero-3-term.webp" alt="Skripta za avtomatizacijo dnevnega porocila" width="1536" height="1024" fetchpriority="high" loading="lazy" decoding="async">
            <span class="uvod-senca" aria-hidden="true"></span>
          </span>
        </div>
@@ -347,6 +358,8 @@
         <img src="assets/images/logo-nav.webp" alt="" width="420" height="96">
         Kaden Digital
       </span>
+      <a class="footer-link js-mail" data-u="admir" data-d="kaden-digital.com" href="#">&nbsp;</a>
+      <a class="footer-link js-tel" data-a="+386 30" data-b="230 620" href="#">&nbsp;</a>
       <a class="footer-link" href="zasebnost.html" data-en="Privacy" data-slo="Zasebnost">Zasebnost</a>
       <span class="footer-geo" data-en="Ljubljana, SI" data-slo="Ljubljana, SI">Ljubljana, SI</span>
       <span class="footer-copy" data-en="&copy; 2026 Kaden Digital &middot; All rights reserved" data-slo="&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane">&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane</span>

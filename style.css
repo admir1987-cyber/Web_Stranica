@@ -158,6 +158,31 @@ body {
   color: var(--color-text);
 }
 
+/* Bliznjica za tipkovnico. Skrita je, dokler je ne doseze tipka Tab. */
+.preskoci {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 200;
+  transform: translate(-50%, -150%);
+  padding: 12px 22px;
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--color-bg);
+  background-color: var(--color-text);
+  border-radius: 0 0 10px 10px;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.preskoci:focus {
+  transform: translate(-50%, 0);
+}
+
+/* Cilj bliznjice ne sme dobiti okvirja, ko nanj skocimo. */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
 /* PROSTOR V OZADJU — pribit na zaslon, zato vsebina drsi cez njega. */
 .space {
   position: fixed;
@@ -1923,6 +1948,18 @@ body {
   transition: opacity 0.2s ease 0.18s;
 }
 
+/* Lastnistvo kode. Stoji vedno vidno, ker na telefonu ni prehoda z misko. */
+.process-lastnistvo {
+  max-width: 62ch;
+  margin: var(--space-xl) auto 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  font-size: clamp(15px, 1.04vw, 26px);
+  line-height: 1.7;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
 /* Hamburger gumb za mobilni prikaz */
 .hamburger {
   display: none;
@@ -2286,6 +2323,25 @@ a.contact-value:hover {
   margin-bottom: var(--space-xs);
 }
 
+/* Zvezdica pove, da je polje obvezno. */
+.obvezno {
+  color: var(--color-accent);
+  margin-left: 0.25em;
+}
+
+/* Sporocilo o napaki stoji pod poljem in se pokaze sele, ko je napaka. */
+.field-napaka {
+  display: block;
+  margin-top: calc(var(--space-xs) / 2);
+  font-size: clamp(12px, 0.82vw, 21px);
+  line-height: 1.4;
+  color: #B04A3A;
+}
+
+.field-napaka:empty {
+  display: none;
+}
+
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea {
@@ -2318,6 +2374,26 @@ a.contact-value:hover {
   opacity: 0.7;
 }
 
+/* Polje z napako dobi rdec rob, da se takoj vidi, kje je tezava. */
+.contact-form input[type="text"][aria-invalid="true"],
+.contact-form input[type="email"][aria-invalid="true"],
+.contact-form textarea[aria-invalid="true"] {
+  border-color: #B04A3A;
+}
+
+.contact-form input[type="text"][aria-invalid="true"]:focus,
+.contact-form input[type="email"][aria-invalid="true"]:focus,
+.contact-form textarea[aria-invalid="true"]:focus {
+  border-color: #B04A3A;
+  box-shadow: 0 0 0 3px rgba(176, 74, 58, 0.15);
+}
+
+/* Kljukica za privolitev nima roba, zato jo obarvamo. */
+.consent input[aria-invalid="true"] {
+  outline: 2px solid #B04A3A;
+  outline-offset: 2px;
+}
+
 .form-btn {
   display: inline-flex;
   align-items: center;
@@ -2328,6 +2404,13 @@ a.contact-value:hover {
 .form-btn svg {
   width: 1em;
   height: 1em;
+}
+
+/* Med posiljanjem je gumb ugasnjen, da se sporocilo ne poslje dvakrat. */
+.form-btn[disabled] {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
 }
 
 /* Privolitev za obdelavo podatkov. */
@@ -2415,6 +2498,78 @@ a.contact-value:hover {
 
 .legal-back {
   margin-top: var(--space-xl);
+}
+
+/* STRAN 404 — obiskovalec je zasel, zato mu takoj ponudimo pot nazaj. */
+.napaka {
+  display: flex;
+  align-items: center;
+  min-height: 70vh;
+  padding: var(--space-xl) 0;
+}
+
+.napaka-inner {
+  max-width: min(100%, 60ch);
+}
+
+.napaka-koda {
+  font-family: var(--font-mono);
+  font-size: clamp(56px, 7vw, 180px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+  opacity: 0.22;
+  margin: 0 0 var(--space-xs);
+}
+
+.napaka h1 {
+  font-size: clamp(28px, 3.5vw, 90px);
+  font-weight: 600;
+  margin: 0 0 var(--space-sm);
+}
+
+.napaka-opis {
+  font-size: clamp(16px, 1.11vw, 28px);
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-lg);
+}
+
+.napaka-gumbi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.napaka-label {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 0.76vw, 19px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: var(--space-xl) 0 var(--space-sm);
+}
+
+.napaka-povezave {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.napaka-povezave a {
+  font-size: clamp(14px, 0.97vw, 25px);
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.napaka-povezave a:hover {
+  border-bottom-color: var(--color-accent);
 }
 
 /* POJAVNO OKNO — lezi cez celo stran. */

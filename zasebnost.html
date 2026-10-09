@@ -4,15 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
-  <title>Privacy Policy | Kaden Digital</title>
+  <title>Politika zasebnosti | Kaden Digital</title>
 
     <!-- Pisave so na nasem streznik, zato Googlu ne posiljamo nicesar. -->
   <link rel="preload" href="assets/fonts/plus-jakarta-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/plus-jakarta-sans-500-latin.woff2" as="font" type="font/woff2" crossorigin>
 
+  <link rel="icon" href="assets/images/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="assets/images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Prva postaja za tipkovnico: preskoci meni naravnost do vsebine. -->
+  <a class="preskoci" href="#glavno" data-en="Skip to content" data-slo="Preskoci na vsebino">Preskoci na vsebino</a>
 
   <!-- PROSTOR V OZADJU — enak kot na glavni strani. -->
   <div class="space" aria-hidden="true">
@@ -37,7 +44,7 @@
     </nav>
   </header>
 
-  <main class="legal">
+  <main class="legal" id="glavno" tabindex="-1">
     <div class="legal-inner container">
 
       <h1 data-en="Privacy Policy" data-slo="Politika zasebnosti">Privacy Policy</h1>
@@ -55,11 +62,13 @@
       <h2 data-en="4. Who else sees your message" data-slo="4. Kdo se vidi vase sporocilo">4. Who else sees your message</h2>
       <p data-en="The contact form is delivered through Web3Forms, an external service that forwards submissions to my inbox. Your message passes through their servers, which run on Amazon Web Services. The connection is encrypted. Web3Forms acts as a processor on my behalf and does not use your data for its own purposes. Their own privacy terms are published at web3forms.com." data-slo="Kontaktni obrazec se dostavlja prek storitve Web3Forms, ki oddane obrazce posreduje v moj postni predal. Vase sporocilo gre prek njihovih streznikov, ki tecejo na Amazon Web Services. Povezava je sifrirana. Web3Forms nastopa kot obdelovalec v mojem imenu in vasih podatkov ne uporablja za svoje namene. Njihovi pogoji zasebnosti so objavljeni na web3forms.com.">The contact form is delivered through Web3Forms, an external service that forwards submissions to my inbox. Your message passes through their servers, which run on Amazon Web Services. The connection is encrypted. Web3Forms acts as a processor on my behalf and does not use your data for its own purposes. Their own privacy terms are published at web3forms.com.</p>
 
+      <p data-en="Your message then arrives in my mailbox, which is hosted by Zoho Mail in the European Union. Zoho stores the message on my behalf and does not use it for its own purposes. The site itself is hosted on GitHub Pages, which records standard server logs, including the IP address of every visitor, for security and abuse prevention. I do not have access to those logs." data-slo="Vase sporocilo nato prispe v moj postni predal, ki ga gosti Zoho Mail v Evropski uniji. Zoho sporocilo hrani v mojem imenu in ga ne uporablja za svoje namene. Samo spletno mesto gostuje na GitHub Pages, ki vodi obicajne dnevnike streznika, vkljucno z IP naslovom vsakega obiskovalca, zaradi varnosti in preprecevanja zlorab. Do teh dnevnikov nimam dostopa.">Your message then arrives in my mailbox, which is hosted by Zoho Mail in the European Union. Zoho stores the message on my behalf and does not use it for its own purposes. The site itself is hosted on GitHub Pages, which records standard server logs, including the IP address of every visitor, for security and abuse prevention. I do not have access to those logs.</p>
+
       <h2 data-en="5. How long it is kept" data-slo="5. Kako dolgo se hranijo">5. How long it is kept</h2>
       <p data-en="Web3Forms deletes stored submissions after 30 days. The email itself stays in my inbox for as long as the enquiry is relevant, and no longer than two years. If you ask me to delete it sooner, I will." data-slo="Web3Forms shranjena sporocila izbrise po 30 dneh. E-posta sama ostane v mojem predalu, dokler je povprasevanje aktualno, najvec pa dve leti. Ce zelite, da jo izbrisem prej, jo bom.">Web3Forms deletes stored submissions after 30 days. The email itself stays in my inbox for as long as the enquiry is relevant, and no longer than two years. If you ask me to delete it sooner, I will.</p>
 
       <h2 data-en="6. Cookies" data-slo="6. Piskotki">6. Cookies</h2>
-      <p data-en="This site sets no cookies and uses no analytics or advertising tools. Fonts are loaded from Google Fonts, which means your browser contacts Google servers and your IP address is visible to them during that request." data-slo="To mesto ne nastavlja piskotkov in ne uporablja analitike ali oglasevalskih orodij. Pisave se nalagajo z Google Fonts, kar pomeni, da vas brskalnik stopi v stik z Googlovimi strezniki in je vas IP naslov med to zahtevo viden njim.">This site sets no cookies and uses no analytics or advertising tools. Fonts are loaded from Google Fonts, which means your browser contacts Google servers and your IP address is visible to them during that request.</p>
+      <p data-en="This site sets no cookies and uses no analytics or advertising tools. The fonts are stored on this site itself, so your browser contacts no outside font service and your IP address is not passed to anyone for that." data-slo="To mesto ne nastavlja piskotkov in ne uporablja analitike ali oglasevalskih orodij. Pisave so shranjene na tem mestu, zato vas brskalnik ne stopi v stik z nobeno zunanjo storitvijo za pisave in vas IP naslov ni posredovan nikomur.">This site sets no cookies and uses no analytics or advertising tools. The fonts are stored on this site itself, so your browser contacts no outside font service and your IP address is not passed to anyone for that.</p>
 
       <h2 data-en="7. Your rights" data-slo="7. Vase pravice">7. Your rights</h2>
       <p data-en="Under the GDPR you may ask me what data I hold about you, request a correction, request deletion, restrict or object to processing, and ask for a copy of your data. Write to me and I will respond within 30 days. If you are not satisfied, you may lodge a complaint with the Slovenian Information Commissioner (ip-rs.si)." data-slo="Po Splosni uredbi o varstvu podatkov (GDPR) me lahko vprasate, katere podatke hranim o vas, zahtevate popravek, zahtevate izbris, omejite ali ugovarjate obdelavi in zahtevate kopijo svojih podatkov. Pisite mi in odgovoril bom v 30 dneh. Ce niste zadovoljni, lahko vlozite pritozbo pri Informacijskem pooblascencu RS (ip-rs.si).">Under the GDPR you may ask me what data I hold about you, request a correction, request deletion, restrict or object to processing, and ask for a copy of your data. Write to me and I will respond within 30 days. If you are not satisfied, you may lodge a complaint with the Slovenian Information Commissioner (ip-rs.si).</p>
@@ -79,6 +88,8 @@
         <img src="assets/images/logo-nav.webp" alt="" width="420" height="96">
         Kaden Digital
       </span>
+      <a class="footer-link js-mail" data-u="admir" data-d="kaden-digital.com" href="#">&nbsp;</a>
+      <a class="footer-link js-tel" data-a="+386 30" data-b="230 620" href="#">&nbsp;</a>
       <span class="footer-geo">Ljubljana, SI</span>
       <span class="footer-copy" data-en="&copy; 2026 Kaden Digital &middot; All rights reserved" data-slo="&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane">&copy; 2026 Kaden Digital &middot; All rights reserved</span>
     </div>

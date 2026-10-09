@@ -18,13 +18,17 @@
   <meta property="og:title" content="Izdelava spletnih strani in mobilnih aplikacij | Kaden Digital">
   <meta property="og:description" content="Izdelava spletnih strani, razvoj mobilnih aplikacij za Android in iOS ter avtomatizacija po meri. Ljubljana, Slovenija.">
   <meta property="og:url" content="https://www.kaden-digital.com/">
-  <meta property="og:image" content="https://www.kaden-digital.com/assets/images/photo-logo.png">
+  <meta property="og:image" content="https://www.kaden-digital.com/assets/images/og-kaden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Pravi naslov strani — Googlu pove, katera razlicica je glavna. -->
   <link rel="canonical" href="https://www.kaden-digital.com/">
 
-  <link rel="icon" href="assets/images/logo-nav.webp">
+  <link rel="icon" href="assets/images/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="assets/images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 
   <!-- Podatki o podjetju v obliki, ki jo Google razume neposredno. -->
   <script type="application/ld+json">
@@ -61,6 +65,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Prva postaja za tipkovnico: preskoci meni naravnost do vsebine. -->
+  <a class="preskoci" href="#hero" data-en="Skip to content" data-slo="Preskoci na vsebino">Preskoci na vsebino</a>
 
   <!-- PROSTOR V OZADJU — pribit na zaslon, vsebina drsi cez njega. -->
   <div class="space" aria-hidden="true">
@@ -107,7 +114,7 @@
 </div>
 
       <!-- Hamburger gumb, vidljiv samo na mobitelu -->
-      <button class="hamburger" aria-label="Menu">
+      <button class="hamburger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobilniMeni">
         <span></span>
         <span></span>
         <span></span>
@@ -116,7 +123,7 @@
     </nav>
 
     <!-- Mobilni meni panel, otvara ga hamburger gumb -->
-    <div class="mobile-menu">
+    <div class="mobile-menu" id="mobilniMeni">
       <ul class="mobile-nav-links">
         <li><a href="#hero" data-en="Home" data-slo="Domov">Domov</a></li>
         <li><a href="#about" data-en="About" data-slo="O nas">O nas</a></li>
@@ -135,7 +142,7 @@
   </header>
 
 <!-- HERO SEKCIJA -->
-<section class="hero" id="hero">
+<section class="hero" id="hero" tabindex="-1">
 
     <div class="hero-content container">
 
@@ -636,6 +643,10 @@
 </div>
 
     </div>
+
+      <!-- Vprasanje, ki ga narocniki postavijo vsakic, zato stoji na vidnem mestu. -->
+      <p class="process-lastnistvo" data-en="The code and every access are yours. When the project is finished you receive the files and the accounts, and you are not tied to me for a single change." data-slo="Koda in vsi dostopi so vasi. Ko je projekt koncan, prejmete datoteke in racune, in za nobeno spremembo niste vezani name.">Koda in vsi dostopi so vasi. Ko je projekt koncan, prejmete datoteke in racune, in za nobeno spremembo niste vezani name.</p>
+
   </section>
 
 
@@ -749,23 +760,26 @@
 
         </div>
 
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" novalidate>
           <input type="hidden" name="access_key" value="bd3b66ae-1171-4874-ac6a-c96515a0e4a7">
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
 
           <div class="field">
-            <label class="contact-label" for="f-name" data-en="Name" data-slo="Ime">Ime</label>
-            <input type="text" id="f-name" name="name" required data-en-ph="Your name" data-slo-ph="Vase ime" placeholder="Your name">
+            <label class="contact-label" for="f-name"><span data-en="Name" data-slo="Ime">Ime</span><span class="obvezno" aria-hidden="true">*</span></label>
+            <input type="text" id="f-name" name="name" required aria-describedby="e-name" data-en-ph="Your name" data-slo-ph="Vase ime" placeholder="Your name">
+            <span class="field-napaka" id="e-name" role="alert"></span>
           </div>
 
           <div class="field">
-            <label class="contact-label" for="f-mail" data-en="Email" data-slo="E-posta">E-posta</label>
-            <input type="email" id="f-mail" name="email" required data-en-ph="your@email.com" data-slo-ph="tvoj@email.si" placeholder="your@email.com">
+            <label class="contact-label" for="f-mail"><span data-en="Email" data-slo="E-posta">E-posta</span><span class="obvezno" aria-hidden="true">*</span></label>
+            <input type="email" id="f-mail" name="email" required aria-describedby="e-mail" data-en-ph="your@email.com" data-slo-ph="tvoj@email.si" placeholder="your@email.com">
+            <span class="field-napaka" id="e-mail" role="alert"></span>
           </div>
 
           <div class="field">
-            <label class="contact-label" for="f-msg" data-en="Message" data-slo="Sporocilo">Sporocilo</label>
-            <textarea id="f-msg" name="message" rows="5" required data-en-ph="Briefly about your project or question..." data-slo-ph="Na kratko o projektu ali vprasanju..." placeholder="Briefly about your project or question..."></textarea>
+            <label class="contact-label" for="f-msg"><span data-en="Message" data-slo="Sporocilo">Sporocilo</span><span class="obvezno" aria-hidden="true">*</span></label>
+            <textarea id="f-msg" name="message" rows="5" required aria-describedby="e-msg" data-en-ph="Briefly about your project or question..." data-slo-ph="Na kratko o projektu ali vprasanju..." placeholder="Briefly about your project or question..."></textarea>
+            <span class="field-napaka" id="e-msg" role="alert"></span>
           </div>
 
           <button type="submit" class="btn btn-primary form-btn">
@@ -776,11 +790,12 @@
           </button>
 
           <label class="consent">
-            <input type="checkbox" required>
+            <input type="checkbox" id="f-privolitev" required aria-describedby="e-privolitev">
             <span data-en="I agree that my data may be used to answer my enquiry." data-slo="Strinjam se, da se moji podatki uporabijo za odgovor na moje povprasevanje.">Strinjam se, da se moji podatki uporabijo za odgovor na moje povprasevanje.</span>
           </label>
+          <span class="field-napaka" id="e-privolitev" role="alert"></span>
 
-          <p class="form-status" id="formStatus"></p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
 
       </div>
@@ -817,6 +832,8 @@
         <img src="assets/images/logo-nav.webp" alt="" width="420" height="96">
         Kaden Digital
       </span>
+      <a class="footer-link js-mail" data-u="admir" data-d="kaden-digital.com" href="#">&nbsp;</a>
+      <a class="footer-link js-tel" data-a="+386 30" data-b="230 620" href="#">&nbsp;</a>
       <a class="footer-link" href="zasebnost.html" data-en="Privacy" data-slo="Zasebnost">Zasebnost</a>
       <span class="footer-geo" data-en="Ljubljana, SI" data-slo="Ljubljana, SI">Ljubljana, SI</span>
       <span class="footer-copy" data-en="&copy; 2026 Kaden Digital &middot; All rights reserved" data-slo="&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane">&copy; 2026 Kaden Digital &middot; Vse pravice pridrzane</span>

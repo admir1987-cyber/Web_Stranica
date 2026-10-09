@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>3D Websites and 3D Web Design | Kaden Digital</title>
+
+  <meta name="description" content="Interactive 3D website development. 3D web design that runs straight in the browser, with no plugins. Ljubljana, Slovenia.">
+  <meta name="author" content="Admir Pajic">
+
+  <link rel="canonical" href="https://www.kaden-digital.com/en/3d-web-design.html">
+  <!-- Ista stran v drugem jeziku. -->
+  <link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/3dspletnestrani.html">
+  <link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/3d-web-design.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/3dspletnestrani.html">
+
+
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="3D Websites and 3D Web Design | Kaden Digital">
+  <meta property="og:description" content="Interactive 3D website development that runs straight in the browser.">
+  <meta property="og:url" content="https://www.kaden-digital.com/en/3d-web-design.html">
+  <meta property="og:image" content="https://www.kaden-digital.com/assets/images/og-kaden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="../assets/images/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="../assets/images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+
+  <link rel="preload" href="../assets/fonts/plus-jakarta-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/plus-jakarta-sans-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- Prva postaja za tipkovnico: preskoci meni naravnost do vsebine. -->
+  <a class="preskoci" href="#glavno">Skip to content</a>
+
+  <!-- PROSTOR V OZADJU — plasti se ob drsenju premikajo razlicno hitro. -->
+  <div class="space" aria-hidden="true">
+    <div class="space-grid space-grid-far" data-globina="0.06"></div>
+    <div class="space-grid space-grid-near" data-globina="0.14"></div>
+    <div class="space-haze" data-globina="0.03"></div>
+    <div class="space-stars" id="spaceStars" data-globina="0.09"></div>
+    <div class="space-light"></div>
+    <div class="space-vignette"></div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="index.html" class="logo">
+        <img src="../assets/images/logo-nav.webp" alt="Kaden Digital" width="420" height="96">
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li class="nav-services">
+            <a href="index.html#services" class="nav-dropdown-toggle">Services</a>
+            <div class="nav-dropdown">
+              <a href="mobile-app-development.html" class="nav-dropdown-item">App Development</a>
+              <a href="web-development-ljubljana.html" class="nav-dropdown-item">Web Development</a>
+              <a href="3d-web-design.html" class="nav-dropdown-item">3D websites</a>
+              <a href="process-automation.html" class="nav-dropdown-item">Scripts &amp; Automation</a>
+            </div>
+          </li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#process">Process</a></li>
+        </ul>
+
+        <div class="lang-switch">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">|</span>
+          <a class="lang-btn" href="../3dspletnestrani.html" hreflang="sl" lang="sl">SLO</a>
+        </div>
+
+        <a href="index.html#contact" class="btn btn-primary nav-cta">Contact</a>
+      </div>
+
+      <button class="hamburger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobilniMeni">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobilniMeni">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#process">Process</a></li>
+      </ul>
+      <div class="lang-switch">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">|</span>
+          <a class="lang-btn" href="../3dspletnestrani.html" hreflang="sl" lang="sl">SLO</a>
+        </div>
+      <a href="index.html#contact" class="btn btn-primary">Contact</a>
+    </div>
+  </header>
+
+  <main id="glavno" tabindex="-1">
+
+    <!-- HERO — besedilo levo, terminal in 3D scena desno -->
+    <section class="storitev-uvod hero3d">
+      <div class="hero3d-tir" id="hero3dTir">
+        <div class="hero3d-lepilo">
+          <div class="container">
+            <div class="uvod-mreza-3d">
+
+              <div class="uvod-besedilo">
+
+                <p class="drobtine razkrij">
+                  <a href="index.html">Home</a>
+                  <span>/</span>
+                  <span>3D websites</span>
+                </p>
+
+                <div class="badge razkrij" data-zamik="1">
+                  <span class="badge-dot"></span>
+                  <span>Available for new projects</span>
+                </div>
+
+                <h1 class="hero-title naslov-ozji razkrij" data-zamik="2">
+                  <span>3D and</span>
+                  <span class="accent">interactive</span>
+                  <br>
+                  <span>websites</span>
+                </h1>
+
+                <p class="hero-subtitle razkrij" data-zamik="3">3D web design that runs straight in the browser, no plugins, no downloads. A website the visitor turns, opens and looks into, instead of scrolling past another photo.</p>
+
+                <div class="hero-buttons razkrij" data-zamik="4">
+                  <a href="index.html#contact" class="btn btn-primary">Start a conversation</a>
+                  <a href="#cena" class="btn btn-secondary">See prices</a>
+                </div>
+
+                <div class="stevilke razkrij" data-zamik="5">
+                  <div class="stevilka">
+                    <strong>0</strong>
+                    <span>plugins to install</span>
+                  </div>
+                  <div class="stevilka">
+                    <strong>60 fps</strong>
+                    <span>on a modern phone</span>
+                  </div>
+                  <div class="stevilka">
+                    <strong>&lt; 2 s</strong>
+                    <span>to first view</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="scena3d razkrij" data-zamik="3" aria-hidden="true">
+                <div class="scena3d-notranjost" id="scena3d">
+
+                  <div class="okno3d" id="okno3d">
+                    <div class="okno3d-vrh">
+                      <span class="okno3d-pika"></span>
+                      <span class="okno3d-pika"></span>
+                      <span class="okno3d-pika"></span>
+                      <span class="okno3d-url">www.kaden-digital.com/3d</span>
+                    </div>
+
+                    <div class="okno3d-oder">
+                      <pre class="term" id="term"></pre>
+                    </div>
+
+                    <div class="okno3d-noga">
+                      <span>WebGL &middot; brez vticnikov</span>
+                      <span><em>60 fps</em> &middot; 1.4 MB</span>
+                    </div>
+                  </div>
+
+                  <span class="okno3d-senca" id="okno3dSenca" aria-hidden="true"></span>
+
+                  <div class="delci" id="delci"></div>
+
+                  <div class="plocica plocica-1">
+                    <span class="plocica-znak">3D</span>
+                    <span>Model v brskalniku<small>nic za namestiti</small></span>
+                  </div>
+                  <div class="plocica plocica-2">
+                    <span class="plocica-znak">&#9889;</span>
+                    <span>Nalozi se v 1.8 s<small>tudi na telefonu</small></span>
+                  </div>
+                  <div class="plocica plocica-3">
+                    <span class="plocica-znak">360</span>
+                    <span>Obrni in poglej<small>z vseh strani</small></span>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- KAJ DOBITE -->
+    <section class="services">
+      <div class="container">
+
+        <p class="section-eyebrow razkrij">What you get</p>
+        <h2 class="section-title razkrij" data-zamik="1">3D that <span class='accent'>actually sells</span></h2>
+        <div class="title-divider razkrij" data-zamik="2">
+          <span class="divider-line"></span>
+          <span class="divider-dot"></span>
+          <span class="divider-line"></span>
+        </div>
+
+        <div class="services-grid">
+
+          <div class="service-card usluga-card obrnljiva razkrij" data-zamik="1">
+            <span class="service-bar"></span>
+           <div class="obrni-notranjost">
+            <div class="obrni-lice">
+            <span class="service-mark mark-1">&lt;/&gt;</span>
+            <span class="service-mark mark-2">#</span>
+            <span class="service-mark mark-3">@</span>
+            <div class="service-card-header">
+              <div class="service-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2 3 7v10l9 5 9-5V7z" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                  <path d="m3 7 9 5 9-5M12 12v10" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                </svg>
+              </div>
+              <div class="service-heading">
+                <h3>3D without plugins</h3>
+                <p class="service-stack">WebGL &middot; Three.js</p>
+              </div>
+            </div>
+            <p class="service-desc">The 3D runs in the browser itself. The visitor installs nothing and downloads nothing.</p>
+            <ul class="service-checklist">
+              <li>Opens in every browser</li>
+              <li>Works on a phone too</li>
+              <li>Nothing to install</li>
+            </ul>
+            <p class="obrni-namig">Tap for details</p>
+            </div>
+            <div class="obrni-hrbet">
+              <h3>Why it matters</h3>
+              <p><strong>Opens in every browser</strong> <span>means nobody drops off because they use a different browser. Chrome, Safari and Firefox all show the same thing.</span></p>
+              <p><strong>Works on a phone too</strong> <span>means the half of your visitors who arrive from a phone see the same 3D as those on a computer.</span></p>
+              <p><strong>Nothing to install</strong> <span>means no downloads and no plugins. Every extra step you ask of a visitor costs you a part of them.</span></p>
+            </div>
+           </div>
+          </div>
+
+          <div class="service-card usluga-card obrnljiva razkrij" data-zamik="2">
+            <span class="service-bar"></span>
+           <div class="obrni-notranjost">
+            <div class="obrni-lice">
+            <span class="service-mark mark-1">{ }</span>
+            <span class="service-mark mark-2">=&gt;</span>
+            <span class="service-mark mark-3">;</span>
+            <div class="service-card-header">
+              <div class="service-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a9 9 0 1 1-9 9" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                  <path d="M3 7V3h4" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                </svg>
+              </div>
+              <div class="service-heading">
+                <h3>Interaction with a point</h3>
+                <p class="service-stack">Interactive website</p>
+              </div>
+            </div>
+            <p class="service-desc">The visitor turns the product, looks inside and picks a colour.</p>
+            <ul class="service-checklist">
+              <li>Turn and zoom the product</li>
+              <li>Choose colours and versions</li>
+              <li>Walk through a space</li>
+            </ul>
+            <p class="obrni-namig">Tap for details</p>
+            </div>
+            <div class="obrni-hrbet">
+              <h3>Why it matters</h3>
+              <p><strong>Turn and zoom the product</strong> <span>means the buyer sees it from every side. Fewer questions before the sale and fewer parcels coming back.</span></p>
+              <p><strong>Choose colours and versions</strong> <span>means one model replaces a photo shoot for every colour. The buyer assembles exactly what he wants to order.</span></p>
+              <p><strong>Walk through a space</strong> <span>means you can show a room that does not exist yet. A flat or a showroom sells before the first wall goes up.</span></p>
+            </div>
+           </div>
+          </div>
+
+          <div class="service-card usluga-card obrnljiva razkrij" data-zamik="3">
+            <span class="service-bar"></span>
+           <div class="obrni-notranjost">
+            <div class="obrni-lice">
+            <span class="service-mark mark-1">$</span>
+            <span class="service-mark mark-2">&rarr;</span>
+            <span class="service-mark mark-3">*</span>
+            <div class="service-card-header">
+              <div class="service-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2 4 14h7l-1 8 9-12h-7z" style="stroke:#ffffff; stroke-width:2.2; fill:none;"/>
+                </svg>
+              </div>
+              <div class="service-heading">
+                <h3>Fast even with 3D</h3>
+                <p class="service-stack">Performance</p>
+              </div>
+            </div>
+            <p class="service-desc">Most 3D sites are heavy and slow. Models get compressed and loaded in steps.</p>
+            <ul class="service-checklist">
+              <li>Compressed 3D models</li>
+              <li>Loads in steps</li>
+              <li>Simpler version on phones</li>
+            </ul>
+            <p class="obrni-namig">Tap for details</p>
+            </div>
+            <div class="obrni-hrbet">
+              <h3>Why it matters</h3>
+              <p><strong>Compressed 3D models</strong> <span>means a model that would weigh 40 MB reaches the visitor as a few. Without that step nobody waits for a 3D page.</span></p>
+              <p><strong>Loads in steps</strong> <span>means the page shows up immediately and the 3D arrives right after. The visitor never stares at an empty screen.</span></p>
+              <p><strong>Simpler version on phones</strong> <span>means an older phone gets a lighter scene instead of a stuttering one. Nobody leaves because the page will not run.</span></p>
+            </div>
+           </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ZA KOGA -->
+    <section class="services">
+      <div class="container">
+
+        <p class="section-eyebrow razkrij">Where it pays off</p>
+        <h2 class="section-title razkrij" data-zamik="1">Not for <span class='accent'>everyone</span></h2>
+        <div class="title-divider razkrij" data-zamik="2">
+          <span class="divider-line"></span>
+          <span class="divider-dot"></span>
+          <span class="divider-line"></span>
+        </div>
+
+        <div class="primeri">
+          <div class="primer razkrij" data-zamik="1">
+            <span class="primer-st">01</span>
+            <h3>Products with variants</h3>
+            <p>Furniture, machines, equipment. One model replaces a photo shoot for every colour and size.</p>
+          </div>
+          <div class="primer razkrij" data-zamik="2">
+            <span class="primer-st">02</span>
+            <h3>Space you cannot visit yet</h3>
+            <p>Flats, showrooms, interiors. People walk through before the first wall goes up.</p>
+          </div>
+          <div class="primer razkrij" data-zamik="3">
+            <span class="primer-st">03</span>
+            <h3>Something hard to explain</h3>
+            <p>A process, a machine, a technology. What takes three paragraphs takes one turn of the model.</p>
+          </div>
+        </div>
+
+        <p class="opomba razkrij" data-zamik="4">If you sell a service without a physical product, an ordinary fast website will do more for you. I will say so.</p>
+
+      </div>
+    </section>
+
+    <!-- CENA -->
+    <section class="services" id="cena">
+      <div class="container">
+
+        <p class="section-eyebrow razkrij">Price</p>
+        <h2 class="section-title razkrij" data-zamik="1">Price of a <span class='accent'>3D website</span></h2>
+        <div class="title-divider razkrij" data-zamik="2">
+          <span class="divider-line"></span>
+          <span class="divider-dot"></span>
+          <span class="divider-line"></span>
+        </div>
+
+        <div class="services-grid">
+
+          <div class="service-card usluga-card paket razkrij" data-zamik="1">
+            <span class="service-bar"></span>
+            <span class="service-mark mark-1">1</span>
+            <p class="paket-ime">3D element</p>
+            <p class="paket-cena">od 2.000 &euro;</p>
+            <ul class="service-checklist">
+              <li>One 3D model on the page</li>
+              <li>Turning and zooming</li>
+              <li>Works on phone and computer</li>
+            </ul>
+          </div>
+
+          <div class="service-card usluga-card paket poudarjena razkrij" data-zamik="2">
+            <span class="service-bar"></span>
+            <span class="service-mark mark-1">2</span>
+            <p class="paket-znacka">Most chosen</p>
+            <p class="paket-ime">Interactive website</p>
+            <p class="paket-cena">2.500 do 4.000 &euro;</p>
+            <ul class="service-checklist">
+              <li>3D through the whole site</li>
+              <li>Colours and versions to choose</li>
+              <li>Animation on scroll</li>
+              <li>Full Google setup</li>
+            </ul>
+          </div>
+
+          <div class="service-card usluga-card paket razkrij" data-zamik="3">
+            <span class="service-bar"></span>
+            <span class="service-mark mark-1">3</span>
+            <p class="paket-ime">Custom</p>
+            <p class="paket-cena">by agreement</p>
+            <ul class="service-checklist">
+              <li>Configurator or shop</li>
+              <li>Walk through a space</li>
+              <li>Modelling from your drawings</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="storitev-konec">
+      <div class="container">
+        <h2 class="section-title razkrij">Something worth showing in 3D?</h2>
+        <p class="hero-subtitle razkrij" data-zamik="1">Tell me what you sell and I will say whether 3D pays off.</p>
+        <div class="hero-buttons razkrij" data-zamik="2">
+          <a href="index.html#contact" class="btn btn-primary">Start a conversation</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top container">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+
+    <div class="footer-bottom container">
+      <span class="footer-brand">
+        <img src="../assets/images/logo-nav.webp" alt="" width="420" height="96">
+        Kaden Digital
+      </span>
+      <a class="footer-link js-mail" data-u="admir" data-d="kaden-digital.com" href="#">&nbsp;</a>
+      <a class="footer-link js-tel" data-a="+386 30" data-b="230 620" href="#">&nbsp;</a>
+      <a class="footer-link" href="privacy-policy.html">Privacy</a>
+      <span class="footer-geo">Ljubljana, SI</span>
+      <span class="footer-copy">&copy; 2026 Kaden Digital &middot; All rights reserved</span>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,3 +1,10 @@
+/* JEZIK STRANI
+   Vsak jezik ima svoj naslov: slovenscina na /, anglescina na /en/.
+   Stran se torej ne preklaplja, ampak ze ob nalozitvi ve, kateri jezik je. */
+const SLO = document.documentElement.lang === 'sl';
+const jez = (en, slo) => (SLO ? slo : en);
+const par = (t) => (SLO ? t[1] : t[0]);
+
 const navServices = document.querySelector('.nav-services');
 const navDropdown = document.querySelector('.nav-dropdown');
 const navDropdownItems = document.querySelectorAll('.nav-dropdown-item');
@@ -88,10 +95,7 @@ function openModal(kljuc) {
   const s = storitve[kljuc];
   if (!s) return;
 
-  /* Vsako tocko zapisemo v obeh jezikih, da preklopnik deluje tudi tukaj. */
-  const seznam = s.tocke
-    .map((t) => `<li data-en="${t[0]}" data-slo="${t[1]}">${t[0]}</li>`)
-    .join('');
+  const seznam = s.tocke.map((t) => `<li>${par(t)}</li>`).join('');
 
   modalBody.innerHTML = `
     <div class="modal-head">
@@ -99,16 +103,16 @@ function openModal(kljuc) {
         <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">${s.ikona}</svg>
       </div>
       <div>
-        <h3 class="modal-title" data-en="${s.naslovEn}" data-slo="${s.naslovSlo}">${s.naslovEn}</h3>
+        <h3 class="modal-title">${jez(s.naslovEn, s.naslovSlo)}</h3>
         <p class="service-stack">${s.stack}</p>
       </div>
     </div>
-    <p class="modal-desc" data-en="${s.opisEn}" data-slo="${s.opisSlo}">${s.opisEn}</p>
-    <p class="modal-label" data-en="What it includes" data-slo="Kaj vključuje">What it includes</p>
+    <p class="modal-desc">${jez(s.opisEn, s.opisSlo)}</p>
+    <p class="modal-label">${jez('What it includes', 'Kaj vključuje')}</p>
     <ul class="service-checklist">${seznam}</ul>
     <div class="modal-actions">
-      <a href="#contact" class="btn btn-primary" data-en="Send an inquiry" data-slo="Pošljite povpraševanje">Send an inquiry</a>
-      <a href="#projects" class="btn btn-secondary" data-en="View my work" data-slo="Poglejte moje delo">View my work</a>
+      <a href="#contact" class="btn btn-primary">${jez('Send an inquiry', 'Pošljite povpraševanje')}</a>
+      <a href="#projects" class="btn btn-secondary">${jez('View my work', 'Poglejte moje delo')}</a>
     </div>
   `;
 
@@ -116,9 +120,6 @@ function openModal(kljuc) {
   modalBody.querySelectorAll('.modal-actions a').forEach((a) => {
     a.addEventListener('click', closeModal);
   });
-
-  /* Novo vsebino takoj prevedemo v jezik, ki je izbran na strani. */
-  setLanguage(document.documentElement.lang === 'sl' ? 'slo' : 'en');
 
   modal.hidden = false;
   document.body.classList.add('modal-open');
@@ -146,33 +147,6 @@ document.querySelectorAll('[data-service]').forEach((el) => {
   });
 });
 
-/* PREKLOPNIK JEZIKA — EN / SLO */
-function setLanguage(lang) {
-  document.querySelectorAll('[data-en]').forEach((el) => {
-    el.innerHTML = el.dataset[lang];
-  });
-
-  /* Besedilo v praznih poljih obrazca ni vsebina, ampak atribut. */
-  document.querySelectorAll('[data-en-ph]').forEach((el) => {
-    el.placeholder = el.dataset[lang + 'Ph'];
-  });
-
-  document.querySelectorAll('.lang-btn').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-
-  document.documentElement.lang = lang === 'slo' ? 'sl' : 'en';
-}
-
-document.querySelectorAll('.lang-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    setLanguage(btn.dataset.lang);
-  });
-});
-
-/* Stran se odpre v slovenscini, obiskovalec lahko preklopi na anglescino. */
-setLanguage('slo');
-
 /* Poslje obrazec brez osvezitve strani in izpise sporocilo. */
 const cForm = document.getElementById('contactForm');
 const cStatus = document.getElementById('formStatus');
@@ -193,8 +167,6 @@ if (cForm) {
       prazno: ['Brez privolitve sporočila ne morem obdelati.', 'I cannot process your message without your consent.'] }
   ];
 
-  const jeSlo = () => document.documentElement.lang === 'sl';
-
   function pocisti(p) {
     document.getElementById(p.napaka).textContent = '';
     document.getElementById(p.vnos).removeAttribute('aria-invalid');
@@ -213,7 +185,7 @@ if (cForm) {
   });
 
   function preveri() {
-    const slo = jeSlo();
+    const slo = SLO;
     let prvaNapaka = null;
 
     polja.forEach((p) => {
@@ -239,7 +211,7 @@ if (cForm) {
 
   cForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const slo = jeSlo();
+    const slo = SLO;
 
     cStatus.className = 'form-status';
     cStatus.textContent = '';
@@ -654,22 +626,22 @@ if (projektneKartice.length) {
     const pol = Math.ceil(p.tocke.length / 2);
     const stolpec = (od, do_) =>
       '<ul>' +
-      p.tocke.slice(od, do_).map((t) => `<li data-en="${t[0]}" data-slo="${t[1]}">${t[0]}</li>`).join('') +
+      p.tocke.slice(od, do_).map((t) => `<li>${par(t)}</li>`).join('') +
       '</ul>';
 
     modalBody.innerHTML = `
       <div class="modal-head">
         <div>
           <h3 class="modal-title">${p.naslov}</h3>
-          <p class="project-tag" data-en="${p.oznakaEn}" data-slo="${p.oznakaSlo}">${p.oznakaEn}</p>
+          <p class="project-tag">${jez(p.oznakaEn, p.oznakaSlo)}</p>
         </div>
       </div>
-      <p class="project-desc" data-en="${p.opisEn}" data-slo="${p.opisSlo}">${p.opisEn}</p>
-      <p class="modal-label" data-en="What is inside" data-slo="Kaj je notri">What is inside</p>
+      <p class="project-desc">${jez(p.opisEn, p.opisSlo)}</p>
+      <p class="modal-label">${jez('What is inside', 'Kaj je notri')}</p>
       <div class="project-features">${stolpec(0, pol)}${stolpec(pol, p.tocke.length)}</div>
       <div class="modal-actions">
-        <a href="#contact" class="btn btn-primary" data-en="Ask about this project" data-slo="Vprašajte o tem projektu">Ask about this project</a>
-        ${p.povezava ? `<a href="${p.povezava}" class="btn btn-secondary btn-ikona" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true">${p.ikona}</svg><span data-en="${p.povezavaEn}" data-slo="${p.povezavaSlo}">${p.povezavaEn}</span></a>` : ''}
+        <a href="#contact" class="btn btn-primary">${jez('Ask about this project', 'Vprašajte o tem projektu')}</a>
+        ${p.povezava ? `<a href="${p.povezava}" class="btn btn-secondary btn-ikona" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true">${p.ikona}</svg><span>${jez(p.povezavaEn, p.povezavaSlo)}</span></a>` : ''}
       </div>
     `;
 
@@ -678,7 +650,6 @@ if (projektneKartice.length) {
       a.addEventListener('click', closeModal);
     });
 
-    setLanguage(document.documentElement.lang === 'sl' ? 'slo' : 'en');
     modal.hidden = false;
     document.body.classList.add('modal-open');
   }
@@ -831,10 +802,9 @@ if (sklad) {
 
   function osveziOznako() {
     if (!oznaka) return;
-    const slo = document.documentElement.lang === 'sl';
     oznaka.style.opacity = 0;
     setTimeout(() => {
-      oznaka.textContent = (slo ? imena[spredaj][1] : imena[spredaj][0]).toUpperCase();
+      oznaka.textContent = par(imena[spredaj]).toUpperCase();
       oznaka.style.opacity = 1;
     }, 170);
   }
@@ -880,11 +850,6 @@ if (sklad) {
       spredaj = i;
       narisiSklad();
     });
-  });
-
-  /* Ob menjavi jezika se napis pod skladom prevede takoj. */
-  document.querySelectorAll('.lang-btn').forEach((btn) => {
-    btn.addEventListener('click', () => setTimeout(osveziOznako, 10));
   });
 
   /* Lok se racuna iz sirine sklada, zato ga ob spremembi okna narisemo znova. */

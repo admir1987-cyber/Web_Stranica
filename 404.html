@@ -19,7 +19,7 @@
 <body>
 
   <!-- Prva postaja za tipkovnico: preskoci meni naravnost do vsebine. -->
-  <a class="preskoci" href="#glavno" data-en="Skip to content" data-slo="Preskoči na vsebino">Preskoči na vsebino</a>
+  <a class="preskoci" href="#glavno">Preskoči na vsebino</a>
 
   <!-- PROSTOR V OZADJU — enak kot na glavni strani. -->
   <div class="space" aria-hidden="true">
@@ -49,22 +49,25 @@
 
       <p class="napaka-koda" aria-hidden="true">404</p>
 
-      <h1 data-en="This page does not exist" data-slo="Te strani ni">Te strani ni</h1>
+      <h1>Te strani ni</h1>
 
-      <p class="napaka-opis" data-en="The address you opened leads nowhere. It was either mistyped, or the page has been moved. Everything else on the site works normally." data-slo="Naslov, ki ste ga odprli, ne vodi nikamor. Ali je bil napačno vpisan, ali pa je bila stran premaknjena. Vse ostalo na mestu deluje normalno.">Naslov, ki ste ga odprli, ne vodi nikamor. Ali je bil napačno vpisan, ali pa je bila stran premaknjena. Vse ostalo na mestu deluje normalno.</p>
+      <p class="napaka-opis">Naslov, ki ste ga odprli, ne vodi nikamor. Ali je bil napačno vpisan, ali pa je bila stran premaknjena. Vse ostalo na mestu deluje normalno.</p>
+
+      <!-- Ta stran je ena sama za obe jezikovni razlicici, zato tu stoji se angleski stavek. -->
+      <p class="napaka-opis napaka-en" lang="en">The address you opened leads nowhere. <a href="/en/">Go to the English site</a>.</p>
 
       <div class="napaka-gumbi">
-        <a href="/" class="btn btn-primary" data-en="Back to home" data-slo="Nazaj na domačo stran">Nazaj na domačo stran</a>
-        <a href="/index.html#contact" class="btn btn-secondary" data-en="Contact me" data-slo="Pišite mi">Pišite mi</a>
+        <a href="/" class="btn btn-primary">Nazaj na domačo stran</a>
+        <a href="/index.html#contact" class="btn btn-secondary">Pišite mi</a>
       </div>
 
-      <p class="napaka-label" data-en="Or go straight to a service" data-slo="Ali pa naravnost do storitve">Ali pa naravnost do storitve</p>
+      <p class="napaka-label">Ali pa naravnost do storitve</p>
 
       <ul class="napaka-povezave">
-        <li><a href="/izdelavaspletnihstrani.html" data-en="Websites" data-slo="Izdelava spletnih strani">Izdelava spletnih strani</a></li>
-        <li><a href="/razvojmobilnihaplikacij.html" data-en="Mobile apps" data-slo="Razvoj mobilnih aplikacij">Razvoj mobilnih aplikacij</a></li>
-        <li><a href="/skripteinavtomatizacija.html" data-en="Scripts and automation" data-slo="Skripte in avtomatizacija">Skripte in avtomatizacija</a></li>
-        <li><a href="/3dspletnestrani.html" data-en="3D websites" data-slo="3D spletne strani">3D spletne strani</a></li>
+        <li><a href="/izdelavaspletnihstrani.html">Izdelava spletnih strani</a></li>
+        <li><a href="/razvojmobilnihaplikacij.html">Razvoj mobilnih aplikacij</a></li>
+        <li><a href="/skripteinavtomatizacija.html">Skripte in avtomatizacija</a></li>
+        <li><a href="/3dspletnestrani.html">3D spletne strani</a></li>
       </ul>
 
     </div>
@@ -78,9 +81,9 @@
       </span>
       <a class="footer-link js-mail" data-u="admir" data-d="kaden-digital.com" href="#">&nbsp;</a>
       <a class="footer-link js-tel" data-a="+386 30" data-b="230 620" href="#">&nbsp;</a>
-      <a class="footer-link" href="/zasebnost.html" data-en="Privacy" data-slo="Zasebnost">Zasebnost</a>
+      <a class="footer-link" href="/zasebnost.html">Zasebnost</a>
       <span class="footer-geo">Ljubljana, SI</span>
-      <span class="footer-copy" data-en="&copy; 2026 Kaden Digital &middot; All rights reserved" data-slo="&copy; 2026 Kaden Digital &middot; Vse pravice pridržane">&copy; 2026 Kaden Digital &middot; Vse pravice pridržane</span>
+      <span class="footer-copy">&copy; 2026 Kaden Digital &middot; Vse pravice pridržane</span>
     </div>
   </footer>
 

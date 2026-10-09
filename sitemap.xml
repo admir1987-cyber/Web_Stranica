@@ -1,33 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.kaden-digital.com/</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/"/>
     <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.kaden-digital.com/izdelavaspletnihstrani.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/izdelavaspletnihstrani.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/web-development-ljubljana.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/izdelavaspletnihstrani.html"/>
     <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.kaden-digital.com/razvojmobilnihaplikacij.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/razvojmobilnihaplikacij.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/mobile-app-development.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/razvojmobilnihaplikacij.html"/>
     <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.kaden-digital.com/skripteinavtomatizacija.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/skripteinavtomatizacija.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/process-automation.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/skripteinavtomatizacija.html"/>
     <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.kaden-digital.com/3dspletnestrani.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/3dspletnestrani.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/3d-web-design.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/3dspletnestrani.html"/>
     <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kaden-digital.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.kaden-digital.com/en/web-development-ljubljana.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/izdelavaspletnihstrani.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/web-development-ljubljana.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/izdelavaspletnihstrani.html"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.kaden-digital.com/en/mobile-app-development.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/razvojmobilnihaplikacij.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/mobile-app-development.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/razvojmobilnihaplikacij.html"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.kaden-digital.com/en/process-automation.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/skripteinavtomatizacija.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/process-automation.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/skripteinavtomatizacija.html"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.kaden-digital.com/en/3d-web-design.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.kaden-digital.com/3dspletnestrani.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kaden-digital.com/en/3d-web-design.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kaden-digital.com/3dspletnestrani.html"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

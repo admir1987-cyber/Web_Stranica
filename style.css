@@ -2536,6 +2536,16 @@ a.contact-value:hover {
   margin: 0 0 var(--space-lg);
 }
 
+/* Angleski stavek je tu le pomoc tujcu, zato je tisji od slovenskega. */
+.napaka-en {
+  font-size: clamp(14px, 0.9vw, 23px);
+  opacity: 0.75;
+}
+
+.napaka-en a {
+  color: var(--color-accent);
+}
+
 .napaka-gumbi {
   display: flex;
   flex-wrap: wrap;

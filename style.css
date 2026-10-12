@@ -3179,7 +3179,7 @@ a.service-card {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .footer-brand {
@@ -3198,7 +3198,7 @@ a.service-card {
 }
 
 .footer-link {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -3253,7 +3253,7 @@ a.service-card {
   flex-shrink: 0;
 }
 
-.trust-badge h4 {
+.trust-badge h2 {
   font-size: clamp(13px, 0.9vw, 23px);
   font-weight: 700;
   margin: 0 0 2px;
@@ -3422,7 +3422,7 @@ a.service-card {
   border-color: rgba(201, 226, 101, 0.3);
 }
 
-.why-card h4 {
+.why-card h3 {
   font-size: 0.929cqw;
   font-weight: 700;
   color: #ffffff;
@@ -3469,7 +3469,7 @@ a.service-card {
 
   .why-card { border-radius: 12px; padding: 16px 14px; }
   .why-card svg { width: 22px; height: 22px; }
-  .why-card h4 { font-size: 13px; margin: 10px 0 6px; }
+  .why-card h3 { font-size: 13px; margin: 10px 0 6px; }
   .why-card p { font-size: 11.5px; }
 
   .why-work-btn {
@@ -3532,7 +3532,7 @@ a.service-card {
     height: 20px;
   }
 
-  .why-card h4 {
+  .why-card h3 {
     font-size: 11px;
     margin: 0 0 2px;
   }

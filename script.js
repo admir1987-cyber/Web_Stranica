@@ -615,6 +615,29 @@ if (projektneKartice.length) {
         ['Sitemap, robots and JSON-LD for Google', 'Sitemap, robots in JSON-LD za Google'],
         ['Published through GitHub Pages', 'Objavljeno prek GitHub Pages']
       ]
+    },
+    seoagent: {
+      naslov: 'SEO Agent',
+      oznakaEn: 'Automated SEO monitoring',
+      oznakaSlo: 'Samodejni SEO nadzor',
+      opisEn: 'An automated SEO watchdog for websites. Twice a week it reads my rankings, impressions and click-through rate from Google Search Console, crawls the site for technical problems and measures speed through PageSpeed Insights. It then looks for keywords just below page one, pages with weak click-through, sudden drops and gaps in content, and sends me a short report with at most five tasks. The agent never changes the website on its own, the decision is always mine. It runs on GitHub Actions and costs 0 EUR a month.',
+      opisSlo: 'Avtomatiziran SEO čuvaj za spletne strani. Dvakrat na teden iz Google Search Console prebere moje uvrstitve, prikaze in delež klikov, s svojim pajkom pregleda stran in poišče tehnične napake, hitrost pa izmeri prek PageSpeed Insights. Nato poišče ključne besede tik pod prvo stranjo, strani s slabim deležem klikov, nenadne padce in vrzeli v vsebini ter mi pošlje kratko poročilo z največ petimi nalogami. Agent spletne strani nikoli ne spreminja sam, odločitev je vedno moja. Teče na GitHub Actions in stane 0 EUR na mesec.',
+      tok: [
+        { naslov: ['Data', 'Podatki'], opis: ['Search Console, crawler, PageSpeed', 'Search Console, pajek, PageSpeed'] },
+        { naslov: ['Analysis', 'Analiza'], opis: ['Keywords, drops, content gaps', 'Ključne besede, padci, vrzeli'] },
+        { naslov: ['Report', 'Poročilo'], opis: ['At most 5 tasks', 'Največ 5 nalog'] },
+        { naslov: ['Delivery', 'Dostava'], opis: ['Email and GitHub Issue', 'E-pošta in GitHub Issue'] }
+      ],
+      tocke: [
+        ['Reads Google Search Console data', 'Bere podatke iz Google Search Console'],
+        ['Own crawler for technical checks', 'Lasten pajek za tehnične preglede'],
+        ['Speed and Core Web Vitals via PageSpeed', 'Hitrost in Core Web Vitals prek PageSpeed'],
+        ['Finds keywords just below page one', 'Poišče ključne besede tik pod prvo stranjo'],
+        ['Spots ranking drops and content gaps', 'Zazna padce uvrstitev in vrzeli v vsebini'],
+        ['Report in Slovenian, at most 5 tasks', 'Poročilo v slovenščini, največ 5 nalog'],
+        ['Delivered by email and as a GitHub Issue', 'Dostava po e-pošti in kot GitHub Issue'],
+        ['Runs on GitHub Actions, 0 EUR a month', 'Teče na GitHub Actions, 0 EUR na mesec']
+      ]
     }
   };
 
@@ -629,6 +652,17 @@ if (projektneKartice.length) {
       p.tocke.slice(od, do_).map((t) => `<li>${par(t)}</li>`).join('') +
       '</ul>';
 
+    /* Tok se pokaze le pri projektih, ki ga imajo, takoj za opisom. */
+    const tok = p.tok
+      ? `<p class="modal-label">${jez('How it works', 'Kako deluje')}</p>
+      <div class="project-tok">` +
+        p.tok.map((k, i) =>
+          (i ? '<span class="tok-puscica" aria-hidden="true">→</span>' : '') +
+          `<div class="tok-korak"><b>${par(k.naslov)}</b><span>${par(k.opis)}</span></div>`
+        ).join('') +
+      '</div>'
+      : '';
+
     modalBody.innerHTML = `
       <div class="modal-head">
         <div>
@@ -637,6 +671,7 @@ if (projektneKartice.length) {
         </div>
       </div>
       <p class="project-desc">${jez(p.opisEn, p.opisSlo)}</p>
+      ${tok}
       <p class="modal-label">${jez('What is inside', 'Kaj je notri')}</p>
       <div class="project-features">${stolpec(0, pol)}${stolpec(pol, p.tocke.length)}</div>
       <div class="modal-actions">

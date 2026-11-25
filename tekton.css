@@ -1635,7 +1635,7 @@ body:has(.tk-video[open]) {
 .tk-dokup-cene {
   display: flex;
   flex-wrap: wrap;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   gap: clamp(8px, 0.7vw, 18px);
   margin: 0;
   padding: 0;

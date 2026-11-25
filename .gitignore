@@ -9,3 +9,6 @@ assets/mockup/
 Thumbs.db
 # Izpis orodja graphify — ni del spletne strani.
 graphify-out/
+
+# Osebni zapiski za besedila strani, ne objavljamo.
+tekst za stran/

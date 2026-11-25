@@ -1,0 +1,1728 @@
+/* TEKTON, samostojna stran v Tektonovem brendu: črna in zlata, pisava Rajdhani kot v aplikaciji. */
+
+/* PISAVA RAJDHANI, na našem strežniku. Latin-ext pokrije slovenska slova č, š, ž. */
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/tekton/fonts/rajdhani-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/tekton/fonts/rajdhani-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('assets/tekton/fonts/rajdhani-500-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('assets/tekton/fonts/rajdhani-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('assets/tekton/fonts/rajdhani-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('assets/tekton/fonts/rajdhani-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/tekton/fonts/rajdhani-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/tekton/fonts/rajdhani-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* BARVE, PISAVA IN VELIKOSTI. Kontejner in razmaki rastejo z zaslonom enako kot na ostalih straneh. */
+:root {
+  color-scheme: dark;
+  --tk-bg: #09090B;
+  --tk-gold: #F7D459;
+  --tk-gold-light: #FFE27D;
+  --tk-text: #F2F2F2;
+  --tk-muted: #9D9EA2;
+  --tk-font: 'Rajdhani', 'Arial Narrow', sans-serif;
+
+  --tk-container-max: clamp(1400px, 97.3vw, 2492px);
+  --tk-gutter: clamp(20px, 4vw, 102px);
+  --tk-space-sm: clamp(16px, 1.4vw, 36px);
+  --tk-glava-v: calc(clamp(48px, 3.8vw, 96px) + 2 * var(--tk-space-sm));
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--tk-bg);
+  color: var(--tk-text);
+  font-family: var(--tk-font);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--tk-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* POZADINA STRANI: fotografija iz heroja ostane za vso stranjo, bleda in za besedilom. Ob drsenju se počasi pomika proti načrtom na tleh (tekton.js). */
+.tk-pozadina {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tk-pozadina-slika {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: max(100%, 56.3vh);
+  aspect-ratio: 941 / 1672;
+  background: url('assets/tekton/Ozadje-light_theme.webp') center / 100% 100% no-repeat;
+  opacity: 0.34;
+  transform: translate3d(-50%, 0, 0);
+  will-change: transform;
+}
+
+/* Levo je ozadje temnejše, da je besedilo vedno berljivo. */
+.tk-pozadina::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(9, 9, 11, 0.6) 0%, rgba(9, 9, 11, 0.3) 55%, rgba(9, 9, 11, 0) 100%);
+}
+
+/* GLAVA: logotip levo, povezave na sredini, FAQ desno. Leži čez zgornji del slike v heroju, zato med njima ni črte. */
+.tk-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.tk-header-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tk-space-sm);
+  width: 100%;
+  max-width: var(--tk-container-max);
+  margin: 0 auto;
+  padding: var(--tk-space-sm) var(--tk-gutter);
+}
+
+.tk-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(10px, 0.8vw, 20px);
+}
+
+.tk-logo img {
+  display: block;
+  width: clamp(48px, 3.8vw, 96px);
+  height: auto;
+}
+
+.tk-logo-tekst {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.tk-logo-ime {
+  font-size: clamp(32px, 2.6vw, 68px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tk-gold);
+}
+
+.tk-logo-pod {
+  margin-top: clamp(3px, 0.3vw, 8px);
+  font-size: clamp(11px, 0.85vw, 22px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tk-muted);
+}
+
+.tk-nav {
+  display: flex;
+  gap: clamp(18px, 2.2vw, 56px);
+  font-size: clamp(17px, 1.18vw, 30px);
+  font-weight: 500;
+  color: var(--tk-muted);
+}
+
+.tk-nav a {
+  transition: color 0.15s ease;
+}
+
+.tk-gumb {
+  display: inline-flex;
+  align-items: center;
+  padding: clamp(9px, 0.7vw, 18px) clamp(20px, 1.5vw, 38px);
+  font-size: clamp(17px, 1.18vw, 30px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--tk-bg);
+  background-color: var(--tk-gold);
+  border-radius: clamp(8px, 0.6vw, 14px);
+  transition: transform 0.16s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.15s ease;
+}
+
+.tk-gumb:active {
+  transform: scale(0.97);
+}
+
+/* FAQ v glavi: navaden tekst kot povezave v meniju, z znakom vprašaja v krogu. */
+.tk-faq {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(6px, 0.5vw, 12px);
+  font-size: clamp(17px, 1.18vw, 30px);
+  font-weight: 500;
+  color: var(--tk-muted);
+  transition: color 0.15s ease;
+}
+
+.tk-faq svg {
+  display: block;
+  width: 1.35em;
+  height: 1.35em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tk-nav a:hover,
+  .tk-faq:hover {
+    color: var(--tk-text);
+  }
+
+  .tk-gumb:hover {
+    background-color: var(--tk-gold-light);
+  }
+}
+
+/* Na telefonu ostaneta le logotip in FAQ. */
+@media (max-width: 720px) {
+  .tk-nav {
+    display: none;
+  }
+}
+
+/* HERO: besedilo levo, listi dnevnika desno. Slika gre od vrha strani, tudi pod glavo, zato med njima ni črte. */
+.tk-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Slika heroja se pri dnu izgubi v prosojnost, da skoznjo zasije ista slika v ozadju strani. */
+.tk-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(9, 9, 11, 0.6) 0%, rgba(9, 9, 11, 0) 22%),
+    linear-gradient(90deg, var(--tk-bg) 30%, rgba(9, 9, 11, 0.6) 68%, rgba(9, 9, 11, 0.3) 100%),
+    url('assets/tekton/Ozadje-light_theme.webp') center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+}
+
+.tk-hero-in {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: clamp(24px, 3vw, 80px);
+  width: 100%;
+  max-width: var(--tk-container-max);
+  margin: 0 auto;
+  padding: calc(var(--tk-glava-v) + clamp(28px, 3.6vw, 92px)) var(--tk-gutter) clamp(44px, 5vw, 130px);
+}
+
+.tk-hero h1 {
+  margin: 0;
+  font-size: clamp(28px, 3.6vw, 96px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tk-h1-vrstica {
+  display: block;
+  text-wrap: balance;
+}
+
+.tk-zlato {
+  color: var(--tk-gold);
+}
+
+.tk-hero-pod {
+  max-width: 34em;
+  margin: clamp(16px, 1.6vw, 40px) 0 0;
+  font-size: clamp(18px, 1.45vw, 38px);
+  line-height: 1.4;
+}
+
+.tk-hero-gumba {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(10px, 0.8vw, 20px);
+  margin-top: clamp(22px, 2.2vw, 56px);
+}
+
+.tk-gumb-velik,
+.tk-gumb-rob {
+  padding: clamp(12px, 0.9vw, 23px) clamp(24px, 1.8vw, 46px);
+  font-size: clamp(18px, 1.3vw, 33px);
+}
+
+/* Gumb Google Play: znak levo, desno mali in veliki napis v dveh vrsticah. */
+.tk-gumb-play {
+  gap: clamp(10px, 0.8vw, 20px);
+  padding-block: clamp(8px, 0.6vw, 16px);
+}
+
+.tk-gumb-play img {
+  display: block;
+  width: auto;
+  height: clamp(26px, 2vw, 52px);
+}
+
+.tk-gumb-besedilo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  text-align: left;
+}
+
+.tk-gumb-mali {
+  font-size: clamp(11px, 0.8vw, 20px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tk-gumb-veliki {
+  font-size: clamp(20px, 1.5vw, 38px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.tk-gumb-rob {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--tk-text);
+  border: 1px solid rgba(242, 242, 242, 0.28);
+  border-radius: clamp(8px, 0.6vw, 14px);
+  transition: transform 0.16s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.15s ease, color 0.15s ease;
+}
+
+.tk-gumb-rob:active {
+  transform: scale(0.97);
+}
+
+.tk-hero-drobno {
+  margin: clamp(14px, 1.2vw, 30px) 0 0;
+  font-size: clamp(14px, 0.97vw, 25px);
+  color: var(--tk-muted);
+}
+
+/* Listi dnevnika lebdijo v treh slojih: bližnji je večji in svetlejši, oddaljena sta manjša in temnejša. */
+.tk-hero-listovi {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 0.85;
+  perspective: 900px;
+}
+
+.tk-hero-listovi::before {
+  content: '';
+  position: absolute;
+  inset: 6% -8% 0;
+  background: radial-gradient(circle, rgba(247, 212, 89, 0.22), transparent 62%);
+}
+
+.tk-list {
+  position: absolute;
+  transform: translate3d(calc(var(--mx, 0) * var(--globina) * 0.1vw), calc(var(--my, 0) * var(--globina) * 0.1vw), 0);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tk-list img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 clamp(12px, 1.2vw, 30px) clamp(26px, 2.8vw, 70px) rgba(0, 0, 0, 0.6);
+  will-change: transform;
+}
+
+.tk-list-blizu {
+  top: 2%;
+  left: 30%;
+  width: 52%;
+  z-index: 3;
+  --globina: 20;
+}
+
+.tk-list-blizu img {
+  animation: tk-veter-1 9s ease-in-out infinite alternate;
+}
+
+.tk-list-sredina {
+  top: 32%;
+  left: -2%;
+  width: 40%;
+  z-index: 2;
+  --globina: 11;
+}
+
+.tk-list-sredina img {
+  filter: brightness(0.78);
+  animation: tk-veter-2 11s ease-in-out infinite alternate;
+}
+
+.tk-list-dalec {
+  top: 48%;
+  left: 64%;
+  width: 32%;
+  z-index: 1;
+  --globina: 5;
+}
+
+.tk-list-dalec img {
+  filter: brightness(0.5) blur(0.8px);
+  animation: tk-veter-3 13s ease-in-out infinite alternate;
+}
+
+@keyframes tk-veter-1 {
+  0% { transform: translate3d(0, 0, 0) rotateX(10deg) rotateY(-24deg) rotateZ(-7deg); }
+  50% { transform: translate3d(12px, -20px, 40px) rotateX(-6deg) rotateY(-6deg) rotateZ(-2deg); }
+  100% { transform: translate3d(-6px, -6px, 10px) rotateX(4deg) rotateY(-18deg) rotateZ(-9deg); }
+}
+
+@keyframes tk-veter-2 {
+  0% { transform: translate3d(0, 0, 0) rotateX(-8deg) rotateY(20deg) rotateZ(6deg); }
+  50% { transform: translate3d(-10px, -16px, 20px) rotateX(6deg) rotateY(8deg) rotateZ(2deg); }
+  100% { transform: translate3d(8px, 8px, 0) rotateX(-4deg) rotateY(26deg) rotateZ(9deg); }
+}
+
+@keyframes tk-veter-3 {
+  0% { transform: translate3d(0, 0, 0) rotateX(6deg) rotateY(-30deg) rotateZ(10deg); }
+  50% { transform: translate3d(8px, -12px, 0) rotateX(-8deg) rotateY(-14deg) rotateZ(4deg); }
+  100% { transform: translate3d(-8px, 6px, 0) rotateX(10deg) rotateY(-26deg) rotateZ(12deg); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tk-gumb-rob:hover {
+    color: var(--tk-gold);
+    border-color: var(--tk-gold);
+  }
+}
+
+/* Ožji zaslon: besedilo zgoraj, listi pod njim. */
+@media (max-width: 900px) {
+  .tk-hero::before {
+    background:
+      linear-gradient(180deg, rgba(9, 9, 11, 0.6) 0%, rgba(9, 9, 11, 0.72) 30%, rgba(9, 9, 11, 0.72) 100%),
+      url('assets/tekton/Ozadje-light_theme.webp') center / cover no-repeat;
+  }
+
+  .tk-hero-in {
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 6vw, 56px);
+  }
+
+  .tk-hero h1 {
+    font-size: clamp(28px, 9.6vw, 62px);
+  }
+
+  .tk-hero-listovi {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+/* Na telefonu sta gumba eden pod drugim čez vso širino. */
+@media (max-width: 560px) {
+  .tk-hero-gumba {
+    display: grid;
+    grid-auto-rows: 1fr;
+  }
+
+  .tk-hero-gumba a {
+    justify-content: center;
+  }
+}
+
+/* VIDEO: okno čez stran. Širina sledi zaslonu, višina se prilagodi razmerju 16:9. */
+.tk-video {
+  width: min(92vw, 156vh, 1920px);
+  max-width: none;
+  padding: 0;
+  overflow: hidden;
+  color: var(--tk-text);
+  background: #000;
+  border: 1px solid rgba(247, 212, 89, 0.35);
+  border-radius: clamp(8px, 0.8vw, 20px);
+}
+
+.tk-video[open] {
+  animation: tk-video-odpri 0.22s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tk-video::backdrop {
+  background: rgba(0, 0, 0, 0.82);
+}
+
+.tk-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.tk-video-zapri {
+  position: absolute;
+  top: clamp(8px, 0.8vw, 20px);
+  right: clamp(8px, 0.8vw, 20px);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(44px, 2.8vw, 72px);
+  aspect-ratio: 1;
+  padding: 0;
+  font: inherit;
+  font-size: clamp(30px, 2vw, 52px);
+  line-height: 1;
+  color: var(--tk-gold);
+  background: rgba(9, 9, 11, 0.7);
+  border: 1px solid rgba(247, 212, 89, 0.35);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.16s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.15s ease, color 0.15s ease;
+}
+
+.tk-video-zapri:active {
+  transform: scale(0.95);
+}
+
+body:has(.tk-video[open]) {
+  overflow: hidden;
+}
+
+@keyframes tk-video-odpri {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tk-video-zapri:hover {
+    color: var(--tk-bg);
+    background: var(--tk-gold);
+  }
+}
+
+/* Na telefonu video zavzame vso širino zaslona. */
+@media (max-width: 560px) {
+  .tk-video {
+    width: 100vw;
+    border-radius: 0;
+    border-inline: 0;
+  }
+}
+
+/* SEKCIJE: skupno ogrodje, naslov in besedilo za vse odseke pod herojem. */
+.tk-sekcija-in {
+  width: 100%;
+  max-width: var(--tk-container-max);
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 130px) var(--tk-gutter);
+}
+
+.tk-h2 {
+  max-width: 20em;
+  margin: 0;
+  font-size: clamp(26px, 2.8vw, 72px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.tk-besedilo {
+  max-width: 42em;
+  margin-top: clamp(16px, 1.6vw, 40px);
+  font-size: clamp(17px, 1.25vw, 32px);
+  line-height: 1.5;
+}
+
+.tk-besedilo p {
+  margin: 0 0 0.8em;
+}
+
+.tk-besedilo p:last-child {
+  margin-bottom: 0;
+}
+
+.tk-besedilo strong {
+  font-weight: 700;
+  color: var(--tk-gold);
+}
+
+/* PROBLEM: dve kartici, Brez Tektona (križci) in S Tektonom (kljukice, zlat okvir). */
+.tk-primerjava {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(12px, 1.2vw, 30px);
+  margin-top: clamp(24px, 2.6vw, 66px);
+}
+
+.tk-kartica {
+  overflow: hidden;
+  background: rgba(242, 242, 242, 0.03);
+  border: 1px solid rgba(242, 242, 242, 0.1);
+  border-radius: clamp(10px, 0.9vw, 22px);
+}
+
+.tk-kartica-s {
+  background: rgba(247, 212, 89, 0.06);
+  border-color: rgba(247, 212, 89, 0.4);
+}
+
+.tk-kartica h3 {
+  margin: 0;
+  padding: clamp(12px, 1vw, 26px) clamp(16px, 1.3vw, 34px);
+  font-size: clamp(17px, 1.2vw, 31px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tk-muted);
+}
+
+.tk-kartica-s h3 {
+  color: var(--tk-gold);
+}
+
+.tk-kartica ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tk-kartica li {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 0.8vw, 20px);
+  min-height: calc(2.6em + 2 * clamp(10px, 0.8vw, 20px));
+  padding: clamp(10px, 0.8vw, 20px) clamp(16px, 1.3vw, 34px);
+  font-size: clamp(16px, 1.15vw, 30px);
+  line-height: 1.3;
+  border-top: 1px solid rgba(242, 242, 242, 0.08);
+}
+
+.tk-kartica-brez li {
+  color: var(--tk-muted);
+}
+
+/* Znak pred vsako vrstico je maska, obarvana z barvo ozadja. */
+.tk-kartica li::before {
+  content: '';
+  flex: none;
+  width: 1.25em;
+  height: 1.25em;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.tk-kartica-brez li::before {
+  background-color: #B0564C;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E");
+}
+
+.tk-kartica-s li::before {
+  background-color: var(--tk-gold);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E");
+}
+
+/* Na telefonu sta kartici ena pod drugo. */
+@media (max-width: 720px) {
+  .tk-primerjava {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* KAKO DELUJE: trije koraki so kartice, ki se pri drsenju zlagajo ena čez drugo. Prejšnja se rahlo zmanjša in potemni (tekton.js). */
+.tk-koraki-seznam {
+  --tk-korak-vrh: clamp(12px, 1.6vw, 40px);
+  --tk-korak-zamik: clamp(8px, 0.8vw, 20px);
+  --tk-slika-v: clamp(300px, 62vh, 1040px);
+  margin: clamp(28px, 3vw, 80px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tk-korak {
+  position: sticky;
+  top: calc(var(--tk-korak-vrh) + var(--i, 0) * var(--tk-korak-zamik));
+}
+
+.tk-korak:nth-child(2) {
+  --i: 1;
+}
+
+.tk-korak:nth-child(3) {
+  --i: 2;
+}
+
+.tk-korak + .tk-korak {
+  margin-top: clamp(16px, 2vw, 48px);
+}
+
+.tk-korak-kartica {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(20px, 3vw, 90px);
+  padding: clamp(20px, 2.4vw, 64px) clamp(20px, 3vw, 80px);
+  overflow: hidden;
+  background: #121215;
+  border: 1px solid rgba(247, 212, 89, 0.3);
+  border-radius: clamp(12px, 1.1vw, 28px);
+  transform: scale(calc(1 - var(--pokrito, 0) * 0.035));
+  transform-origin: top center;
+  will-change: transform;
+}
+
+/* Ko naslednja kartica pokrije to, se ta potemni. */
+.tk-korak-kartica::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--tk-bg);
+  opacity: calc(var(--pokrito, 0) * 0.22);
+  pointer-events: none;
+}
+
+.tk-korak-stevilka {
+  display: block;
+  font-size: clamp(44px, 4.6vw, 120px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--tk-gold);
+}
+
+.tk-korak h3 {
+  margin: clamp(8px, 0.8vw, 20px) 0 0;
+  font-size: clamp(24px, 2.3vw, 60px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tk-korak-tekst {
+  max-width: 30em;
+  margin: clamp(10px, 0.9vw, 24px) 0 0;
+  font-size: clamp(17px, 1.25vw, 32px);
+  line-height: 1.5;
+}
+
+.tk-korak-oznake {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 0.5vw, 12px);
+  margin: clamp(14px, 1.2vw, 30px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tk-korak-oznake li {
+  padding: 0.15em 0.8em;
+  font-size: clamp(14px, 0.97vw, 25px);
+  color: var(--tk-gold);
+  border: 1px solid rgba(247, 212, 89, 0.45);
+  border-radius: 99px;
+}
+
+.tk-korak-opomba {
+  max-width: 34em;
+  margin: clamp(16px, 1.4vw, 36px) 0 0;
+  padding-top: clamp(10px, 0.9vw, 24px);
+  font-size: clamp(14px, 0.97vw, 25px);
+  line-height: 1.5;
+  color: var(--tk-muted);
+  border-top: 1px solid rgba(242, 242, 242, 0.14);
+}
+
+/* Slika zaslona z mehkim zlatim sijajem za njo. */
+.tk-korak-slika {
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, rgba(247, 212, 89, 0.16), transparent 68%);
+}
+
+.tk-korak-slika img {
+  display: block;
+  width: calc(var(--tk-slika-v) * 0.491);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tretji korak: trije izpolnjeni listi, razmetani eden na drugem. Najdaljši je zgoraj in ves viden. */
+.tk-listovi {
+  position: relative;
+  width: min(calc(var(--tk-slika-v) * 0.636), 72%);
+  aspect-ratio: 700 / 990;
+}
+
+.tk-listovi img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  box-shadow: 0 clamp(10px, 1vw, 26px) clamp(22px, 2.4vw, 60px) rgba(0, 0, 0, 0.6);
+}
+
+.tk-listovi img:nth-child(1) {
+  transform: translate(-17%, 4%) rotate(-9deg);
+  filter: brightness(0.8);
+}
+
+.tk-listovi img:nth-child(2) {
+  transform: translate(15%, -3%) rotate(7deg);
+  filter: brightness(0.9);
+}
+
+.tk-listovi img:nth-child(3) {
+  transform: rotate(-2deg);
+}
+
+/* Telefon: slika pod besedilom. */
+@media (max-width: 720px) {
+  .tk-koraki-seznam {
+    --tk-korak-vrh: 12px;
+    --tk-korak-zamik: 8px;
+    --tk-slika-v: clamp(170px, calc(100svh - 500px), 520px);
+  }
+
+  .tk-listovi {
+    width: min(calc(var(--tk-slika-v) * 0.636), 62%);
+  }
+
+  .tk-korak-kartica {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Če je zaslon prenizek, da bi se cela kartica videla, ali če ima uporabnik izklopljene animacije, se kartice le vrstijo ena pod drugo. */
+@media (max-height: 600px), (max-width: 720px) and (max-height: 680px) {
+  .tk-korak {
+    position: static;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tk-korak {
+    position: static;
+  }
+}
+
+/* KAKO DELUJE, ko zaslon dovoljuje (tekton.js): naslov in kartice so v oknu čez cel zaslon. Ko se odsek zalepi, se kartice ena za drugo zložijo. Sicer ostane prikaz zgoraj. */
+.tk-koraki-aktivno {
+  height: 280svh;
+}
+
+.tk-koraki-aktivno .tk-sekcija-in {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  padding-top: clamp(16px, 3svh, 48px);
+  padding-bottom: clamp(16px, 3svh, 48px);
+}
+
+.tk-koraki-aktivno .tk-koraki-seznam {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  flex: 1 1 0;
+  min-height: 0;
+  margin-top: clamp(14px, 2.4svh, 40px);
+}
+
+.tk-koraki-aktivno .tk-korak {
+  position: static;
+  grid-area: 1 / 1;
+  align-self: start;
+  height: calc(100% - 2 * var(--tk-korak-zamik));
+  margin-top: 0;
+  transform: translateY(calc(var(--vstop, 0) * 110% + var(--i, 0) * var(--tk-korak-zamik)));
+  will-change: transform;
+}
+
+.tk-koraki-aktivno .tk-korak-kartica {
+  height: 100%;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.tk-koraki-aktivno .tk-korak-slika {
+  align-self: stretch;
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+}
+
+.tk-koraki-aktivno .tk-korak-slika img {
+  width: auto;
+  height: 100%;
+  max-height: 1040px;
+  object-fit: contain;
+}
+
+.tk-koraki-aktivno .tk-listovi {
+  width: auto;
+  height: 88%;
+  max-height: 940px;
+}
+
+.tk-koraki-aktivno .tk-listovi img {
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 720px) {
+  .tk-koraki-aktivno .tk-korak-kartica {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+}
+
+/* Če besedilo v kartici ne stane, skripta (tekton.js) zmanjša črke do 85 %. */
+.tk-koraki-aktivno .tk-korak-stevilka {
+  font-size: calc(clamp(44px, 4.6vw, 120px) * var(--tk-pisava, 1));
+}
+
+.tk-koraki-aktivno .tk-korak h3 {
+  font-size: calc(clamp(24px, 2.3vw, 60px) * var(--tk-pisava, 1));
+}
+
+.tk-koraki-aktivno .tk-korak-tekst {
+  font-size: calc(clamp(17px, 1.25vw, 32px) * var(--tk-pisava, 1));
+}
+
+.tk-koraki-aktivno .tk-korak-oznake li,
+.tk-koraki-aktivno .tk-korak-opomba {
+  font-size: calc(clamp(14px, 0.97vw, 25px) * var(--tk-pisava, 1));
+}
+
+/* Na nižjih zaslonih računalnika je uvod širši, število koraka manjše in presledki krajši, da je v karticah dovolj prostora za besedilo. */
+@media (min-width: 721px) and (max-height: 720px) {
+  .tk-koraki-aktivno .tk-besedilo {
+    max-width: 64em;
+  }
+
+  .tk-koraki-aktivno .tk-korak-stevilka {
+    font-size: calc(38px * var(--tk-pisava, 1));
+  }
+
+  .tk-koraki-aktivno .tk-korak h3 {
+    margin-top: 6px;
+  }
+
+  .tk-koraki-aktivno .tk-korak-oznake {
+    margin-top: 12px;
+  }
+}
+
+/* KAJ ZNA: osem zmožnosti. Brez skripta ali pri zmanjšanem gibanju so kartice navadna mreža. S skriptom so zložene kot kup in se pri drsenju zavrtijo ena za drugo (tekton.js). */
+.tk-zna .tk-sekcija-in {
+  padding-bottom: clamp(16px, 2vw, 48px);
+}
+
+.tk-zna {
+  overflow-x: clip;
+}
+
+.tk-zna-vsebina {
+  width: 100%;
+  max-width: var(--tk-container-max);
+  margin: 0 auto;
+  padding: 0 var(--tk-gutter) clamp(40px, 5vw, 130px);
+}
+
+.tk-zna-stevec {
+  display: none;
+}
+
+.tk-zna-spil {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 1.2vw, 30px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tk-zna-kartica {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(20px, 2vw, 52px) clamp(20px, 2.2vw, 60px);
+  background: #121215;
+  border: 1px solid rgba(247, 212, 89, 0.32);
+  border-radius: clamp(12px, 1.1vw, 28px);
+}
+
+/* Kartice, ki so še zadaj, so temnejše. */
+.tk-zna-kartica::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--tk-bg);
+  opacity: var(--tamno, 0);
+  pointer-events: none;
+}
+
+.tk-zna-ikona {
+  display: block;
+  width: clamp(34px, 2.6vw, 68px);
+  height: auto;
+  color: var(--tk-gold);
+}
+
+.tk-zna-kartica h3 {
+  margin: clamp(12px, 1.1vw, 28px) 0 0;
+  font-size: clamp(22px, 1.9vw, 50px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tk-zna-kartica p {
+  margin: clamp(8px, 0.8vw, 20px) 0 0;
+  font-size: clamp(17px, 1.25vw, 32px);
+  line-height: 1.5;
+}
+
+/* Vklopljeno s skriptom: višok odsek, v njem lepljivo okno s kupom kartic. */
+.tk-zna-aktivno .tk-zna-oder {
+  height: 320svh;
+}
+
+.tk-zna-aktivno .tk-zna-okno {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100svh;
+}
+
+/* Naslov je v istem oknu kot kartice, zato je cel odsek viden naenkrat. */
+.tk-zna-aktivno .tk-sekcija-in {
+  padding-top: 0;
+  padding-bottom: clamp(16px, 3svh, 48px);
+}
+
+.tk-zna-aktivno .tk-zna-vsebina {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 120px);
+  padding-bottom: 0;
+}
+
+.tk-zna-aktivno .tk-zna-stevec {
+  display: block;
+}
+
+.tk-zna-aktivno .tk-zna-spil {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.tk-zna-aktivno .tk-zna-kartica {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: clamp(300px, 46svh, 700px);
+  padding: clamp(24px, 2.6vw, 72px) clamp(24px, 3vw, 84px);
+  transform-origin: 50% 90%;
+  will-change: transform, opacity;
+}
+
+.tk-zna-aktivno .tk-zna-ikona {
+  width: clamp(40px, 3.4vw, 90px);
+}
+
+.tk-zna-aktivno .tk-zna-kartica h3 {
+  font-size: clamp(24px, 2.3vw, 60px);
+}
+
+.tk-zna-aktivno .tk-zna-kartica p {
+  font-size: clamp(17px, 1.4vw, 36px);
+}
+
+.tk-zna-stevilka {
+  display: block;
+  font-size: clamp(56px, 6vw, 160px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--tk-gold);
+}
+
+.tk-zna-od {
+  font-size: clamp(18px, 1.5vw, 40px);
+  color: var(--tk-muted);
+}
+
+.tk-zna-crtice {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 0.5vw, 12px);
+  margin-top: clamp(16px, 1.6vw, 40px);
+}
+
+.tk-zna-crtice span {
+  width: clamp(34px, 3vw, 80px);
+  height: 3px;
+  background: rgba(242, 242, 242, 0.14);
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.tk-zna-crtice span.tk-aktivna {
+  background: var(--tk-gold);
+}
+
+@media (max-width: 900px) {
+  .tk-zna-aktivno .tk-zna-vsebina {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .tk-zna-stevec {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+  }
+
+  .tk-zna-aktivno .tk-zna-stevec {
+    display: flex;
+  }
+
+  .tk-zna-stevilka {
+    font-size: clamp(40px, 11vw, 80px);
+  }
+
+  .tk-zna-crtice {
+    flex-direction: row;
+    flex: 1 0 100%;
+    margin-top: 8px;
+  }
+
+  .tk-zna-crtice span {
+    flex: 1;
+    width: auto;
+  }
+}
+
+/* Na telefonu je kartic v mreži ena pod drugo. */
+@media (max-width: 720px) {
+  .tk-zna-spil {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ZA KOGA: pet kartic, glavni uporabnik ima večjo, spodaj umirjen trak "Za koga ni". */
+.tk-komu-mreza {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.2vw, 30px);
+  margin: clamp(28px, 3vw, 80px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tk-komu-kartica {
+  padding: clamp(20px, 2vw, 52px) clamp(20px, 2.2vw, 60px);
+  background: #121215;
+  border: 1px solid rgba(247, 212, 89, 0.32);
+  border-radius: clamp(12px, 1.1vw, 28px);
+}
+
+.tk-komu-glavna {
+  grid-column: span 2;
+}
+
+.tk-komu-ikona {
+  display: block;
+  flex-shrink: 0;
+  width: clamp(34px, 2.6vw, 68px);
+  height: auto;
+  color: var(--tk-gold);
+}
+
+.tk-komu h3 {
+  margin: clamp(12px, 1.1vw, 28px) 0 0;
+  font-size: clamp(22px, 1.9vw, 50px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tk-komu-kartica p,
+.tk-komu-ni p {
+  margin: clamp(8px, 0.8vw, 20px) 0 0;
+  font-size: clamp(17px, 1.25vw, 32px);
+  line-height: 1.5;
+}
+
+/* Za koga ni: brez zlatega okvira, sivo besedilo. */
+.tk-komu-ni {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(14px, 1.4vw, 36px);
+  margin-top: clamp(12px, 1.2vw, 30px);
+  padding: clamp(18px, 1.8vw, 48px) clamp(20px, 2.2vw, 60px);
+  color: var(--tk-muted);
+  border: 1px dashed rgba(242, 242, 242, 0.22);
+  border-radius: clamp(12px, 1.1vw, 28px);
+}
+
+.tk-komu-ni .tk-komu-ikona {
+  color: var(--tk-muted);
+}
+
+.tk-komu-ni h3 {
+  margin-top: 0;
+}
+
+/* Tablica: dve koloni, glavna kartica čez celo širino. */
+@media (max-width: 900px) {
+  .tk-komu-mreza {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Telefon: kartice ena pod drugo. */
+@media (max-width: 720px) {
+  .tk-komu-mreza {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tk-komu-glavna {
+    grid-column: auto;
+  }
+}
+
+/* Za koga v enem zaslonu: znak je ob naslovu kartice, na računalniku je odsek v dveh stolpcih (levo naslov, Za koga ni in gumb, desno kartice). */
+.tk-komu-kartica {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(12px, 1vw, 26px);
+}
+
+.tk-komu-kartica h3 {
+  margin-top: 0;
+}
+
+.tk-komu-kartica p {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .tk-komu .tk-sekcija-in {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-rows: auto auto auto auto 1fr;
+    align-items: start;
+    column-gap: clamp(28px, 3.5vw, 100px);
+  }
+
+  .tk-komu .tk-h2 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .tk-komu .tk-besedilo {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .tk-komu-mreza {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 0;
+  }
+
+  .tk-komu-ni {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: clamp(20px, 2vw, 52px);
+  }
+
+  .tk-komu .tk-poziv {
+    grid-column: 1;
+    grid-row: 4;
+    margin-top: clamp(20px, 2vw, 52px);
+    text-align: left;
+  }
+
+  .tk-komu .tk-poziv-naslov {
+    margin-inline: 0;
+    font-size: clamp(22px, 1.9vw, 50px);
+  }
+}
+
+/* Nizek zaslon računalnika: kartice so nižje, da odsek še vedno stane v en zaslon. */
+@media (min-width: 1024px) and (max-height: 620px) {
+  .tk-komu-kartica {
+    padding-block: 16px;
+  }
+}
+
+/* POZIV: gumb za prenos na koncu odseka, na sredini. */
+.tk-poziv {
+  margin-top: clamp(32px, 3.2vw, 90px);
+  text-align: center;
+}
+
+.tk-poziv-naslov {
+  margin: 0 auto clamp(16px, 1.6vw, 40px);
+  max-width: 24em;
+  font-size: clamp(24px, 2.3vw, 60px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.tk-poziv-drobno {
+  margin: clamp(12px, 1.1vw, 28px) 0 0;
+  font-size: clamp(14px, 0.97vw, 25px);
+  color: var(--tk-muted);
+}
+
+/* VRSTICA NA TELEFONU: skrita pod robom zaslona, pokaže se, ko drugega gumba za prenos ni videti (tekton.js). */
+.tk-vrstica {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  body {
+    padding-bottom: 76px;
+  }
+
+  .tk-vrstica {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    display: block;
+    padding: 10px var(--tk-gutter) calc(10px + env(safe-area-inset-bottom));
+    background: rgba(9, 9, 11, 0.94);
+    border-top: 1px solid rgba(247, 212, 89, 0.25);
+    visibility: hidden;
+    transform: translateY(110%);
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), visibility 0s linear 0.25s;
+  }
+
+  .tk-vrstica.tk-vidna {
+    visibility: visible;
+    transform: none;
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .tk-vrstica-gumb {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tk-vrstica,
+  .tk-vrstica.tk-vidna {
+    transition: none;
+  }
+}
+
+/* PRIMER: besedilo levo, velik dnevni list desno kot list papirja. */
+.tk-primer-mreza {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 120px);
+}
+
+.tk-primer-seznam {
+  display: grid;
+  gap: clamp(8px, 0.8vw, 20px);
+  margin: clamp(20px, 2vw, 52px) 0 0;
+  padding: 0;
+  font-size: clamp(17px, 1.25vw, 32px);
+  line-height: 1.4;
+  list-style: none;
+}
+
+.tk-primer-seznam li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6em;
+}
+
+.tk-primer-kljukica {
+  flex-shrink: 0;
+  width: 1.15em;
+  height: 1.15em;
+  margin-top: 0.12em;
+  color: var(--tk-gold);
+}
+
+/* List papirja z mehkim zlatim sijajem za njim. */
+.tk-primer-list {
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 2vw, 60px);
+  background: radial-gradient(circle, rgba(247, 212, 89, 0.16), transparent 68%);
+}
+
+.tk-primer-list img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 640px);
+  height: auto;
+  max-height: 82svh;
+  box-shadow: 0 clamp(14px, 1.4vw, 36px) clamp(30px, 3vw, 80px) rgba(0, 0, 0, 0.6);
+  transform: rotate(-1.5deg);
+}
+
+/* Telefon in ozka tablica: list pod besedilom. */
+@media (max-width: 900px) {
+  .tk-primer-mreza {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tk-primer-list img {
+    max-width: min(100%, 440px);
+  }
+}
+
+/* CENIK: štirje paketi v vrsti, Business ima zlat okvir in oznako Popularno kot v aplikaciji, spodaj dokup vnosov in gumb za prenos. */
+.tk-cenik-glava {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  column-gap: clamp(28px, 3.5vw, 100px);
+}
+
+.tk-cenik-glava .tk-besedilo {
+  margin-top: 0;
+}
+
+.tk-cenik-mreza {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.2vw, 30px);
+  margin: clamp(22px, 2.2vw, 58px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tk-paket {
+  position: relative;
+  padding: clamp(18px, 1.6vw, 44px);
+  background: #121215;
+  border: 1px solid rgba(242, 242, 242, 0.14);
+  border-radius: clamp(12px, 1.1vw, 28px);
+}
+
+.tk-paket-popularen {
+  border-color: var(--tk-gold);
+  box-shadow: 0 clamp(10px, 1vw, 26px) clamp(30px, 3vw, 80px) rgba(247, 212, 89, 0.12);
+}
+
+.tk-paket-znacka {
+  position: absolute;
+  top: 0;
+  right: clamp(14px, 1.2vw, 30px);
+  padding: 0.3em 0.8em;
+  font-size: clamp(12px, 0.8vw, 20px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tk-bg);
+  background: var(--tk-gold);
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.tk-paket h3 {
+  margin: 0;
+  font-size: clamp(20px, 1.6vw, 42px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tk-paket-komu {
+  margin: 0.3em 0 0;
+  font-size: clamp(14px, 0.97vw, 25px);
+  line-height: 1.3;
+  color: var(--tk-muted);
+}
+
+.tk-paket-cena {
+  margin: clamp(10px, 0.9vw, 24px) 0 0;
+  font-size: clamp(15px, 1vw, 26px);
+  color: var(--tk-muted);
+}
+
+.tk-paket-znesek {
+  font-size: clamp(30px, 2.6vw, 68px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--tk-text);
+}
+
+.tk-paket-leto {
+  margin: 0.35em 0 0;
+  font-size: clamp(14px, 0.97vw, 25px);
+  line-height: 1.3;
+  color: var(--tk-muted);
+}
+
+.tk-paket-leto strong {
+  font-weight: 700;
+  color: var(--tk-gold);
+}
+
+.tk-paket-seznam {
+  display: grid;
+  gap: clamp(6px, 0.55vw, 14px);
+  margin: clamp(12px, 1.1vw, 28px) 0 0;
+  padding: clamp(12px, 1.1vw, 28px) 0 0;
+  font-size: clamp(15px, 1.05vw, 27px);
+  line-height: 1.3;
+  list-style: none;
+  border-top: 1px solid rgba(242, 242, 242, 0.1);
+}
+
+.tk-paket-seznam li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55em;
+}
+
+/* Spodaj levo dokup vnosov v črtkanem okvirju, desno gumb za prenos. */
+.tk-cenik-spodaj {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  align-items: center;
+  gap: clamp(20px, 3vw, 80px);
+  margin-top: clamp(14px, 1.4vw, 36px);
+}
+
+.tk-dokup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(10px, 1.2vw, 30px) clamp(16px, 1.6vw, 40px);
+  padding: clamp(14px, 1.3vw, 34px) clamp(18px, 1.6vw, 44px);
+  border: 1px dashed rgba(242, 242, 242, 0.22);
+  border-radius: clamp(12px, 1.1vw, 28px);
+}
+
+.tk-dokup > div {
+  flex: 1 1 18em;
+}
+
+.tk-dokup h3 {
+  margin: 0;
+  font-size: clamp(17px, 1.25vw, 32px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tk-dokup p {
+  margin: 0.3em 0 0;
+  font-size: clamp(14px, 0.97vw, 25px);
+  line-height: 1.4;
+  color: var(--tk-muted);
+}
+
+.tk-dokup-cene {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+  gap: clamp(8px, 0.7vw, 18px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tk-dokup-cene li {
+  padding: 0.3em 0.9em;
+  font-size: clamp(14px, 0.97vw, 25px);
+  font-weight: 600;
+  border: 1px solid rgba(247, 212, 89, 0.32);
+  border-radius: 999px;
+}
+
+.tk-dokup-cene strong {
+  font-weight: 700;
+  color: var(--tk-gold);
+}
+
+/* Nizek zaslon računalnika: manj praznine nad in pod cenikom ter nižje kartice, da odsek z gumbom stane v en zaslon. */
+@media (min-width: 1001px) and (max-height: 800px) {
+  .tk-cenik .tk-sekcija-in {
+    padding-block: 40px;
+  }
+}
+
+@media (min-width: 1001px) and (max-height: 620px) {
+  .tk-cenik .tk-sekcija-in {
+    padding-block: 28px;
+  }
+
+  .tk-paket {
+    padding-block: 14px;
+  }
+
+  .tk-paket-seznam {
+    gap: 4px;
+  }
+}
+
+/* Tablica: paketi v dveh vrstah po dva, vse ostalo eno pod drugim. */
+@media (max-width: 1000px) {
+  .tk-cenik-glava,
+  .tk-cenik-spodaj {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tk-cenik-glava .tk-besedilo {
+    margin-top: clamp(16px, 1.6vw, 40px);
+  }
+
+  .tk-cenik-mreza {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Telefon: paketi eden pod drugim. */
+@media (max-width: 560px) {
+  .tk-cenik-mreza {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tk-nav a,
+  .tk-faq,
+  .tk-gumb,
+  .tk-gumb-rob,
+  .tk-list,
+  .tk-video-zapri {
+    transition: none;
+  }
+
+  .tk-list img,
+  .tk-video[open] {
+    animation: none;
+  }
+
+  .tk-list-blizu img {
+    transform: rotateY(-16deg) rotateZ(-5deg);
+  }
+
+  .tk-list-sredina img {
+    transform: rotateY(14deg) rotateZ(4deg);
+  }
+
+  .tk-list-dalec img {
+    transform: rotateY(-20deg) rotateZ(7deg);
+  }
+}

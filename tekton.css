@@ -1699,6 +1699,115 @@ body:has(.tk-video[open]) {
   }
 }
 
+/* VARNOST: besedilo s šestimi točkami levo, sef s fotografijami in posnetkom desno. */
+.tk-varnost-mreza {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+  align-items: center;
+  gap: clamp(28px, 3.5vw, 100px);
+}
+
+.tk-varnost-seznam {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 1.8vw, 46px) clamp(24px, 2.6vw, 66px);
+  margin: clamp(24px, 2.4vw, 64px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tk-varnost-seznam li {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(12px, 1vw, 26px);
+}
+
+.tk-varnost-ikona {
+  flex-shrink: 0;
+  width: clamp(30px, 2.2vw, 58px);
+  height: auto;
+  color: var(--tk-gold);
+}
+
+.tk-varnost h3 {
+  margin: 0;
+  font-size: clamp(18px, 1.35vw, 36px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tk-varnost-seznam p {
+  margin: 0.35em 0 0;
+  font-size: clamp(15px, 1.05vw, 27px);
+  line-height: 1.45;
+  color: var(--tk-muted);
+}
+
+.tk-varnost-povezave {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 1.6vw, 40px);
+  margin: clamp(24px, 2.4vw, 64px) 0 0;
+}
+
+.tk-varnost-povezave a {
+  font-size: clamp(16px, 1.1vw, 28px);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(247, 212, 89, 0.5);
+  text-underline-offset: 0.25em;
+  transition: color 0.15s ease;
+}
+
+.tk-varnost-slika {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin-inline: auto;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tk-varnost-povezave a:hover {
+    color: var(--tk-gold);
+  }
+}
+
+/* Nizek zaslon računalnika: manj praznine nad in pod odsekom, da stane v en zaslon. */
+@media (min-width: 1001px) and (max-height: 800px) {
+  .tk-varnost .tk-sekcija-in {
+    padding-block: 40px;
+  }
+}
+
+@media (min-width: 1001px) and (max-height: 620px) {
+  .tk-varnost .tk-sekcija-in {
+    padding-block: 28px;
+  }
+}
+
+/* Tablica: sef manjši nad besedilom. */
+@media (max-width: 1000px) {
+  .tk-varnost-mreza {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tk-varnost-slika {
+    order: -1;
+    max-width: clamp(160px, 30vw, 260px);
+    margin-inline: 0;
+  }
+}
+
+/* Telefon: točke ena pod drugo. */
+@media (max-width: 720px) {
+  .tk-varnost-seznam {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tk-nav a,
   .tk-faq,
